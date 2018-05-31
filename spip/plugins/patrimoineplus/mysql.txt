@@ -1,0 +1,385 @@
+SELECT GROUP_CONCAT(valeur SEPARATOR ';') as valeurGroup, date
+FROM (
+	SELECT r.id_formulaire,r.date,c.*
+	FROM spip_formulaires_reponses as r LEFT JOIN spip_formulaires_reponses_champs as c USING (id_formulaires_reponse)
+	WHERE r.id_formulaire=34
+) matable
+GROUP BY id_formulaires_reponse
+
+————
+23/10/2015 : suppression des objets lexiques, thematiques, et chronologie pour les transformer en mots clefs
+
+on reconstruit id_parent à partir des codes : 3 requêtes
+
+UPDATE matieres AS tab1
+JOIN (
+SELECT `id_mot`,`code`,
+		LEFT(`code`,CHAR_LENGTH(`code`) - 3) as id_parentcode,
+		LEFT(`code`,2) as `id_mot_racinecode`,
+		CHAR_LENGTH(`code`) DIV 3 as profondeur
+FROM `matieres`
+	) AS tab2 ON tab1.id_mot = tab2.id_mot
+SET tab1.profondeur = tab2.profondeur ;
+
+
+UPDATE matieres as tab0
+JOIN (
+	SELECT tab2.id_mot as id_mot,tab1.id_mot as id_parent FROM matieres as tab1
+	JOIN (
+		SELECT `id_mot`,`code`,
+				LEFT(`code`,CHAR_LENGTH(`code`) - 3) as id_parentcode,
+				LEFT(`code`,2) as `id_mot_racinecode`,
+				CHAR_LENGTH(`code`) DIV 3 as profondeur
+		FROM `matieres` ) as tab2
+	ON tab1.code=tab2.id_parentcode
+) as tab3 ON tab3.id_mot=tab0.id_mot
+SET tab0.id_parent=tab3.id_parent
+
+UPDATE matieres as tab0
+JOIN (
+	SELECT tab2.id_mot as id_mot,tab1.id_mot as id_mot_racine FROM matieres as tab1
+	JOIN (
+		SELECT `id_mot`,`code`,
+				LEFT(`code`,CHAR_LENGTH(`code`) - 3) as id_parentcode,
+				LEFT(`code`,2) as `id_mot_racinecode`,
+				CHAR_LENGTH(`code`) DIV 3 as profondeur
+		FROM `matieres` ) as tab2
+	ON tab1.code=tab2.id_mot_racinecode
+) as tab3 ON tab3.id_mot=tab0.id_mot
+SET tab0.id_mot_racine=tab3.id_mot_racine
+
+---------
+on reconstruit la table mots_liens à partir de la table bibliochrono :
+
+ALTER TABLE `bibliochrono` ADD `id_mot` BIGINT(21) NOT NULL FIRST, ADD `id_objet` BIGINT(21) NOT NULL AFTER `id_mot`, ADD `objet` VARCHAR(25) NOT NULL AFTER `id_objet`;
+
+UPDATE bibliochrono AS tab1
+JOIN spip_bibliographies AS tab2 ON tab1.vedette = tab2.vedette
+SET tab1.id_objet = tab2.id_bibliographie, tab1.objet='bibliographie' ;
+
+UPDATE bibliochrono AS tab1
+JOIN spip_mots AS tab2 ON tab1.idchrono = tab2.code
+SET tab1.id_mot = tab2.id_mot
+WHERE tab2.id_groupe=8 ;
+
+--------------
+
+on reconstruit la table mots_liens à partir de la table bibliomatieres2 et on supprime les doublons :
+
+ALTER TABLE `bibliomatieres2` ADD `id_mot` BIGINT(21) NOT NULL FIRST, ADD `id_objet` BIGINT(21) NOT NULL AFTER `id_mot`, ADD `objet` VARCHAR(25) NOT NULL AFTER `id_objet`;
+
+UPDATE bibliomatieres2 AS tab1
+JOIN spip_bibliographies AS tab2 ON tab1.vedette = tab2.vedette
+SET tab1.id_objet = tab2.id_bibliographie, tab1.objet='bibliographie' ;
+
+UPDATE bibliomatieres2 AS tab1
+JOIN spip_mots AS tab2 ON tab1.code = tab2.code
+SET tab1.id_mot = tab2.id_mot
+WHERE tab2.id_groupe=9 ;
+
+ALTER IGNORE TABLE  bibliomatieres2 ADD UNIQUE INDEX(id_mot,id_objet,objet);
+
+--------------
+
+on reconstruit la table mots_liens à partir de la table sitesdeno et on supprime les doublons :
+
+ALTER TABLE `sitesdeno` ADD `id_mot` BIGINT(21) NOT NULL FIRST, ADD `id_objet` BIGINT(21) NOT NULL AFTER `id_mot`, ADD `objet` VARCHAR(25) NOT NULL AFTER `id_objet`;
+
+UPDATE sitesdeno AS tab1
+JOIN spip_patrimoines AS tab2 ON tab1.codesite = tab2.codesite
+SET tab1.id_objet = tab2.id_patrimoine, tab1.objet='patrimoine' ;
+
+UPDATE sitesdeno AS tab1
+JOIN spip_mots AS tab2 ON tab1.code = tab2.code
+SET tab1.id_mot = tab2.id_mot
+WHERE tab2.id_groupe=9 ;
+
+ALTER IGNORE TABLE sitesdeno ADD UNIQUE INDEX(id_mot,id_objet,objet);
+
+--------------
+
+on reconstruit la table mots_liens à partir de la table siteschrono et on supprime les doublons :
+
+ALTER TABLE `siteschrono` ADD `id_mot` BIGINT(21) NOT NULL FIRST, ADD `id_objet` BIGINT(21) NOT NULL AFTER `id_mot`, ADD `objet` VARCHAR(25) NOT NULL AFTER `id_objet`;
+
+UPDATE siteschrono AS tab1
+JOIN spip_patrimoines AS tab2 ON tab1.codesite = tab2.codesite
+SET tab1.id_objet = tab2.id_patrimoine, tab1.objet='patrimoine' ;
+
+UPDATE siteschrono AS tab1
+JOIN spip_mots AS tab2 ON tab1.idchrono = tab2.code
+SET tab1.id_mot = tab2.id_mot
+WHERE tab2.id_groupe=8 ;
+
+ALTER IGNORE TABLE siteschrono ADD UNIQUE INDEX(id_mot,id_objet,objet);
+
+--------------
+
+on reconstruit la table mots_liens à partir de la table materiautheque et on supprime les doublons :
+
+ALTER TABLE `materiautheque` ADD `id_mot` BIGINT(21) NOT NULL FIRST, ADD `id_objet` BIGINT(21) NOT NULL AFTER `id_mot`, ADD `objet` VARCHAR(25) NOT NULL AFTER `id_objet`;
+
+UPDATE materiautheque AS tab1
+JOIN spip_patrimoines AS tab2 ON tab1.code = tab2.codesite
+SET tab1.id_objet = tab2.id_patrimoine, tab1.objet='patrimoine'
+WHERE tab1.bdtable='sites';
+
+UPDATE materiautheque AS tab1
+JOIN spip_bibliographies AS tab2 ON tab1.code = tab2.vedette
+SET tab1.id_objet = tab2.id_bibliographie, tab1.objet='bibliographie'
+WHERE tab1.bdtable='biblio';
+
+UPDATE materiautheque AS tab1
+JOIN spip_images AS tab2 ON tab1.code = tab2.idimage
+SET tab1.id_objet = tab2.id_image, tab1.objet='image'
+WHERE tab1.bdtable='images';
+
+UPDATE materiautheque AS tab1
+JOIN spip_mots AS tab2 ON tab1.materiau = tab2.titre
+SET tab1.id_mot = tab2.id_mot
+WHERE tab2.id_groupe=9 ;
+
+ALTER IGNORE TABLE materiautheque ADD UNIQUE INDEX(id_mot,id_objet,objet);
+
+--------------
+
+on reconstruit les relations entre patrimoines à partir de relation sites :
+
+ALTER TABLE `relationsites` ADD `id_patrimoine` BIGINT(21) NOT NULL FIRST, ADD `id_parent` BIGINT(21) NOT NULL AFTER `id_patrimoine`;
+
+UPDATE relationsites AS tab1
+JOIN spip_patrimoines AS tab2 ON tab1.code = tab2.codesite
+SET tab1.id_patrimoine = tab2.id_patrimoine ;
+
+UPDATE relationsites AS tab1
+JOIN spip_patrimoines AS tab2 ON tab1.ssdossierrattache = tab2.codesite
+SET tab1.id_parent = tab2.id_patrimoine ;
+
+UPDATE spip_patrimoines AS tab1
+JOIN relationsites AS tab2 ON tab1.id_patrimoine=tab2.id_patrimoine
+SET tab1.id_parent=tab2.id_parent
+
+--------------
+
+ALTER TABLE `chronotexte`
+ADD `paragraphe` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `titre` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `soustitre` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `chapeau` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `texte` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `auteurconstruction` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `chronoconstruction` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `docutexte` LONGTEXT NOT NULL  AFTER `id_texte`,
+ADD `colltexte` LONGTEXT NOT NULL  AFTER `id_texte`;
+
+UPDATE chronotexte AS tab1
+JOIN (SELECT `id_texte`,GROUP_CONCAT('<',`tablelie`,`iddoc`,'|ordre=',`ordre`,'|emplacement=',`emplacement`,'>' SEPARATOR '') as collconc FROM `docutexte` GROUP BY `id_texte`) AS tab3 ON tab1.id_texte = tab3.id_texte
+SET tab1.docutexte = tab3.collconc ;
+
+UPDATE chronotexte AS tab1
+JOIN textes as tab3 ON tab1.id_texte=tab3.id_texte
+SET tab1.paragraphe=tab3.paragraphe,tab1.titre=tab3.titre,tab1.soustitre=tab3.soustitre,tab1.chapeau=tab3.chapeau,tab1.texte=tab3.texte;
+
+UPDATE chronotexte AS tab1
+JOIN (SELECT `codesite`,`datetrav`,GROUP_CONCAT('{{{',datetrav,' ',titrecourt,'}}}' SEPARATOR '') as collconc FROM `chronoconstruction` GROUP BY `codesite`,`datetrav` ORDER BY `datetrav` ASC) AS tab3
+ON tab1.codesite = tab3.codesite
+SET tab1.chronoconstruction = tab3.collconc
+WHERE tab1.datetrav = tab3.datetrav AND tab1.`paragraphe`=1;
+
+UPDATE chronotexte AS tab1
+JOIN (SELECT `codesite`,`datetrav`,GROUP_CONCAT(profession,' : ',nom,'' ORDER BY `ordimp` ASC SEPARATOR '\n') as collconc FROM `auteurconstruction` GROUP BY `codesite`,`datetrav`) AS tab3
+ON tab1.codesite = tab3.codesite
+SET tab1.auteurconstruction = tab3.collconc
+WHERE tab1.datetrav = tab3.datetrav AND tab1.`paragraphe`=1;
+
+UPDATE `chronotexte`
+SET `chronotexte`.`titre`=CONCAT('{{{{',titre,'}}}}')
+WHERE `chronotexte`.`titre` !='';
+
+UPDATE `chronotexte`
+SET `chronotexte`.`soustitre`=CONCAT('{{{{{',soustitre,'}}}}}')
+WHERE `chronotexte`.`soustitre` !='';
+
+UPDATE `chronotexte`
+SET `chronotexte`.`chapeau`=CONCAT('{{{{{',chapeau,'}}}}}')
+WHERE `chronotexte`.`chapeau` !='';
+
+UPDATE `chronotexte`
+SET `chronotexte`.`texte`=CONCAT(chronoconstruction,'\n',auteurconstruction,'\n',titre,'\n',soustitre,'\n',chapeau,'\n',texte,'\n',docutexte);
+
+UPDATE chronotexte as t1
+JOIN (SELECT `codesite`,GROUP_CONCAT(texte SEPARATOR '\n') as collconc FROM `chronotexte` GROUP BY `codesite` ORDER BY `paragraphe` ASC) as t2
+ON t1.codesite=t2.codesite
+SET t1.colltexte=t2.collconc;
+
+UPDATE spip_patrimoines as t1
+JOIN chronotexte as t2
+ON t1.codesite=t2.codesite
+SET t1.texte=t2.colltexte;
+
+---------
+
+UPDATE spip_colleges as t1
+JOIN (SELECT `codesite`,GROUP_CONCAT('-* ',profession,' (',datetrav,') : ',nom SEPARATOR '\n') as collconc FROM `atlas`.`auteurconstruction` GROUP BY `codesite` ORDER BY `datetrav` ASC,`ordimp` ASC) as t2
+ON t1.codesite=t2.codesite
+SET t1.acteurs=t2.collconc;
+
+UPDATE patrimoine.spip_colleges as t1
+JOIN (SELECT `codesite`,GROUP_CONCAT('-* ',datetrav,' : ',titrecourt,' (',commentaire,')' SEPARATOR '\n') as collconc FROM `atlas`.`chronoconstruction` GROUP BY `codesite` ORDER BY `datetrav` ASC) as t2
+ON t1.codesite=t2.codesite
+SET t1.chronologie=t2.collconc;
+
+
+
+-----
+
+
+UPDATE patrimoine.spip_colleges as t1
+JOIN (SELECT `codesite`,CONCAT('-* coût global de l’opération : ',coutglobaloperation,'\n','-* coût des travaux : ',couttravaux,'\n','-* coût des bâtiments : ',coutbatimentht) as collconc FROM `atlas`.`college`) as t2
+ON t1.codesite=t2.codesite
+SET t1.couts=t2.collconc;
+
+UPDATE patrimoine.spip_colleges as t1
+JOIN (SELECT `codesite`,CONCAT('-* salles d’enseignement général : ',sallegeneral,'\n','-* salles de sciences : ',sallescience,'\n','-* salles de technologie : ',salletechnologie,'\n','-* salles d’informatique : ',salleinformatique,'\n','-* salles d’enseignement artistique : ',salleartistique,'\n','-* salles audiovisuelles : ',salleaudio,'\n','-* salles sous préfabriquées : ',salleprefa,'\n','-* CDI et locaux associés : ',sallecdi,'\n','-* salle d’EPS : ',salleeps,'\n','-* SEGPA : ',segpa,'\n','-* salle polyvalente : ',sallepolyvalente,'\n','-* demi-pension : ',demipension,'\n','-* foyer des élèves : ',foyereleve,'\n','-* préau : ',preau,'\n','-* cour : ',cour,'\n','-* plateau EPS : ',plateaueps,'\n','-* parvis : ',parvis,'\n','-* espaces verts : ',espacesverts,'\n','-* logements de fonction : ',logementsfonction,'\n','-* places de stationnement : ',placestationnement) as collconc FROM `atlas`.`college`) as t2
+ON t1.codesite=t2.codesite
+SET t1.programmedetaille=t2.collconc;
+
+UPDATE patrimoine.spip_colleges as t1
+JOIN (SELECT `codesite`,CONCAT('-* surface hors-oeuvre brute : ',shob,'\n','-* surface hors-oeuvre nette : ',shon,'\n','-* surface hors-oeuvre nette de l’extension : ',shonext,'\n','-* surface utile : ',surfaceutile,'\n','-* surface du terrain : ',surfaceterrain) as collconc FROM `atlas`.`college`) as t2
+ON t1.codesite=t2.codesite
+SET t1.surfaces=t2.collconc;
+
+----------------------
+On associe les collèges aux patrimoines :
+
+INSERT INTO `spip_colleges_liens`(`id_college`, `id_objet`, `objet`, `vu`)
+SELECT t1.`id_college`,t2.`id_patrimoine`,'patrimoine','non'
+FROM `spip_colleges` as t1
+JOIN `spip_patrimoines` as t2
+ON t1.codesite=t2.codesite
+
+UPDATE spip_patrimoines as tab0
+JOIN (
+	SELECT t1.`id_college`,t2.`id_patrimoine`
+	FROM `spip_colleges` as t1
+	JOIN `spip_patrimoines` as t2
+	ON t1.codesite=t2.codesite
+) as tab3 ON tab3.id_patrimoine=tab0.id_patrimoine
+SET tab0.statut='publie'
+
+
+----------------------
+
+INSERT INTO `spip_communes_liens`(`id_commune`, `id_objet`, `objet`, `vu`)
+SELECT t1.`id_commune`,t2.`id_protection`,'protection','non'
+FROM `spip_communes` as t1
+JOIN `spip_protections` as t2
+ON t1.nomcommune=t2.commune
+
+INSERT INTO `spip_communes_liens`(`id_commune`, `id_objet`, `objet`, `vu`)
+SELECT t1.`id_commune`,t2.`id_patrimoine`,'patrimoine','non'
+FROM `spip_communes` as t1
+JOIN `spip_patrimoines` as t2
+ON t1.nomcommune=t2.commune
+
+INSERT INTO `spip_images_liens`(`id_image`, `id_objet`, `objet`, `vu`)
+SELECT t1.`id_image`,t2.`id_patrimoine`,'patrimoine','non'
+FROM `spip_images` as t1
+JOIN `spip_patrimoines` as t2
+ON t1.codesite=t2.codesite
+
+----------------------
+
+ALTER TABLE `spip_colleges_liens` CHANGE `id_college` `id_college` BIGINT(21) NOT NULL DEFAULT '0';
+
+
+-------------------------
+
+SELECT * FROM `spip_contacts_liens` WHERE `objet`='document' AND `id_objet`>=26144 AND `id_objet`<=26552
+
+UPDATE `spip_contacts_liens` SET `id_objet`=`id_objet`+1000000 WHERE `objet`='document' AND `id_objet`>=26144 AND `id_objet`<=26552
+
+UPDATE `spip_documents` SET `id_document`=`id_document`+1000000 WHERE `id_document`>=26144 AND `id_document`<=26552
+
+
+UPDATE spip_images_documents as tab0
+JOIN `spip_images` as t1
+	ON t1.id_image=tab0.id_image
+SET tab0.id_document_new=t1.idimage;
+
+UPDATE spip_contacts_liens2 as tab0
+JOIN `spip_images_documents` as t1
+	ON t1.iddocumentold=tab0.id_objet
+SET tab0.id_objet=t1.id_document_new
+WHERE objet='document';
+
+UPDATE `spip_images_documents` SET `id_document_new`=`id_document_new`+10000000
+
+UPDATE spip_documents_liens as tab0
+JOIN `spip_images_documents` as t1
+	ON t1.iddocumentold=tab0.id_document
+SET tab0.id_document=t1.id_document_new;
+
+UPDATE `spip_documents_liens` SET `id_document_new`=`id_document_new`-10000000 WHERE `id_document_new`>=10000000
+
+-------
+
+UPDATE `spip_images_liens` SET `id_objet`=`id_objet`+10000000 WHERE `objet`='document'
+
+UPDATE spip_images_liens as tab0
+JOIN `spip_images_documents` as t1
+	ON t1.id_image=tab0.id_image
+SET tab0.id_objet=t1.id_document_new
+WHERE `objet`='document';
+
+-------
+ajout champ id_image
+
+UPDATE `spip_documents` SET `id_document`=`id_document`+1000000 WHERE `id_document`>=25952 AND `id_document`<=26552
+
+UPDATE `spip_documents` SET `id_document`=`id_document`+100000 WHERE `id_document`<25952
+
+UPDATE `spip_documents` SET `id_image`=`id_document`
+
+modification clef primaire
+
+UPDATE spip_documents as tab0
+JOIN `spip_images_documents` as t1
+	ON t1.iddocumentold=tab0.id_image
+SET tab0.id_document=t1.id_document_new;
+
+UPDATE `spip_documents` SET `id_document`=`id_document`-1000000 WHERE `id_document`>=1000000
+
+
+----------
+
+UPDATE spip_images_liens as sil
+JOIN `spip_images` as si
+	ON si.id_image=sil.id_image
+SET sil.id_document_new=si.id_document_new;
+
+UPDATE spip_documents as sd
+JOIN `spip_images_liens` as sil
+	ON sd.id_document_old=sil.id_document_old
+SET sd.id_document_new=sil.id_document_new;
+
+UPDATE spip_documents_liens as sdl
+JOIN `spip_images_liens` as sil
+	ON sdl.id_document=sil.id_document_old
+SET sdl.id_document_new=sil.id_document_new;
+
+UPDATE `spip_documents_liens` SET `id_document`=`id_document`+1000000 WHERE `id_document_new`=0
+
+UPDATE `spip_documents_liens` SET `id_document`=`id_document_new` WHERE `id_document_new`!=0
+
+UPDATE `spip_documents` SET `id_document`=`id_document`+1000000 WHERE `id_document_new`=0
+
+UPDATE `spip_documents` SET `id_document`=`id_document_new` WHERE `id_document_new`!=0
+
+UPDATE `spip_organisations_liens` SET `id_document_old`=`id_objet` WHERE `objet`='document'
+
+UPDATE spip_organisations_liens as scl
+JOIN `spip_images_liens` as sil
+	ON scl.id_document_old=sil.id_document_old
+SET scl.id_document_new=sil.id_document_new
+WHERE scl.`objet`='document';

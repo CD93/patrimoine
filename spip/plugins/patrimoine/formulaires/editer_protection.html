@@ -1,0 +1,74 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_protection,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_protection" value="#ENV{id_protection}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{textarea, nomusage, obligatoire=oui,
+				label=<:protection:champ_nomusage_label:>,
+				rows=4})]
+
+			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_protection},#ENV{id_parent},'protection',#ENV{id_secteur},'',0,form_simple})
+			</div>]
+
+			[(#SAISIE{input, codeprotection,
+				label=<:protection:champ_codeprotection_label:>})]
+
+			[(#SAISIE{input, codeculture,
+				label=<:protection:champ_codeculture_label:>})]
+
+			[(#SAISIE{textarea, protobjet,
+				label=<:protection:champ_protobjet_label:>,
+				explication=<:protection:champ_protobjet_explication:> ,
+				rows=4})]
+
+			[(#SAISIE{textarea, mode,
+				label=<:protection:champ_mode_label:>,
+				rows=4})]
+
+			[(#SAISIE{input, datedemande,
+				label=<:protection:champ_datedemande_label:>})]
+
+			[(#SAISIE{input, datemiseenplace,
+				label=<:protection:champ_datemiseenplace_label:>})]
+
+			[(#SAISIE{textarea, commentaire,
+				label=<:protection:champ_commentaire_label:>,
+				rows=4})]
+
+			[(#SAISIE{input, etat,
+				label=<:protection:champ_etat_label:>})]
+
+			[(#SAISIE{input, commune,
+				label=<:protection:champ_commune_label:>})]
+
+			[(#SAISIE{input, commune2,
+				label=<:protection:champ_commune2_label:>})]
+
+			[(#SAISIE{input, datation,
+				label=<:protection:champ_datation_label:>})]
+
+			[(#SAISIE{input, adresse,
+				label=<:protection:champ_adresse_label:>})]
+
+			[(#SAISIE{input, codesite,
+				label=<:protection:champ_codesite_label:>})]
+
+			[(#SAISIE{input, merimee,
+				label=<:protection:champ_merimee_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

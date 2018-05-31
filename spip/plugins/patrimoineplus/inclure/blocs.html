@@ -1,0 +1,20 @@
+<INCLURE{fond=inclure/objets/bloc/typeetude}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+[(#OBJET|=={patrimoine}|oui|ou{#OBJET|=={protection}|oui})<INCLURE{fond=inclure/objets/bloc/localisation}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
+<INCLURE{fond=inclure/objets/bloc/site}{env}{ajax}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}} />
+<INCLURE{fond=inclure/objets/bloc/document}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+<BOUCLE_commune(COMMUNES){id_objet}{objet}>
+<INCLURE{fond=inclure/objets/bloc/college}{objet=commune}{id_objet=#ID_COMMUNE}{ajax} />
+</BOUCLE_commune>
+<INCLURE{fond=inclure/objets/bloc/chronologie}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+<INCLURE{fond=inclure/objets/bloc/thematique}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+[(#REM)<INCLURE{fond=inclure/objets/bloc/groupe_mot}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
+[(#OBJET|=={bibliographie}|non)<INCLURE{fond=inclure/objets/bloc/publication}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
+<INCLURE{fond=inclure/objets/bloc/contact}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+[(#OBJET|=={organisation}|non)<INCLURE{fond=inclure/objets/bloc/organisation}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
+<INCLURE{fond=inclure/objets/bloc/protection}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+<BOUCLE_communeprot(COMMUNES){id_objet}{objet}>
+<INCLURE{fond=inclure/objets/bloc/protections}{objet=commune}{id_objet=#ID_COMMUNE}{ajax} />
+</BOUCLE_communeprot>
+[(#OBJET|=={commune}|oui)<INCLURE{fond=inclure/objets/bloc/protections}{objet=commune}{id_objet=#ID_COMMUNE}{ajax} />]
+[(#OBJET|=={bibliographie}|non)<INCLURE{fond=inclure/objets/bloc/bibliographie}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax}{where='id_mot!=5137'} />]
+[(#OBJET|=={patrimoine}|oui)<INCLURE{fond=inclure/objets/bloc/patrimoine}{{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]

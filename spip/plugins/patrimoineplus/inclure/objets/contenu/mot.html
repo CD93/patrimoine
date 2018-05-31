@@ -1,0 +1,27 @@
+<BOUCLE_mot(MOTS){id_mot}>
+    [(#TITRE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:paquet_patrimoine:champ_titre_label:></div>
+    <div class="valeurchamp #EDIT{titre}">#TITRE</div>
+    </div>
+    ]
+    [(#DESCRIPTIF|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:paquet_patrimoine:champ_descriptif_label:></div>
+    <div class="valeurchamp #EDIT{descriptif}">#DESCRIPTIF</div>
+    </div>
+    ]
+    [(#TEXTE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:paquet_patrimoine:champ_texte_label:></div>
+    <div class="valeurchamp #EDIT{texte}">#TEXTE*</div>
+    </div>
+    ]
+    [(#PARENT|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:paquet_patrimoine:champ_parent_label:></div>
+    <div class="valeurchamp #EDIT{parent}">#PARENT</div>
+    </div>
+    ]
+</BOUCLE_mot>
+<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=mot}{id_objet=#ID_MOT}{id_unique=''}{ajax} />

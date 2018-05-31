@@ -1,0 +1,19 @@
+<BOUCLE_document(DOCUMENTS){id_document}{tout}>
+<div class="contenu document">
+    <h3>Document :</h3>
+    <a href="#FICHIER">[(#LOGO_DOCUMENT|image_responsive{0/300/600})]</a>
+    [(#DESCRIPTIF|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:document:champ_descriptif_label:></div>
+    <div class="valeurchamp #EDIT{descriptif}">#DESCRIPTIF</div>
+    </div>
+    ]
+    [(#CREDITS|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_creditsdocu_label:></div>
+    <div class="valeurchamp #EDIT{credits}">#CREDITS</div>
+    </div>
+    ]
+    <INCLURE{fond=inclure/objets/contenu/imageaccess}{env} />
+</div>
+</BOUCLE_document>

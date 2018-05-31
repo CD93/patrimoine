@@ -1,0 +1,72 @@
+<B_organisme>
+<div class="bloc-organisme">
+<BOUCLE_organisme(ORGANISATIONS){id_organisation}>
+	<h4 class="spip">Informations</h4>
+	[(#NOM|oui)
+	<div class="patchamps">
+	<div class="titrechamp"><:contacts:label_nom:></div>
+	<div class="valeurchamp #EDIT{nom}">#NOM</div>
+	</div>
+	]
+	[(#STATUT_JURIDIQUE|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_statut_juridique:></div>
+		<div class="valeurchamp #EDIT{statut_juridique}">#STATUT_JURIDIQUE</div>
+	</div>
+	]
+	[(#IDENTIFICATION|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_identification:></div>
+	<div class="valeurchamp #EDIT{identification}">#IDENTIFICATION</div>
+	</div>
+	]
+	[(#ACTIVITE|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_activite:></div>
+	<div class="valeurchamp #EDIT{activite}">#ACTIVITE</div>
+	</div>
+	]
+	[(#DATE_CREATION|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_date_creation:></div>
+	<div class="valeurchamp #EDIT{date_creation}">#DATE_CREATION</div>
+	</div>
+	]
+	[(#DESCRIPTIF|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_descriptif:></div>
+	<div class="valeurchamp #EDIT{descriptif}">#DESCRIPTIF</div>
+	</div>
+	]
+	[(#OUVERTURES|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_ouvertures:></div>
+	<div class="valeurchamp #EDIT{ouvertures}">#OUVERTURES</div>
+	</div>
+	]
+	[(#TARIFS|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_tarifs:></div>
+	<div class="valeurchamp #EDIT{tarifs}">#TARIFS</div>
+	</div>
+	]
+	[(#URL_SITE|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_url_sites:></div>
+	<div class="valeurchamp #EDIT{url_site}"><a href="#URL_SITE" title="site de l'organisation" class="external spip_out">#URL_SITE</a></div>
+	</div>
+	]
+	<B_mot>
+			<div class="patchamps">
+			<div class="titrechamp">#INFO_TITRE{groupe_mot,12}</div>
+			<div class="valeurchamp #EDIT{titre}">
+			<BOUCLE_mot(MOTS){id_groupe=12}{id_organisation}{", "}>
+			<a href="#URL_MOT">#TITRE</a>
+			</BOUCLE_mot>
+			</div>
+			</div>
+	</B_mot>
+</BOUCLE_organisme>
+</div>
+<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=organisation}{id_objet=#ID_ORGANISATION}{id_unique=''}{ajax} />
+</B_organisme>

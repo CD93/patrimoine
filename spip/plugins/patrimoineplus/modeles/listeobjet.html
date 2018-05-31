@@ -1,0 +1,41 @@
+[(#SET{objets,#ENV{objets}})]
+
+[(#GET{objets}|=={patrimoines}|oui)
+	<INCLURE{fond=inclure/objets/liste/patrimoines}{env} />
+]
+[(#GET{objets}|=={articles}|oui)
+<INCLURE{fond=inclure/objets/liste/articles}{env} />
+]
+[(#GET{objets}|=={protections}|oui)
+	<INCLURE{fond=inclure/objets/liste/protections}{env} />
+]
+[(#GET{objets}|=={documents}|oui)
+<INCLURE{fond=inclure/objets/liste/documents}{env} />
+]
+[(#GET{objets}|=={bibliographies}|oui)
+<INCLURE{fond=inclure/objets/liste/bibliographies}{env} />
+]
+[(#GET{objets}|=={communes}|oui)
+<INCLURE{fond=inclure/objets/liste/communes}{env} />
+]
+[(#GET{objets}|=={publications}|oui)
+<INCLURE{fond=inclure/objets/liste/publications}{env} />
+]
+[(#GET{objets}|=={colleges}|oui)
+	<INCLURE{fond=inclure/objets/liste/colleges}{env} />
+]
+[(#GET{objets}|=={mots}|oui)
+	<INCLURE{fond=inclure/objets/liste/mots}{env} />
+]
+[(#GET{objets}|=={contacts}|oui)
+	<INCLURE{fond=inclure/objets/liste/contacts}{env} />
+]
+[(#GET{objets}|=={organisations}|oui)
+	<INCLURE{fond=inclure/objets/liste/organisations}{env} />
+]
+[(#GET{objets}|=={definitions}|oui)
+	<INCLURE{fond=inclure/objets/liste/definitions}{env} />
+]
+[(#GET{objets}|=={auteurs}|oui)
+	<INCLURE{fond=inclure/objets/liste/auteurs}{env} />
+]

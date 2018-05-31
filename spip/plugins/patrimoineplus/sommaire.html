@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="#LANG">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="[(#DESCRIPTIF_SITE_SPIP|couper{300}|textebrut|sinon{#SLOGAN_SITE_SPIP|couper{300}|textebrut})]">
+		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+<INCLURE{fond=inc/entete}{env} />
+	<body class="sommaire">
+    	<div class="container">
+				<INCLURE{fond=inc/menuhaut}{env} />
+				<main id="main">
+				<section class="parun">
+					<BOUCLE_artdossune(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=52}{0,1}>
+					<div class="diaporama">
+						[(#LOGO_ARTICLE|image_proportions{17,6,"focus"}|image_responsive)]
+						<div class="titre texte-diaporama">
+							<a href="#URL_ARTICLE">#TITRE</a>
+						</div>
+					</div>
+					</BOUCLE_artdossune>
+				</section>
+				<B_artdossunedeuz1>
+				<section class="wrapper">
+					<BOUCLE_artdossunedeuz1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10}{1,n}>
+					<div class="panel fond_gris">
+						[(#LOGO_ARTICLE|image_proportions{3,2,"focus"}|image_responsive)]
+						<div class="titre">
+							<a href="#URL_ARTICLE">#TITRE</a>
+						</div>
+						<div class="introduction">
+							[(#INTRODUCTION|couper{300}|textebrut)]
+						</div>
+					</div>
+				</BOUCLE_artdossunedeuz1>
+				</section>
+				</B_artdossunedeuz1>
+				<section class="pardeux">
+						<BOUCLE_artdossunetroiz(ARTICLES){par ordre}{spip_pb_selection.id_rubrique=10}{0,1}>
+							<div class="texte fond_orange">
+								<div>
+									<a href="#URL_ARTICLE" class="titre">#TITRE</a>
+								</div>
+								#DESCRIPTIF
+							</div>
+							[<div class="carte">(#PS)</div>]
+						</BOUCLE_artdossunetroiz>
+				</section>
+				<section class="recherche fond_orange" id="searchprec">
+				  <div class="formulaire">
+				    #FORMULAIRE_RECHERCHE
+				  </div>
+				</section>
+			</main>
+				<INCLURE{fond=inc/footer}{env} />
+		</div>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+[(#SET{defaut_tri,#ARRAY{
+	num nomcommune,1,
+}})]<B_liste_communes>
+#ANCRE_PAGINATION
+<div class="liste-objets communes">
+<table class="spip liste">
+	[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commune:info_1_commune,commune:info_nb_communes}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="nomcommune principale" scope="col">[(#TRI{nomcommune,<:commune:champ_nomcommune_label:>,ajax})]</th>
+			<th class="nbpat" scope="col"><:commune:nombre_patrimoine_recherche:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_communes(COMMUNES){id_mot?}{where?}
+		{tri #ENV{par,#GET{defaut_tri_par,num nomcommune}},#GET{defaut_tri}}
+		{pagination #ENV{pagination,30}}{recherche?}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="nomcommune principale">[(#LOGO_COMMUNE|image_reduire{0,75})]<a href="[(#ID_COMMUNE|generer_url_entite{commune})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMUNE">[(#RANG). ]#NOMCOMMUNE</a></td>
+			<td class="nbpat"><B_nb_patrimoines>#GRAND_TOTAL<BOUCLE_nb_patrimoines(PATRIMOINES){communes_liens.id_commune}> </BOUCLE_nb_patrimoines></B_nb_patrimoines>-<//B_nb_patrimoines></td>
+		</tr>
+	</BOUCLE_liste_communes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_communes>[
+<div class="liste-objets communes caption-wrap"><strong class="caption">(#ENV*{sinon,<:commune:info_aucun_commune:>})</strong></div>
+]<//B_liste_communes>

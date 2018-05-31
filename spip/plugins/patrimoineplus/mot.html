@@ -1,0 +1,44 @@
+<BOUCLE_mot(MOTS){id_mot}>
+<!DOCTYPE html>
+<html lang="#LANG">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#TITRE|textebrut)][ - Mot-clef - (#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="[(#DESCRIPTIF|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/mot}{env}|couper{300}|textebrut})]">
+		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+		<INCLURE{fond=inc/entete}{env} />
+	<body class="objet">
+		<div class="container">
+			<INCLURE{fond=inc/menuhaut}{env} />
+			<main id="main">
+				<section class="parun">
+					<div class="diaporama">
+						[(#LOGO_MOT|image_proportions{17,6,"focus"}|image_responsive|inserer_attribut{alt,#TITRE})]
+					</div>
+					<INCLURE{fond=inclure/ariane}{env}{objet=mot}{id_objet=#ID_MOT} />
+				</section>
+				<article>
+					<header>
+						<h1>#TITRE</h1>
+						<p class="info-publi"><abbr class="published" title="#DATE">[(#DATE|affdate)]</abbr>
+							[<span class="sep">, </span><span class="auteurs">par (#LESAUTEURS)</span>]
+						</p>
+					</header>
+					<section class="contenu">
+						<INCLURE{fond=inclure/objets/contenu/mot}{env} />
+						<INCLURE{fond=inclure/objets/bloc/groupe_mot}{env}{objet=mot}{id_objet=#ID_MOT} />
+					</section>
+					<section class="bloc">
+						<INCLURE{fond=inclure/blocs}{objet=mot}{id_objet=#ID_MOT}{env}{ajax} />
+					</section>
+				</article>
+			</section>
+			</main>
+		<INCLURE{fond=inc/footer}{env} />
+		</div>
+	</body>
+</html>
+</BOUCLE_mot>

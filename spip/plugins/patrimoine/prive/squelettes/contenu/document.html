@@ -1,0 +1,67 @@
+[(#AUTORISER{voir,document,#ID_DOCUMENT}|sinon_interdire_acces)]
+<BOUCLE_document(DOCUMENTS){id_document}{statut==.*}{si #ENV{exec}|=={document}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,document,#ID_DOCUMENT})
+		[(#ID_DOCUMENT|afficher_qui_edite{document}|non)
+			[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}|icone_verticale{<:document:icone_modifier_document:>,document,edit,right ajax preload})]
+		]
+		[(#ID_DOCUMENT|afficher_qui_edite{document}|oui)
+			[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}|icone_verticale{#ID_DOCUMENT|afficher_qui_edite{document},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{document-24.png}|balise_img{document,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{document,#ID_DOCUMENT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/document,id=#ID_DOCUMENT,id_document=#ID_DOCUMENT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,document,#ID_DOCUMENT})
+	[(#ID_DOCUMENT|afficher_qui_edite{document}|non)
+		[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}|icone_verticale{<:document:icone_modifier_document:>,document,edit,right ajax preload})]
+	]
+	[(#ID_DOCUMENT|afficher_qui_edite{document}|oui)
+		[(#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}|icone_verticale{#ID_DOCUMENT|afficher_qui_edite{document},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+
+<div class="liste">
+<BOUCLE_objetslies(spip_documents_liens){id_document}{0,1}><h3><:document:titre_objets_lies_document:></h3></BOUCLE_objetslies>
+
+<BOUCLE_autresobjets(spip_documents_liens){id_document}{objet !IN article,rubrique}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_document]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_document}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_document,ajax,env} />
+</BOUCLE_autresobjets>
+</div>
+#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,document,id_objet,#ID_DOCUMENT},data,''}}
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,document,id,#ID_DOCUMENT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/document-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/document-enfants,id_document,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,document,id_document,#ID_DOCUMENT,objet,document,id_objet,#ID_DOCUMENT},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_document>
+[(#ENV**{exec}|=={document_edit}|?{#INCLURE{fond=prive/squelettes/contenu/document_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_document>

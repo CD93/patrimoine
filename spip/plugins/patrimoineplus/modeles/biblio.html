@@ -1,0 +1,4 @@
+#SET{id,#ENV{id_biblio}}
+<BOUCLE_biblio(BIBLIOGRAPHIES){id_bibliographie=#GET{id}}>
+<a href="#URL_BIBLIOGRAPHIE">#TITRE[ - (#TITREDOCUMENTHOTE)][ - (#AUTEURS)][ - (#DATEDEDITION)][ ((#ENV{page}))]</a>
+</BOUCLE_biblio>

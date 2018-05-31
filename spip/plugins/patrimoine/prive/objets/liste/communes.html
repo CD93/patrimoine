@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	nomcommune,1,
+	date_publication,-1,
+	id_commune,1,
+	points,-1
+}})]<B_liste_communes>
+#ANCRE_PAGINATION
+<div class="liste-objets communes">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commune:info_1_commune,commune:info_nb_communes}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="nomcommune" scope="col">[(#TRI{nomcommune,<:commune:champ_nomcommune_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date_publication,<:date:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_commune,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_communes(COMMUNES){id_rubrique?}{id_secteur?}{mots_liens.id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nomcommune},#GET{defaut_tri}}{par nomcommune}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{commune-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{commune,#ID_COMMUNE,#ID_RUBRIQUE})]</td>
+			<td class="nomcommune principale">[(#LOGO_COMMUNE|image_reduire{20,26})]<a href="[(#ID_COMMUNE|generer_url_entite{commune})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMUNE">[(#RANG). ]#NOMCOMMUNE</a></td>
+			<td class="date secondaire">[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
+			<td class="id">[(#AUTORISER{modifier,commune,#ID_COMMUNE}|?{
+				<a href="[(#URL_ECRIRE{commune_edit,id_commune=#ID_COMMUNE})]">#ID_COMMUNE</a>,
+				#ID_COMMUNE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_communes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_communes>[
+<div class="liste-objets communes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_communes>

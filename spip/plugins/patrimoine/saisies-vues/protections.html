@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_protections_selectionnes>
+	<ul>
+	<BOUCLE_protections_selectionnes(PROTECTIONS){id_protection IN #GET*{valeur}}
+		{par num nomusage, nomusage}{statut?}{tout}>
+		<li class="choix">#NOMUSAGE (#ID_PROTECTION)</li>
+	</BOUCLE_protections_selectionnes>
+	</ul>
+	</B_protections_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_protections_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_protection_selectionne(PROTECTIONS){id_protection=#ENV{valeur}}
+		{par num nomusage, nomusage}{statut?}{tout}>
+	  	<p>#NOMUSAGE (#ID_PROTECTION)</p>
+	</BOUCLE_protection_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_protection_selectionne>
+<//B_test_multiple>

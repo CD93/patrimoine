@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_patrimoines_selectionnes>
+	<ul>
+	<BOUCLE_patrimoines_selectionnes(PATRIMOINES){id_patrimoine IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_PATRIMOINE)</li>
+	</BOUCLE_patrimoines_selectionnes>
+	</ul>
+	</B_patrimoines_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_patrimoines_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_patrimoine_selectionne(PATRIMOINES){id_patrimoine=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_PATRIMOINE)</p>
+	</BOUCLE_patrimoine_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_patrimoine_selectionne>
+<//B_test_multiple>

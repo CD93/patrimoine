@@ -1,0 +1,11 @@
+#SET{nb,#ENV{nb,30}}
+	<B_doc>
+	<div class="pagination">#PAGINATION{prive}</div>
+	<ul class="listedoc spip">
+		<BOUCLE_doc(DOCUMENTS){mode=document}{id_patrimoine?}{id_commune?}{pagination #GET{nb}}>
+			#SET{docs,#GET{docs}|concat{#MODELE{ligne}{id=#ID_DOCUMENT}{largeur=200}}}
+		</BOUCLE_doc>
+		#PIPELINE{post_echappe_html_propre,#GET{docs}}
+	</ul>
+	<div class="pagination">#PAGINATION{prive}</div>
+	</B_doc>

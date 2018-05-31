@@ -1,0 +1,47 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_publication,-1,
+	id_patrimoine,1,
+	points,-1
+}})]<B_liste_patrimoines>
+#ANCRE_PAGINATION
+<div class="liste-objets patrimoines">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:patrimoine:champ_titre_label:>,ajax})]</th>
+			<th class="commune" scope="col">commune</th>
+			<th class="date" scope="col">[(#TRI{date_publication,<:date:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_patrimoine,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="codesite" scope="col">[(#TRI{codesite,<:patrimoine:codesite:>,ajax})]</th>
+			<th class="nbdoc" scope="col">nbre de documents</th>
+			<th class="nbgis" scope="col">nbre de géométries</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_patrimoines(PATRIMOINES){id_rubrique?}{id_secteur?}{mots_liens.id_mot?}{documents_liens.id_document?}{protections_liens.id_protection?}{communes_liens.id_commune?}{bibliographies_liens.id_bibliographie?}{colleges_liens.id_college?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,30}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{patrimoine-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{patrimoine,#ID_PATRIMOINE,#ID_RUBRIQUE})]</td>
+			<td class="titre principale">[(#LOGO_PATRIMOINE|image_reduire{20,26})]<a href="[(#ID_PATRIMOINE|generer_url_entite{patrimoine})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PATRIMOINE">[(#RANG). ]#TITRE</a></td>
+			<td class="commune"><BOUCLE_liste_communes(COMMUNES spip_communes_lien){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}{", "}>#NOMCOMMUNE</BOUCLE_liste_communes></td>
+			<td class="date secondaire">[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
+			<td class="id">[(#AUTORISER{modifier,patrimoine,#ID_PATRIMOINE}|?{
+				<a href="[(#URL_ECRIRE{patrimoine_edit,id_patrimoine=#ID_PATRIMOINE})]">#ID_PATRIMOINE</a>,
+				#ID_PATRIMOINE
+			})]</td>
+			<td class="codesite">#CODESITE</td>
+			<td class="nbdoc"><B_nb_documents>#GRAND_TOTAL<BOUCLE_nb_documents(DOCUMENTS spip_documents_liens){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}> </BOUCLE_nb_documents></B_nb_documents>-<//B_nb_documents></td>
+			<td class="nbdoc"><B_nb_gis>#GRAND_TOTAL<BOUCLE_nb_gis(GIS spip_gis_liens){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}> </BOUCLE_nb_gis></B_nb_gis>-<//B_nb_gis></td>
+		</tr>
+	</BOUCLE_liste_patrimoines>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_patrimoines>[
+<div class="liste-objets patrimoines caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_patrimoines>

@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_publication,-1,
+	codeia,1,
+	id_college,1,
+	points,-1
+}})]<B_liste_colleges>
+#ANCRE_PAGINATION
+<div class="liste-objets colleges">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{college:info_1_college,college:info_nb_colleges}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:college:champ_titre_label:>,ajax})]</th>
+			<th class="codeia" scope="col">[(#TRI{codeia,<:college:champ_codeia_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date_publication,<:date:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_college,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_colleges(COLLEGES){id_rubrique?}{id_secteur?}{mots_liens.id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{college-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{college,#ID_COLLEGE,#ID_RUBRIQUE})]</td>
+			<td class="titre principale">[(#LOGO_COLLEGE|image_reduire{20,26})]<a href="[(#ID_COLLEGE|generer_url_entite{college})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COLLEGE">[(#RANG). ]#TITRE</a></td>
+			<td class="codeia">[(#CODEIA)]</td>
+			<td class="date secondaire">[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
+			<td class="id">[(#AUTORISER{modifier,college,#ID_COLLEGE}|?{
+				<a href="[(#URL_ECRIRE{college_edit,id_college=#ID_COLLEGE})]">#ID_COLLEGE</a>,
+				#ID_COLLEGE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_colleges>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_colleges>[
+<div class="liste-objets colleges caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_colleges>

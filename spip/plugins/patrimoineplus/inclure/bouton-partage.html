@@ -1,0 +1,20 @@
+<B_art>
+<div class="break"></div>
+<BOUCLE_art(ARTICLES){id_article ?}{id_article=#ENV{id_article}}{0,1}>
+<div class="printmail reseausoc">
+	<a class="google" alt="Partagez sur Google+" href="https://plus.google.com/share?url=[(#URL_PAGE|urlencode)]">Google+</a>
+	<a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=[(#URL_PAGE|urlencode)]" target="_blank">Facebook</a>
+	<a class="twitter" data-href="[(#URL_PAGE|urlencode)]" alt="Partagez sur Twitter" href="https://twitter.com/intent/tweet?hashtags=SSD93&original_referer=[(#URL_PAGE|urlencode)]&text=[(#TITRE*|urlencode)]&tw_p=tweetbutton&url=[(#URL_PAGE|urlencode)]" target="_blank">Twitter</a>
+	<div class="texte"><span>PARTAGEZ</span></div>
+</div>
+</BOUCLE_art>
+<B_rub>
+<div class="break"></div>
+<BOUCLE_rub(RUBRIQUES){id_rubrique ?}{id_rubrique=#ENV{id_rubrique}}{0,1}>
+<div class="printmail reseausoc">
+	<a class="google" alt="Partagez sur Google+" href="https://plus.google.com/share?url=[(#URL_PAGE|urlencode)]">Google+</a>
+	<a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=[(#URL_PAGE|urlencode)]" target="_blank">Facebook</a>
+	<a class="twitter" data-href="[(#URL_PAGE|urlencode)]" alt="Partagez sur Twitter" href="https://twitter.com/intent/tweet?hashtags=SSD93&original_referer=[http://patrimoine.seinesaintdenis.fr/rubrique(#ID_RUBRIQUE|urlencode)]&text=[(#TITRE*|urlencode)]&tw_p=tweetbutton&url=[http://patrimoine.seinesaintdenis.fr/rubrique(#ID_RUBRIQUE|urlencode)]" target="_blank">Twitter</a>
+	<div class="texte"><span>PARTAGEZ</span></div>
+</div>
+</BOUCLE_rub>

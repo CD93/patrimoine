@@ -1,0 +1,35 @@
+<paquet
+	prefix="patrimoineplus"
+	categorie="divers"
+	version="1.0.4"
+	etat="dev"
+	compatibilite="[3.0.20;3.2.*]"
+	logo=""
+	documentation=""
+	schema="1.0.1"
+>
+	<!--
+		Paquet genere le 2015-09-25 11:54:01
+	-->
+
+	<nom>Patrimoine Plus</nom>
+
+	<auteur>damien</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/patrimoineplus.php" />
+	<pipeline nom="patrimoineplus_objets_lies" inclure="patrimoineplus_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="patrimoineplus_pipelines.php" />
+	<pipeline nom="insert_head_prive" inclure="patrimoineplus_pipelines.php" />
+  <pipeline nom="jquery_plugins" inclure="patrimoineplus_pipelines.php" />
+  <pipeline nom="jqueryui_plugins" inclure="patrimoineplus_pipelines.php" />
+  <pipeline nom="header_prive" inclure="patrimoineplus_pipelines.php" />
+  <pipeline nom="recuperer_fond" inclure="patrimoineplus_pipelines.php" />
+	<necessite nom="gis" compatibilite="[4.42.0;[" />
+	<necessite nom="gisgeom" compatibilite="[1.10.0;[" />
+	<necessite nom="motsar"  compatibilite="[1.1.6;["/>
+
+	<utilise nom="medias" />
+	<utilise nom="mots" />
+</paquet>

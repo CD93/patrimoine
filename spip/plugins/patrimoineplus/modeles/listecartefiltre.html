@@ -1,0 +1,15 @@
+[(#SET{objets,#ENV{objets,patrimoines}})]
+[(#SET{type,#ENV{type,a}})]
+[(#SET{soustype,#ENV{soustype,a}})]
+[(#SET{colonne,#ENV{colonne,2}})]
+[(#SET{cluster,#ENV{cluster,oui}})]
+[(#SET{height,#ENV{height,360px}})]
+[(#SET{zoom,#ENV{zoom,10}})]
+<div class="col-sm-8">
+	[(#MODELE{listeobjet}{objets=#GET{objets},type=#GET{type},soustype=#GET{soutype},colonne=#GET{colonne}})]
+</div>
+<div class="col-sm-4">
+	<div class="well">
+		[(#MODELE{carte_gis_base}{objets=#GET{objets},cluster=#GET{cluster},height=#GET{height},zoom=#GET{zoom}})]
+	</div>
+</div>

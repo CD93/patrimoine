@@ -1,0 +1,8 @@
+[(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
+<BOUCLE_patrimoines(PATRIMOINES){par num titre, titre}{id_parent}{tout}>
+	[(#ENV{multiple}|oui)
+	<option value="#ID_PATRIMOINE"[(#ID_PATRIMOINE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+	[(#ENV{multiple}|non)
+	<option value="#ID_PATRIMOINE"[(#ID_PATRIMOINE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+	<INCLURE{fond=saisies/_patrimoines_recurs,env,id_parent=#ID_PATRIMOINE,separateur=#GET{separateur}} />
+</BOUCLE_patrimoines>

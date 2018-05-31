@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	vedette,1,
+	titre,1,
+	auteurs,1,
+	datededition,-1,
+	id_bibliographie,1,
+	points,-1
+}})]<B_liste_bibliographies>
+#ANCRE_PAGINATION
+<div class="liste-objets bibliographies">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{titre,<:bibliographie:champ_titre_label:>,ajax})]</th>
+			<th class="auteurs" scope="col">[(#TRI{auteurs,<:bibliographie:champ_auteurs_label:>,ajax})]</th>
+			<th class="vedette" scope="col">[(#TRI{vedette,<:bibliographie:champ_vedette_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{datededition,<:bibliographie:champ_datededition_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_bibliographie,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_rubrique?}{id_document?}{id_secteur?}{mots_liens.id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num vedette},#GET{defaut_tri}}{par vedette}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{bibliographie-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{bibliographie,#ID_BIBLIOGRAPHIE,#ID_RUBRIQUE})]</td>
+			<td class="titre principale">[(#LOGO_BIBLIOGRAPHIE|image_reduire{20,26})]<a href="[(#ID_BIBLIOGRAPHIE|generer_url_entite{bibliographie})]" title="<:info_numero_abbreviation|attribut_html:> #ID_BIBLIOGRAPHIE">[(#RANG). ]#TITRE</a></td>
+			<td class="auteurs">#AUTEURS</td>
+			<td class="vedette">#VEDETTE</td>
+			<td class="date secondaire">[(#DATEDEDITION)]</td>
+			<td class="id">[(#AUTORISER{modifier,bibliographie,#ID_BIBLIOGRAPHIE}|?{
+				<a href="[(#URL_ECRIRE{bibliographie_edit,id_bibliographie=#ID_BIBLIOGRAPHIE})]">#ID_BIBLIOGRAPHIE</a>,
+				#ID_BIBLIOGRAPHIE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_bibliographies>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_bibliographies>[
+<div class="liste-objets bibliographies caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_bibliographies>

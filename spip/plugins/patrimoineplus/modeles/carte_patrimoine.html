@@ -1,0 +1,143 @@
+	[(#SET{id,#ENV{id_carte_gis,#ENV{id_map,#ENV{id,1}}}})]
+	[(#SET{couche_geoportail,#ENV{couche_geoportail}})]
+	[(#SET{choix,#ENV{choix,""}})]
+	[(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
+	[(#SET{height,#ENV{height,#ENV{hauteur,400px}}})]
+	[(#SET{icone,#ENV{icone,"objet"}})]
+	
+	<link rel="stylesheet" href="#CHEMIN{lib/leaflet/dist/leaflet.css}" ></link>
+	<style>
+	.leaflet-marker-pane {
+	    z-index: 4;
+	}
+	.leaflet-shadow-pane {
+		z-index: 3;
+	}
+	.leaflet-popup {
+		z-index: 1203;
+	}
+	.leaflet-control {
+	    float: none;
+	    display: inline-block;
+	}
+	
+	#maptrav .leaflet-control-layers {
+		display:  none;
+	}
+	
+	</style>
+	<div id="controls"></div>
+	<div tabindex="0" class="map leaflet-container leaflet-fade-anim" id="mapobjet#GET{id}" style="[width:(#GET{width});][ height:(#GET{height});] position: relative;"></div>
+	<script src="#CHEMIN{lib/leaflet/dist/leaflet.js}" type="text/javascript"></script>
+	<script>
+		var mapObjet = L.map('mapobjet#GET{id}',{scrollWheelZoom:false,zoomControl:true}).setView([48.90903,2.45506 ], 11);
+		//url des TMS de fond
+		var oms=L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/{variant}/x={x}&y={y}&z={z}', {	maxZoom: 18,variant: 'roadsg'});
+		var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',maxZoom: 18});
+		var google =  L.tileLayer('http://khms0.googleapis.com/kh?v=145&hl=fr-FR&x={x}&y={y}&z={z}', {maxZoom: 20}); 
+		
+		 // option pour le selecteur de couche
+		var baseMaps = {
+		    "OpenMapSurfer": oms, 
+		    "OSM": osm,
+		    "Ortho Google":google,
+		};
+		//on ajoute le fond OMS au départ
+		osm.addTo(mapObjet);
+				
+		var coucheObjet = L.featureGroup().addTo(mapObjet); // feature group ou on va inserer les travaux
+		var fondCD = L.featureGroup().addTo(mapObjet); // feature group ou on va inserer les fonds de cartes
+		
+		var overlayMaps = {
+		    "Objet": coucheObjet,
+
+		};
+		//on ajoute le 'control' des fonds de carte
+		/*
+		var optionsCont = {collapsed: false};
+		var control = L.control.layers("",overlayMaps,optionsCont);
+		control.addTo(maptrav);
+		var controlDiv = control.onAdd(maptrav);
+		$(document).ready(function(){
+			$('#controls').append(controlDiv);
+		});
+		*/
+		//on ajoute la limite départementale
+		$.ajax({
+			url: "https://geoportail93.fr/SERV/DATA/?LAYERS=1049&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27",
+			dataType: 'json',
+			}).done(function(data) {
+				var deptOptions = {
+				    color: "#444",
+				    fill: false,
+				    weight: 2,
+				    opacity: 0.3,
+				    clickable: false
+				};
+				// Add the geojson layer to the map
+				var dept_geojson = L.geoJson(data,{
+					style: deptOptions
+				});
+				dept_geojson.addTo(fondCD);
+				
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+		});
+		//on ajoute les limites communales
+		$.ajax({
+			url: "https://geoportail93.fr/SERV/DATA/?LAYERS=937&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27",
+			dataType: 'json',
+			}).done(function(data) {
+				var commOptions = {
+				    fillColor: "#ffffff",
+				    color: "#222",
+				    weight: 1,
+				    opacity: 0.3,
+				    fill: false,
+				    clickable: false
+				};
+				// Add the geojson layer to the map
+				var comm_geojson = L.geoJson(data,{
+					style: commOptions
+				});
+				comm_geojson.addTo(fondCD);
+				
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+		});		
+		
+		var objetIcon = L.icon({
+			iconUrl: '#CHEMIN{images/#GET{icone}-marker.png}',
+			iconSize: [26, 34],
+			iconAnchor: [13, 34],
+			popupAnchor: [0, -28],
+			fillOpacity:0.8
+			
+		});
+		$.ajax({
+			url: "https://geoportail93.fr/SERV/DATA/?LAYERS=#GET{couche_geoportail}&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=codesite='#GET{choix}'",
+			dataType: 'json',
+			}).done(function(data) {
+				// Add the geojson layer to the map
+				var objet_geojson = L.geoJson(data,{
+					onEachFeature: onEachFeature,
+					pointToLayer: function (feature, latlng) {
+						return L.marker(latlng, {icon: objetIcon});
+					}
+				});
+				objet_geojson.addTo(coucheObjet);
+				
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+		});
+				
+		mapObjet.fitBounds(fondCD.getBounds());
+			
+		//pour chaque trace de travaux DVD...
+		function onEachFeature(feature, layer) {
+			//on lui fait afficher une popup lors d'un click
+			var popuptxt = '';
+			if (feature.properties["id"] !== null) popuptxt += '<b>id :</b> ' + feature.properties["id"]+'<br/>'; 
+		    layer.bindPopup(popuptxt);
+		}
+</script>

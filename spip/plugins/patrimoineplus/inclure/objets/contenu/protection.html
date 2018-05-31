@@ -1,0 +1,87 @@
+<div class="bloc protection">
+[(#REM) les autres protections de la commune (à mettre à droite ou pas)]
+<BOUCLE_commune(COMMUNES){id_patrimoine}>
+<div class="patchamps">
+	<div class="titrechamp">Autres protections :</div>
+	<div class="valeurchamp">
+	<BOUCLE_patcomm(protections_liens patrimoines communes_liens){protections_liens.objet=patrimoine}{communes_liens.objet=patrimoine}{communes_liens.id_commune=#ID_COMMUNE}{id_objet!=#ID_PATRIMOINE}{", "}>
+		<a href="#URL_PATRIMOINE{#ID_OBJET}">#TITRE</a>
+	</BOUCLE_patcomm>
+	</div>
+</div>
+</BOUCLE_commune>
+
+<BOUCLE_prot(PROTECTIONS){id_protection}>
+
+							<div class="zoneprot">
+								[(#ADRESSE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_adresse_label:>: </div>
+								<div class="valeurchamp #EDIT{adresse}" >#ADRESSE</div>
+								</div>
+								]
+                [(#CODECULTURE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_codeculture_label:>: </div>
+								<div class="valeurchamp #EDIT{codeculture}" >#CODECULTURE</div>
+								</div>
+								]
+                [(#CODEPROTECTION|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_codeprotection_label:>: </div>
+								<div class="valeurchamp #EDIT{codeprotection}" >#CODEPROTECTION</div>
+								</div>
+								]
+                [(#CODESITE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_codesite_label:>: </div>
+								<div class="valeurchamp #EDIT{codesite}" >#CODESITE</div>
+								</div>
+								]
+                [(#COMMENTAIRE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_commentaire_label:>: </div>
+								<div class="valeurchamp #EDIT{commentaire}" >#COMMENTAIRE</div>
+								</div>
+								]
+                [(#DATATION|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_datation_label:>: </div>
+								<div class="valeurchamp #EDIT{datation}" >#DATATION</div>
+								</div>
+								]
+                [(#DATEMISEENPLACE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_datemiseenplace_label:>: </div>
+								<div class="valeurchamp #EDIT{datemiseenplace}" >#DATEMISEENPLACE</div>
+								</div>
+								]
+                [(#ETAT|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_etat_label:>: </div>
+								<div class="valeurchamp #EDIT{etat}" >#ETAT</div>
+								</div>
+								]
+                [(#MERIMEE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_merimee_label:>: </div>
+								<div class="valeurchamp #EDIT{merimee}" >#MERIMEE</div>
+								</div>
+								]
+                [(#MODE|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_mode_label:>: </div>
+								<div class="valeurchamp #EDIT{mode}" >#MODE</div>
+								</div>
+								]
+                [(#PROTPROTECTION|oui)
+								<div class="patchamps">
+								<div class="titrechamp"><:protection:champ_protprotection_label:>: </div>
+								<div class="valeurchamp #EDIT{protprotection}" >#PROTPROTECTION</div>
+								</div>
+								]
+              </div>
+
+</BOUCLE_prot>
+</div>
+<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=protection}{id_objet=#ID_PROTECTION}{id_unique=''}{ajax} />

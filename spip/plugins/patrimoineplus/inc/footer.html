@@ -1,0 +1,11 @@
+<footer role="contentinfo" id="footer" class="footer">
+<B_article>
+	<ul>
+		<BOUCLE_article(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=51}>
+		<li><a href="#URL_ARTICLE">#TITRE</a></li>
+		</BOUCLE_article>
+	</ul>
+</B_article>
+  <div class="logoCD93"><a href="http://seinesaintdenis.fr" title="site de la Seine-Saint-Denis" class="external">[(#LOGO_SITE_SPIP|image_responsive{260,520})]</a></div>
+</footer>
+<INCLURE{fond=inclure/visites}{env} />

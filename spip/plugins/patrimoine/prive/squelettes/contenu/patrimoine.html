@@ -1,0 +1,62 @@
+[(#AUTORISER{voir,patrimoine,#ID_PATRIMOINE}|sinon_interdire_acces)]
+<BOUCLE_patrimoine(PATRIMOINES){id_patrimoine}{statut==.*}{si #ENV{exec}|=={patrimoine}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,patrimoine,#ID_PATRIMOINE})
+		[(#ID_PATRIMOINE|afficher_qui_edite{patrimoine}|non)
+			[(#URL_ECRIRE{patrimoine_edit,id_patrimoine=#ID_PATRIMOINE}|icone_verticale{<:patrimoine:icone_modifier_patrimoine:>,patrimoine,edit,right ajax preload})]
+		]
+		[(#ID_PATRIMOINE|afficher_qui_edite{patrimoine}|oui)
+			[(#URL_ECRIRE{patrimoine_edit,id_patrimoine=#ID_PATRIMOINE}|icone_verticale{#ID_PATRIMOINE|afficher_qui_edite{patrimoine},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{patrimoine-24.png}|balise_img{patrimoine,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{patrimoine,#ID_PATRIMOINE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/patrimoine,id=#ID_PATRIMOINE,id_patrimoine=#ID_PATRIMOINE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,patrimoine,#ID_PATRIMOINE})
+	[(#ID_PATRIMOINE|afficher_qui_edite{patrimoine}|non)
+		[(#URL_ECRIRE{patrimoine_edit,id_patrimoine=#ID_PATRIMOINE}|icone_verticale{<:patrimoine:icone_modifier_patrimoine:>,patrimoine,edit,right ajax preload})]
+	]
+	[(#ID_PATRIMOINE|afficher_qui_edite{patrimoine}|oui)
+		[(#URL_ECRIRE{patrimoine_edit,id_patrimoine=#ID_PATRIMOINE}|icone_verticale{#ID_PATRIMOINE|afficher_qui_edite{patrimoine},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<!-- **sq/cont/pat**-->
+<div class="liste">
+
+<BOUCLE_objetslies(spip_patrimoines_liens){id_patrimoine}{0,1}><h3><:patrimoine:titre_patrimoines_lies_patrimoine:></h3></BOUCLE_objetslies>
+[(#REM)<INCLURE{fond=prive/objets/liste/patrimoines_lies_patrimoines,objet=patrimoine,id_objet=id_patrimoine,ajax,env} />]
+</div>
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,patrimoine,id,#ID_PATRIMOINE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/patrimoine-enfants}|trouver_fond|oui) 
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/patrimoine-enfants,id_patrimoine,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,patrimoine,id_patrimoine,#ID_PATRIMOINE,objet,patrimoine,id_objet,#ID_PATRIMOINE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_patrimoine>
+[(#ENV**{exec}|=={patrimoine_edit}|?{#INCLURE{fond=prive/squelettes/contenu/patrimoine_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_patrimoine>

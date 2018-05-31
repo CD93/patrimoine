@@ -1,0 +1,19 @@
+[(#REM)
+
+	Pagination alphabétique des mots.
+
+	Paramètres :
+	- id_boucle : identifiant de la boucle qui liste les contacts, par défaut 'liste_mots'
+
+]
+<B_lettres>
+<div class="pagination alpha">
+	<BOUCLE_lettres(MOTS){fusion LOWER(SUBSTR(titre,1,1))}{'<span class="sep"> | </span>'}>
+	#SET{lettre,#TITRE|mb_substr{0,1}|strtolower}
+	<BOUCLE_premier_element(MOTS){par titre}{titre like #GET{lettre}%}{0,1}>
+	[(#SELF|parametre_url{lettre,#GET{lettre}}|parametre_url{debut_#ENV{id_boucle,liste_mots},@#ID_MOT}|ancre_url{mot#ID_MOT}
+		|lien_ou_expose{#GET{lettre},#VAL{debut_#ENV{id_boucle,liste_mots}}|_request|=={@#ID_MOT}})]
+	</BOUCLE_premier_element>
+	</BOUCLE_lettres>
+</div>
+</B_lettres>

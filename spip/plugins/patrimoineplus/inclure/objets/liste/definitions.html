@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,#ENV{date_sens,-1},
+	points,-1
+}})
+]<B_liste_definitions>
+#ANCRE_PAGINATION
+<div class="liste-elements liste-objets definitions">
+<table class="spip liste">
+[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{definition:info_1_definition,definition:info_nb_definitions}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="titre principale" scope="col">[(#TRI{titre,<:definition:champ_titre_label:>,ajax})]</th>
+			<th class="descriptif" scope="col"><:definition:champ_texte_label:></th>
+			<th class="type" scope="col">[(#TRI{type,<:definition:champ_type_label:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_definitions(DEFINITIONS){id_definition?}
+		{id_dictionnaire?}
+		{recherche?}
+		{tri #ENV{par,#ENV{recherche}|?{points,titre}},#GET{defaut_tri}}
+		{pagination #ENV{pagination,30}}
+	>
+		<tr class="[(COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="titre principale"><a href="[(#ID_DEFINITION|generer_url_entite{definition})]"
+				title="<:info_numero_abbreviation|attribut_html:> #ID_DEFINITION">[(#RANG). ]#TITRE</a></td>
+			<td dir="#LANG_DIR" class="#EDIT{texte} descriptif">[(#TEXTE|ptobr|couper{80})]</td>
+			<td class="type">[(#TYPE|=={abbr}|?{<:item_oui:>,<:item_non:>})]</td>
+		</tr>
+	</BOUCLE_liste_definitions>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_definitions>[
+<div class="liste-elements liste-objets definitions caption-wrap"><strong class="caption">(#ENV*{sinon,<:definition:info_aucun_definition:>})</strong></div>
+]<//B_liste_definitions>

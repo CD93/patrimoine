@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	num titre,1,
+	media,1,
+	credits,1,
+}})]<B_liste_documents>
+#ANCRE_PAGINATION
+<div class="liste-objets documents">
+<table class="spip liste">
+	[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{document:info_1_document,document:info_nb_documents}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="logo" scope="col"><:patrimoine:vignette:></th>
+			<th class="titre principale" scope="col">[(#TRI{titre,<:document:champ_titre_label:>,ajax})]</th>
+			<th class="media" scope="col">[(#TRI{media,<:document:champ_media_label:>,ajax})]</th>
+			<th class="credits" scope="col">[(#TRI{credits,<:document:champ_credits_label:>,ajax})]</th>
+			<th class="codesite" scope="col"><:document:champ_codesite_label:></th>
+			<th class="datecreation" scope="col"><:document:champ_datecreation_label:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_documents(DOCUMENTS){id_mot?}{auteurs_liens.id_auteur?}{where?}{recherche?}
+	   {tri #ENV{par,#GET{defaut_tri_par,num titre}},#GET{defaut_tri}}
+		 {pagination #ENV{pagination,30}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo"><a href="#FICHIER">[(#LOGO_DOCUMENT|image_proportions{4,3,"focus"}|image_responsive{0/75/150})]</a></td>
+			<td class="titre principale"><a href="[(#URL_DOCUMENT)]" title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">[(#RANG). ]#TITRE</a></td>
+			<td class="credits">#MEDIA</td>
+			<td class="credits">#CREDITS</td>
+			<td class="codesite"><BOUCLE_liste_pat(PATRIMOINES spip_documents_liens){id_document=#ID_DOCUMENT}{", "}><a href="#URL_PATRIMOINE">#CODESITE</a></BOUCLE_liste_pat></td>
+			<td class="datecreation"><BOUCLE_liste_images(IMAGES spip_images_liens){objet='document'}{id_objet=#ID_DOCUMENT}>#DATECREATION</BOUCLE_liste_images></td>
+		</tr>
+	</BOUCLE_liste_documents>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_documents>[
+<div class="liste-objets documents caption-wrap"><strong class="caption">(#ENV*{sinon,<:document:info_aucun_document:>})</strong></div>
+]<//B_liste_documents>

@@ -1,0 +1,12 @@
+<B_label>
+<div class="bloc label">
+		<span class="titrebloc">#INFO_TITRE{groupes_mots,6}</span>
+	<ul class="spip">
+		<BOUCLE_label(MOTS){id_groupe=6}{SI #ID_MOT|!={22}}
+		{auteurs_liens.id_auteur?}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}
+		{pagination #ENV{nb,5}}>
+		[<li class="logolabel"><a href="#URL_MOT">(#LOGO_MOT|image_proportions{1,1,"focus"}|image_responsive{50})</a></li>]
+		</BOUCLE_label>
+	</ul>
+</div>
+</B_label>

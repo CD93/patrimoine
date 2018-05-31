@@ -1,0 +1,14 @@
+<div class="formulaire_spip formulaire_recherche[ (#ENV{class})]" id="formulaire_recherche_#ENV{_id_champ}">
+	<form action="[(#ENV{action})]" method="get" role="form">
+		<div class="form-group">
+			[(#ENV{action}|form_hidden)]
+			[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+			<label class="muted" for="#ENV{_id_champ}">Recherche détaillée :</label>
+			<div class="input-append input-group">
+				<input type="[(#HTML5|?{search,text})]" class="search text form-control" placeholder="Trouver un élément dans l'atlas :" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" />
+				<input type="hidden" name="restype" id="restype" value="#ENV{restype}" />
+				<button type="submit" class="submit" value="rechercher" title="<:info_rechercher:>" >rechercher</button>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,79 @@
+[(#REM) Tableau complet des contacts, affiché sur la page ?exec=contacts ]
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+}})
+]
+
+<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}{si #OBJET|!={organisation}}>
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>
+			[(#ENV{id_annuaire}|is_null|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,''})]">})]
+			<:contacts:contacts_tout:>
+			[(#ENV{id_annuaire}|is_null|?{</strong>, </a>})]
+		</li>
+		<BOUCLE_filtre_annuaires(ANNUAIRES){par titre}>
+		<li>
+			<BOUCLE_comptage_contacts_annuaire(CONTACTS){id_annuaire}{id_organisation?}/>#SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_annuaire>
+			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,#ID_ANNUAIRE})]">})]
+			#TITRE (#GET{nb_contacts})
+			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{</strong>,</a>})]
+		</li>
+		</BOUCLE_filtre_annuaires>
+		<li>
+			<BOUCLE_comptage_contacts_aucun(CONTACTS){id_annuaire=0}/>#SET{nb_contacts,#TOTAL_BOUCLE}<//B_comptage_contacts_aucun>
+			[(#ENV{id_annuaire}|=={0}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,0})]">})]
+			<:contacts:annuaire_aucun:> (#GET{nb_contacts})
+			[(#ENV{id_annuaire}|=={0}|?{</strong>, </a>})]
+		</li>
+	</ul>
+</div>
+</BOUCLE_test_annuaire>
+
+<B_liste_contacts>
+#ANCRE_PAGINATION
+<div class="liste-objets contacts">
+[(#OBJET|!={organisation}|oui)<INCLURE{fond=inclure/pagination_alpha_contacts, env} />]
+<table class='spip liste'>
+[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class="nom">[(#TRI{nom,<:contacts:label_prenom_nom:>,ajax})]</th>
+			<th class="organisation"><:contacts:label_organisation:></th>
+			<th class='motclef'><:contacts:label_motclef_associe:></th>
+			<th class='annuaire'><:contacts:annuaire:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_contacts(CONTACTS)
+		{id_annuaire?}
+		{id_organisation?}{recherche ?}
+		{auteurs.statut ?= #ENV{statut,''}}
+		{where?}
+		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{pagination,30} #ENV{pagination_id,'_liste_contacts'}}
+	>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" id="contact#ID_CONTACT">
+			<BOUCLE_lien_contact(contacts_liens){id_contact}>
+				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+			</BOUCLE_lien_contact>
+				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
+			<//B_lien_contact>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
+			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
+			<td class='motclef'>
+			<BOUCLE_motclef(MOTS){tout}{id_contact}{"|"}>
+				[<a href="(#URL_MOT)">#TITRE</a>]
+			</BOUCLE_motclef></B_motclef>-<//B_motclef>
+			</td>
+			<td class='annuaire'>
+				<BOUCLE_annuaire(ANNUAIRES){tout}{id_contact}{"|"}><a href="#URL_ANNUAIRE">#TITRE</a></BOUCLE_annuaire>
+			</td>
+		</tr>
+	</BOUCLE_liste_contacts>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_contacts>[
+<div class="liste-objets contacts"><strong class="caption">(#ENV*{sinon,<:contacts:aucun_contact:>})</strong></div>
+]<//B_liste_contacts>

@@ -1,0 +1,50 @@
+<B_contact>
+<div class="bloc-contact">
+<BOUCLE_contact(CONTACTS){id_contact?}{id_auteur?}>
+	<h4 class="spip">Informations</h4>
+	[(#CIVILITE|oui)
+	<div class="patchamps">
+		<div class="titrechamp"><:contacts:label_civilite:></div>
+		<div class="valeurchamp #EDIT{civilite}">#CIVILITE</div>
+	</div>
+	]
+	[(#NOM|oui)
+	<div class="patchamps">
+	<div class="titrechamp"><:contacts:label_nom:></div>
+	<div class="valeurchamp #EDIT{nom}">#NOM</div>
+	</div>
+	]
+	[(#PRENOM|oui)
+	<div class="patchamps">
+	<div class="titrechamp"><:contacts:label_prenom:></div>
+	<div class="valeurchamp #EDIT{prenom}">#PRENOM</div>
+	</div>
+	]
+	[(#FONCTION|oui)
+	<div class="patchamps">
+	<div class="titrechamp"><:contacts:label_fonction:></div>
+	<div class="valeurchamp #EDIT{fonction}">#FONCTION</div>
+	</div>
+	]
+	[(#DESCRIPTIF|oui)
+	<div class="patchamps">
+	<div class="titrechamp"><:contacts:label_descriptif:></div>
+	<div class="valeurchamp #EDIT{descriptif}">#DESCRIPTIF</div>
+	</div>
+	]
+
+<B_mot>
+		<div class="patchamps">
+		<div class="titrechamp">#INFO_TITRE{groupe_mot,12}</div>
+		<div class="valeurchamp #EDIT{titre}">
+		<BOUCLE_mot(MOTS){id_groupe=12}{id_contact}{", "}>
+		<a href="#URL_MOT">#TITRE</a>
+		</BOUCLE_mot>
+		</div>
+		</div>
+</B_mot>
+
+</BOUCLE_contact>
+</div>
+</B_contact>
+<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=contact}{id_objet=#ID_CONTACT}{id_unique=''}{ajax} />

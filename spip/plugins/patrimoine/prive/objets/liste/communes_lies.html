@@ -1,0 +1,63 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nomcommune,1,
+	date_publication,-1, 
+	id_commune,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+<B_liste_communes>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+#SET{afficher_lettres,#TRI|=={'multi nomcommune'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies communes">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commune:info_1_commune,commune:info_nb_communes}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(COMMUNES){tout}{id_commune IN #GET{selection}}{where?}{statut?}
+			{tri #ENV{par,multi nomcommune},#GET{defaut_tri}}{id_commune==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOMCOMMUNE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutpatl,@#ID_COMMUNE}|ancre_url{paginationpatl}|afficher_initiale{#NOMCOMMUNE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="nomcommune" scope="col">[(#TRI{multi nomcommune,<:commune:champ_nomcommune_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_communes(COMMUNES){id_commune IN #GET{selection}}{statut?}
+		{tri #ENV{par,multi nomcommune},#GET{defaut_tri}}{pagination #ENV{nb,10} patl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOMCOMMUNE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_COMMUNE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{commune})]</td> 
+			<td class="nomcommune">[(#LOGO_COMMUNE|image_reduire{20,20})]<a href="[(#ID_COMMUNE|generer_url_entite{commune})]">#NOMCOMMUNE</a></td>
+
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[commune-#ID_COMMUNE-#OBJET-#ID_OBJET\]" value="X"><:commune:retirer_lien_commune:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_communes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[commune-*-#OBJET-#ID_OBJET\]" value="X"><:commune:retirer_tous_liens_communes:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_communes>
+<div class="liste-objets liste-objets-lies COMMUNES caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:commune:info_aucun_commune:>})]</strong>
+</div>
+<//B_liste_communes>

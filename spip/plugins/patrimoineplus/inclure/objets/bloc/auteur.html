@@ -1,0 +1,18 @@
+<B_auteur>
+<div class="bloc auteur">
+	<div class="titrebloc">[(#GRAND_TOTAL|singulier_ou_pluriel{paquet_patrimoine:info_1_auteur, paquet_patrimoine:info_nb_auteurs})]</div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_auteur(AUTEURS)
+		{id_objet?}{objet?}
+		{pagination #ENV{nb,5}}
+		{SI #ENV{objet}|!=={auteur}}>
+			<li>
+				<a class="valeurchamp" href="#URL_AUTEUR">#NOM</a>
+				[<span class="valeurchamp">(#ROLE)</span>]
+			</li>
+		</BOUCLE_auteur>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_auteur>

@@ -1,0 +1,65 @@
+<B_biblio>
+	<div class="bloc bibliographie">
+	<div class="titrebloc">#GRAND_TOTAL <:bibliographie:titre_bibliographies:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_biblio(BIBLIOGRAPHIES){id_objet?}{objet?}	{pagination #ENV{nb,5}}>
+		<BOUCLE_motpub(mots_liens){objet='bibliographie'}{id_mot='5173'}{id_objet=#ID_BIBLIOGRAPHIE}></BOUCLE_motpub>
+		</B_motpub>
+		<li class="valeurchamp">
+			<a href="#URL_BIBLIOGRAPHIE">#TITRE, #AUTEURS (#DATEDEDITION)
+			<BOUCLE_bibliorole(bibliographies_liens){id_bibliographie}>
+			[<span class="minus">((#ROLE))</span>]
+			</BOUCLE_bibliorole>
+			</a>
+		</li>
+		<//B_motpub>
+	</BOUCLE_biblio>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_biblio>
+
+<B_bibliomot>
+	<div class="bloc bibliographiemot">
+	<div class="titrebloc">#GRAND_TOTAL <:bibliographie:titre_bibliographies:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_bibliomot(BIBLIOGRAPHIES mots_liens){mots_liens.id_mot=#ENV{id_objet}}{mots_liens.objet=bibliographie}{si #OBJET|=={mot}}{pagination #ENV{nb,5}}>
+		<BOUCLE_motpubbib(mots_liens){objet='bibliographie'}{id_mot='5173'}{id_objet=#ID_BIBLIOGRAPHIE}></BOUCLE_motpubbib>
+	</B_motpubbib>
+		<li class="valeurchamp">
+			<a href="#URL_BIBLIOGRAPHIE">#TITRE, #AUTEURS (#DATEDEDITION)
+			<BOUCLE_bibliomotrole(bibliographies_liens){id_bibliographie}>
+			[<span class="minus">((#ROLE))</span>]
+		</BOUCLE_bibliomotrole>
+			</a>
+		</li>
+	<//B_motpubbib>
+	</BOUCLE_bibliomot>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_bibliomot>
+
+<B_biblioauteur>
+	<div class="bloc bibliographieauteur">
+	<div class="titrebloc">#GRAND_TOTAL <:bibliographie:titre_bibliographies:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_biblioauteur(BIBLIOGRAPHIES auteurs_liens){auteurs_liens.id_auteur=#ENV{id_objet}}{auteurs_liens.objet=bibliographie}	{pagination #ENV{nb,5}}>
+		<BOUCLE_autpubbib(auteurs_liens){objet='bibliographie'}{id_mot='5173'}{id_objet=#ID_BIBLIOGRAPHIE}></BOUCLE_autpubbib>
+	</B_motautbib>
+		<li class="valeurchamp">
+			<a href="#URL_BIBLIOGRAPHIE">#TITRE, #AUTEURS (#DATEDEDITION)
+			<BOUCLE_biblioautrole(bibliographies_liens){id_bibliographie}>
+			[<span class="minus">((#ROLE))</span>]
+		</BOUCLE_biblioautrole>
+			</a>
+		</li>
+	<//B_motpubbib>
+</BOUCLE_biblioauteur>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_biblioauteur>

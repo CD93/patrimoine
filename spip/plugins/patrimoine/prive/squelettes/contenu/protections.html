@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/protections, env, ajax, sinon=<:protection:info_aucun_protection:>}>
+
+[(#AUTORISER{creer,protection})
+	[(#URL_ECRIRE{protection_edit,new=oui}|icone_verticale{<:protection:icone_creer_protection:>,protection,new,right})]
+]

@@ -1,0 +1,72 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_college,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_college" value="#ENV{id_college}" />
+		<div class="editer-groupe">
+ 
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:college:champ_titre_label:>})]
+
+			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_college},#ENV{id_parent},'college',#ENV{id_secteur},'',0,form_simple})
+			</div>]
+ 
+			[(#SAISIE{input, codesite,
+				label=<:college:champ_codesite_label:>})]
+ 
+			[(#SAISIE{input, codedcaf,
+				label=<:college:champ_codedcaf_label:>})]
+ 
+			[(#SAISIE{input, codeia,
+				label=<:college:champ_codeia_label:>})]
+ 
+			[(#SAISIE{textarea, programmedorigine,
+				label=<:college:champ_programmedorigine_label:>,
+				explication=<:college:champ_programmedorigine_explication:> })]
+ 
+			[(#SAISIE{textarea, programmeactuel,
+				label=<:college:champ_programmeactuel_label:>,
+				explication=<:college:champ_programmeactuel_explication:> })]
+ 
+			[(#SAISIE{textarea, programmefutur,
+				label=<:college:champ_programmefutur_label:>,
+				explication=<:college:champ_programmefutur_explication:> })]
+ 
+			[(#SAISIE{textarea, surfaces,
+				label=<:college:champ_surfaces_label:>,
+				explication=<:college:champ_surfaces_explication:> })]
+ 
+			[(#SAISIE{textarea, programmedetaille,
+				label=<:college:champ_programmedetaille_label:>,
+				explication=<:college:champ_programmedetaille_explication:> ,
+				rows=16})]
+ 
+			[(#SAISIE{textarea, couts,
+				label=<:college:champ_couts_label:>,
+				explication=<:college:champ_couts_explication:> ,
+				rows=20})]
+ 
+			[(#SAISIE{textarea, acteurs,
+				label=<:college:champ_acteurs_label:>,
+				explication=<:college:champ_acteurs_explication:> ,
+				rows=20})]
+ 
+			[(#SAISIE{textarea, chronologie,
+				label=<:college:champ_chronologie_label:>,
+				explication=<:college:champ_chronologie_explication:> ,
+				rows=10})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,30 @@
+<BOUCLE_definition(DEFINITIONS){id_definition}>
+<div class="bloc definition">
+    <h3>definition :</h3>
+    [(#TITRE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:definition:champ_titre_label:></div>
+    <div class="valeurchamp #EDIT{titre}">#TITRE</div>
+    </div>
+    ]
+    [(#TEXTE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:definition:champ_texte_label:></div>
+    <div class="valeurchamp #EDIT{texte}">#TEXTE</div>
+    </div>
+    ]
+    [(#TERMES|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:definition:champ_termes_label:></div>
+    <div class="valeurchamp #EDIT{termes}">#TERMES</div>
+    </div>
+    ]
+    [(#URL_EXTERNE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:definition:champ_url_externe_label:></div>
+    <div class="valeurchamp #EDIT{type}">#URL_EXTERNE</div>
+    </div>
+    ]
+</div>
+</BOUCLE_definition>
+<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=definition}{id_objet=#ID_DEFINITION}{id_unique=''}{ajax} />

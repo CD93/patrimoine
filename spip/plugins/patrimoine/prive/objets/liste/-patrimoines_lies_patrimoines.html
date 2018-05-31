@@ -1,0 +1,70 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	date_publication,-1, 
+	id_patrimoine,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+<pre>titre: (#ENV**{titre})</pre>
+<pre>objet_source: (#ENV**{objet_source})</pre>
+<pre>objet: (#ENV**{objet})</pre>
+<pre>id_objet: (#ENV**{id_objet})</pre>
+<pre>_objet_lien: (#ENV**{_objet_lien})</pre>
+
+<B_liste_patrimoines>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies patrimoines">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(PATRIMOINES){tout}{id_patrimoine IN #GET{selection}}{where?}{statut?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_patrimoine==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutpatl,@#ID_PATRIMOINE}|ancre_url{paginationpatl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{multi titre,<:patrimoine:champ_titre_label:>,ajax})]</th>
+			<th class="codesite" scope="col">[(#TRI{multi codesite,<:patrimoine:champ_codesite_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_patrimoines(PATRIMOINES){id_patrimoine IN #GET{selection}}{statut?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} patl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PATRIMOINE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{patrimoine})]</td> 
+			<td class="titre">[(#LOGO_PATRIMOINE|image_reduire{20,20})]<a href="[(#ID_PATRIMOINE|generer_url_entite{patrimoine})]">#TITRE</a></td>
+			<td class="codesite">#CODESITE</td>
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[patrimoine-#ID_PATRIMOINE-#OBJET-#ID_OBJET\]" value="X"><:patrimoine:retirer_lien_patrimoine:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_patrimoines>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[patrimoine-*-#OBJET-#ID_OBJET\]" value="X"><:patrimoine:retirer_tous_liens_patrimoines:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_patrimoines>
+<div class="liste-objets liste-objets-lies PATRIMOINES caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:patrimoine:info_aucun_patrimoine:>})]</strong>
+</div>
+<//B_liste_patrimoines>

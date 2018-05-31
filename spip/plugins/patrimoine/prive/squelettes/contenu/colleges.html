@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/colleges, env, ajax, sinon=<:college:info_aucun_college:>}>
+
+[(#AUTORISER{creer,college})
+	[(#URL_ECRIRE{college_edit,new=oui}|icone_verticale{<:college:icone_creer_college:>,college,new,right})]
+]

@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,college,#ID_COLLEGE}|sinon_interdire_acces)]
+<BOUCLE_college(COLLEGES){id_college}{statut==.*}{si #ENV{exec}|=={college}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,college,#ID_COLLEGE})
+		[(#ID_COLLEGE|afficher_qui_edite{college}|non)
+			[(#URL_ECRIRE{college_edit,id_college=#ID_COLLEGE}|icone_verticale{<:college:icone_modifier_college:>,college,edit,right ajax preload})]
+		]
+		[(#ID_COLLEGE|afficher_qui_edite{college}|oui)
+			[(#URL_ECRIRE{college_edit,id_college=#ID_COLLEGE}|icone_verticale{#ID_COLLEGE|afficher_qui_edite{college},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{college-24.png}|balise_img{college,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{college,#ID_COLLEGE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/college,id=#ID_COLLEGE,id_college=#ID_COLLEGE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,college,#ID_COLLEGE})
+	[(#ID_COLLEGE|afficher_qui_edite{college}|non)
+		[(#URL_ECRIRE{college_edit,id_college=#ID_COLLEGE}|icone_verticale{<:college:icone_modifier_college:>,college,edit,right ajax preload})]
+	]
+	[(#ID_COLLEGE|afficher_qui_edite{college}|oui)
+		[(#URL_ECRIRE{college_edit,id_college=#ID_COLLEGE}|icone_verticale{#ID_COLLEGE|afficher_qui_edite{college},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+
+<div class="liste">
+<BOUCLE_objetslies(spip_colleges_liens){id_college}{0,1}><h3><:college:titre_objets_lies_college:></h3></BOUCLE_objetslies>
+
+<BOUCLE_autresobjets(spip_colleges_liens){id_college}{objet !IN article,rubrique}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_college]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_college}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_college,ajax,env} />
+</BOUCLE_autresobjets>
+</div>
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,college,id,#ID_COLLEGE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/college-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/college-enfants,id_college,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,college,id_college,#ID_COLLEGE,objet,college,id_objet,#ID_COLLEGE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_college>
+[(#ENV**{exec}|=={college_edit}|?{#INCLURE{fond=prive/squelettes/contenu/college_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_college>

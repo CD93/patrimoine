@@ -1,0 +1,63 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi nomusage,1,
+	datemiseenplace,-1, 
+	id_protection,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+<B_liste_protections>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+#SET{afficher_lettres,#TRI|=={'multi nomusage'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies protections">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(PROTECTIONS){tout}{id_protection IN #GET{selection}}{where?}{statut?}
+			{tri #ENV{par,multi nomusage},#GET{defaut_tri}}{id_protection==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOMUSAGE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutpatl,@#ID_PROTECTION}|ancre_url{paginationpatl}|afficher_initiale{#NOMUSAGE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="nomusage" scope="col">[(#TRI{multi nomusage,<:protection:champ_nomusage_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_protections(PROTECTIONS){id_protection IN #GET{selection}}{statut?}
+		{tri #ENV{par,multi nomusage},#GET{defaut_tri}}{pagination #ENV{nb,10} patl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOMUSAGE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_PROTECTION|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{protection})]</td>
+			<td class="nomusage">[(#LOGO_PROTECTION|image_reduire{20,20})]<a href="[(#ID_PROTECTION|generer_url_entite{protection})]">#NOMUSAGE</a></td>
+
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[protection-#ID_PROTECTION-#OBJET-#ID_OBJET\]" value="X"><:protection:retirer_lien_protection:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_protections>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[protection-*-#OBJET-#ID_OBJET\]" value="X"><:protection:retirer_tous_liens_protections:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_protections>
+<div class="liste-objets liste-objets-lies PROTECTIONS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:protection:info_aucun_protection:>})]</strong>
+</div>
+<//B_liste_protections>

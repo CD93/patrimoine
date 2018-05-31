@@ -1,0 +1,23 @@
+#CACHE{86400}
+<BOUCLE_gis(GIS){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{id_patrimoine ?}{recherche ?}{0, #ENV{limit,5000}}{","}>#SET{idpat,#ID_PATRIMOINE}#SET{gdethema,""}<BOUCLE_theme(MOTS){id_groupe=1}{id_patrimoine=#GET{idpat}}{0,1}>#SET{gdethema,#TITRE**}</BOUCLE_theme>#SET{gdeperio,""}<BOUCLE_periode(MOTS){id_groupe=3}{id_patrimoine=#GET{idpat}}{0,1}>#SET{gdeperio,#TITRE**}</BOUCLE_periode>#SET{label20,""}<BOUCLE_label20(MOTS){id_mot=22}{id_patrimoine=#GET{idpat}}>#SET{label20,"true"}</BOUCLE_label20>#SET{cartearcheo,""}<BOUCLE_cartearcheo(MOTS){id_mot=5150}{id_patrimoine=#GET{idpat}}>#SET{cartearcheo,"true"}</BOUCLE_cartearcheo>#SET{etudeplu,""}<BOUCLE_etudeplu(MOTS){id_mot=5151}{id_patrimoine=#GET{idpat}}>#SET{etudeplu,"true"}</BOUCLE_etudeplu>#SET{etudethema,""}<BOUCLE_etudethema(MOTS){id_mot=5152}{id_patrimoine=#GET{idpat}}>#SET{etudethema,"true"}</BOUCLE_etudethema>#SET{etudemono,""}<BOUCLE_etudemono(MOTS){id_mot=5154}{id_patrimoine=#GET{idpat}}>#SET{etudemono,"true"}</BOUCLE_etudemono>#SET{commune,#ARRAY}<BOUCLE_commune(COMMUNES){id_patrimoine=#GET{idpat}}{0,1}>#SET{commune,#NOMCOMMUNE**}</BOUCLE_commune>
+{"type": "Feature",
+["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+"id":"#ID_GIS",
+"properties": {["styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json}),]<BOUCLE_pat(spip_patrimoines){0,1}{id_patrimoine=#GET{idpat}}>[
+	"id_patrimoine":(#ID_PATRIMOINE|json_encode)][,
+	"titre":(#TITRE|json_encode)][,
+	"url":(#URL_PATRIMOINE|url_absolue|json_encode)][,
+	"image":(#LOGO_PATRIMOINE|oui)[(#CHEMIN{IMG/#LOGO_PATRIMOINE**}|url_absolue|json_encode)]][,
+	"codesite":(#CODESITE|json_encode)][,
+	"adresse":(#_gis:ADRESSE|json_encode)][,
+	"commune":(#GET{commune}|json_encode)][,
+	"appellation":(#APPELLATION|json_encode)][,
+	"gdethema":(#GET{gdethema}|json_encode)][,
+	"gdeperio":(#GET{gdeperio}|json_encode)][,
+	"label20":(#GET{label20}|json_encode)][,
+	"cartearcheo":(#GET{cartearcheo}|json_encode)][,
+	"etudeplu":(#GET{etudeplu}|json_encode)][,
+	"etudethema":(#GET{etudethema}|json_encode)][,
+	"etudemono":(#GET{etudemono}|json_encode)][,
+	"descriptif":(#DESCRIPTIF*|json_encode)]</BOUCLE_pat>
+}}</BOUCLE_gis>

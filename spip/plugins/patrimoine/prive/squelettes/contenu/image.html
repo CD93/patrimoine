@@ -1,0 +1,54 @@
+[(#AUTORISER{voir,image,#ID_IMAGE}|sinon_interdire_acces)]
+<BOUCLE_image(IMAGES){id_image}{statut==.*}{si #ENV{exec}|=={image}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,image,#ID_IMAGE})
+		[(#ID_IMAGE|afficher_qui_edite{image}|non)
+			[(#URL_ECRIRE{image_edit,id_image=#ID_IMAGE}|icone_verticale{<:image:icone_modifier_image:>,image,edit,right ajax preload})]
+		]
+		[(#ID_IMAGE|afficher_qui_edite{image}|oui)
+			[(#URL_ECRIRE{image_edit,id_image=#ID_IMAGE}|icone_verticale{#ID_IMAGE|afficher_qui_edite{image},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{image-24.png}|balise_img{image,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{image,#ID_IMAGE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/image,id=#ID_IMAGE,id_image=#ID_IMAGE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,image,#ID_IMAGE})
+	[(#ID_IMAGE|afficher_qui_edite{image}|non)
+		[(#URL_ECRIRE{image_edit,id_image=#ID_IMAGE}|icone_verticale{<:image:icone_modifier_image:>,image,edit,right ajax preload})]
+	]
+	[(#ID_IMAGE|afficher_qui_edite{image}|oui)
+		[(#URL_ECRIRE{image_edit,id_image=#ID_IMAGE}|icone_verticale{#ID_IMAGE|afficher_qui_edite{image},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,image,id,#ID_IMAGE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/image-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/image-enfants,id_image,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,image,id_image,#ID_IMAGE,objet,image,id_objet,#ID_IMAGE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_image>
+[(#ENV**{exec}|=={image_edit}|?{#INCLURE{fond=prive/squelettes/contenu/image_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_image>

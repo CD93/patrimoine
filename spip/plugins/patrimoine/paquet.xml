@@ -1,0 +1,49 @@
+<paquet
+	prefix="patrimoine"
+	categorie="divers"
+	version="1.0.10"
+	etat="dev"
+	compatibilite="[3.0.20;3.2.*]"
+	logo=""
+	documentation=""
+	schema="1.0.10"
+>
+	<!--
+		Paquet généré le 2016-07-26 11:34:59
+	-->
+
+	<nom>Patrimoine</nom>
+
+
+	<auteur>damien</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="patrimoineplus"   />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="roles" compatibilite="[1.1.0;]" />
+
+	<utilise nom="medias" />
+
+	<pipeline nom="autoriser" inclure="patrimoine_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/patrimoine.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/patrimoine.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/patrimoine.php" />
+	<pipeline nom="affiche_milieu" inclure="patrimoine_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="patrimoine_pipelines.php" />
+	<pipeline nom="objet_compte_enfants" inclure="patrimoine_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="patrimoine_pipelines.php" />
+	<pipeline nom="trig_propager_les_secteurs" inclure="patrimoine_pipelines.php" />
+
+	<menu nom="patrimoines" titre="patrimoine:titre_patrimoines" parent="menu_edition" icone="images/patrimoine-16.png" action="patrimoines" />
+	<menu nom="patrimoine_creer" titre="patrimoine:icone_creer_patrimoine" parent="outils_rapides" icone="images/patrimoine-new-16.png" action="patrimoine_edit" parametres="new=oui" />
+	<menu nom="bibliographies" titre="bibliographie:titre_bibliographies" parent="menu_edition" icone="images/bibliographie-16.png" action="bibliographies" />
+	<menu nom="bibliographie_creer" titre="bibliographie:icone_creer_bibliographie" parent="outils_rapides" icone="images/bibliographie-new-16.png" action="bibliographie_edit" parametres="new=oui" />
+	<menu nom="colleges" titre="college:titre_colleges" parent="menu_edition" icone="images/college-16.png" action="colleges" />
+	<menu nom="college_creer" titre="college:icone_creer_college" parent="outils_rapides" icone="images/college-new-16.png" action="college_edit" parametres="new=oui" />
+	<menu nom="protections" titre="protection:titre_protections" parent="menu_edition" icone="images/protection-16.png" action="protections" />
+	<menu nom="protection_creer" titre="protection:icone_creer_protection" parent="outils_rapides" icone="images/protection-new-16.png" action="protection_edit" parametres="new=oui" />
+	<menu nom="communes" titre="commune:titre_communes" parent="menu_edition" icone="images/commune-16.png" action="communes" />
+	<menu nom="commune_creer" titre="commune:icone_creer_commune" parent="outils_rapides" icone="images/commune-new-16.png" action="commune_edit" parametres="new=oui" />
+	<menu nom="commune_tous" titre="commune:icone_commune_tous" parent="menu_edition" icone="images/commune-16.png" />
+
+</paquet>

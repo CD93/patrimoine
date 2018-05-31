@@ -1,0 +1,1204 @@
+Only in ../plugins/fabrique_auto/patrimoine/action: supprimer_patrimoine.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/base/patrimoine.php ../plugins/fabrique_auto/patrimoine/base/patrimoine.php
+53a54
+> 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0',
+124a126,128
+> 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
+> 			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+> 			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
+129a134,136
+> 			'KEY id_secteur'     => 'id_secteur',
+> 			'KEY lang'           => 'lang',
+> 			'KEY id_trad'        => 'id_trad',
+132c139
+< 		'titre' => 'titre AS titre, "" AS lang',
+---
+> 		'titre' => 'titre AS titre, lang AS lang',
+164a172,173
+> 			'id_rubrique'        => 'bigint(21) NOT NULL DEFAULT 0',
+> 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0',
+199a209,212
+> 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
+> 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
+> 			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+> 			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
+203a217,221
+> 			'KEY id_rubrique'    => 'id_rubrique',
+> 			'KEY id_secteur'     => 'id_secteur',
+> 			'KEY lang'           => 'lang',
+> 			'KEY id_trad'        => 'id_trad',
+> 			'KEY statut'         => 'statut',
+205c223
+< 		'titre' => 'vedette AS titre, "" AS lang',
+---
+> 		'titre' => 'vedette AS titre, lang AS lang',
+210a229,245
+> 		'statut_textes_instituer' => array(
+> 			'prepa'    => 'texte_statut_en_cours_redaction',
+> 			'prop'     => 'texte_statut_propose_evaluation',
+> 			'publie'   => 'texte_statut_publie',
+> 			'refuse'   => 'texte_statut_refuse',
+> 			'poubelle' => 'texte_statut_poubelle',
+> 		),
+> 		'statut'=> array(
+> 			array(
+> 				'champ'     => 'statut',
+> 				'publie'    => 'publie',
+> 				'previsu'   => 'publie,prop,prepa',
+> 				'post_date' => 'date',
+> 				'exception' => array('statut','tout')
+> 			)
+> 		),
+> 		'texte_changer_statut' => 'bibliographie:texte_changer_statut_bibliographie',
+232a268,269
+> 			'id_rubrique'        => 'bigint(21) NOT NULL DEFAULT 0',
+> 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0',
+245a283,286
+> 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
+> 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
+> 			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+> 			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
+249a291,295
+> 			'KEY id_rubrique'    => 'id_rubrique',
+> 			'KEY id_secteur'     => 'id_secteur',
+> 			'KEY lang'           => 'lang',
+> 			'KEY id_trad'        => 'id_trad',
+> 			'KEY statut'         => 'statut',
+251c297
+< 		'titre' => 'titre AS titre, "" AS lang',
+---
+> 		'titre' => 'titre AS titre, lang AS lang',
+256a303,319
+> 		'statut_textes_instituer' => array(
+> 			'prepa'    => 'texte_statut_en_cours_redaction',
+> 			'prop'     => 'texte_statut_propose_evaluation',
+> 			'publie'   => 'texte_statut_publie',
+> 			'refuse'   => 'texte_statut_refuse',
+> 			'poubelle' => 'texte_statut_poubelle',
+> 		),
+> 		'statut'=> array(
+> 			array(
+> 				'champ'     => 'statut',
+> 				'publie'    => 'publie',
+> 				'previsu'   => 'publie,prop,prepa',
+> 				'post_date' => 'date',
+> 				'exception' => array('statut','tout')
+> 			)
+> 		),
+> 		'texte_changer_statut' => 'college:texte_changer_statut_college',
+266a330,331
+> 			'id_rubrique'        => 'bigint(21) NOT NULL DEFAULT 0',
+> 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0',
+283a349,352
+> 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
+> 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
+> 			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+> 			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
+287a357,361
+> 			'KEY id_rubrique'    => 'id_rubrique',
+> 			'KEY id_secteur'     => 'id_secteur',
+> 			'KEY lang'           => 'lang',
+> 			'KEY id_trad'        => 'id_trad',
+> 			'KEY statut'         => 'statut',
+289c363
+< 		'titre' => 'nomusage AS titre, "" AS lang',
+---
+> 		'titre' => 'nomusage AS titre, lang AS lang',
+294a369,385
+> 		'statut_textes_instituer' => array(
+> 			'prepa'    => 'texte_statut_en_cours_redaction',
+> 			'prop'     => 'texte_statut_propose_evaluation',
+> 			'publie'   => 'texte_statut_publie',
+> 			'refuse'   => 'texte_statut_refuse',
+> 			'poubelle' => 'texte_statut_poubelle',
+> 		),
+> 		'statut'=> array(
+> 			array(
+> 				'champ'     => 'statut',
+> 				'publie'    => 'publie',
+> 				'previsu'   => 'publie,prop,prepa',
+> 				'post_date' => 'date',
+> 				'exception' => array('statut','tout')
+> 			)
+> 		),
+> 		'texte_changer_statut' => 'protection:texte_changer_statut_protection',
+304a396,397
+> 			'id_rubrique'        => 'bigint(21) NOT NULL DEFAULT 0',
+> 			'id_secteur'         => 'bigint(21) NOT NULL DEFAULT 0',
+331a425,429
+> 			'date_publication'   => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
+> 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
+> 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
+> 			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+> 			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
+335a434,438
+> 			'KEY id_rubrique'    => 'id_rubrique',
+> 			'KEY id_secteur'     => 'id_secteur',
+> 			'KEY lang'           => 'lang',
+> 			'KEY id_trad'        => 'id_trad',
+> 			'KEY statut'         => 'statut',
+337,338c440,441
+< 		'titre' => 'nomcommune AS titre, "" AS lang',
+< 		 #'date' => '',
+---
+> 		'titre' => 'nomcommune AS titre, lang AS lang',
+> 		'date' => 'date_publication',
+342a446,462
+> 		'statut_textes_instituer' => array(
+> 			'prepa'    => 'texte_statut_en_cours_redaction',
+> 			'prop'     => 'texte_statut_propose_evaluation',
+> 			'publie'   => 'texte_statut_publie',
+> 			'refuse'   => 'texte_statut_refuse',
+> 			'poubelle' => 'texte_statut_poubelle',
+> 		),
+> 		'statut'=> array(
+> 			array(
+> 				'champ'     => 'statut',
+> 				'publie'    => 'publie',
+> 				'previsu'   => 'publie,prop,prepa',
+> 				'post_date' => 'date',
+> 				'exception' => array('statut','tout')
+> 			)
+> 		),
+> 		'texte_changer_statut' => 'commune:texte_changer_statut_commune',
+389a510,513
+> 			'statut'             => 'varchar(20)  DEFAULT "0" NOT NULL',
+> 			'lang'               => 'VARCHAR(10) NOT NULL DEFAULT ""',
+> 			'langue_choisie'     => 'VARCHAR(3) DEFAULT "non"',
+> 			'id_trad'            => 'bigint(21) NOT NULL DEFAULT 0',
+393a518,520
+> 			'KEY lang'           => 'lang',
+> 			'KEY id_trad'        => 'id_trad',
+> 			'KEY statut'         => 'statut',
+395c522
+< 		'titre' => 'titre AS titre, "" AS lang',
+---
+> 		'titre' => 'titre AS titre, lang AS lang',
+400a528,544
+> 		'statut_textes_instituer' => array(
+> 			'prepa'    => 'texte_statut_en_cours_redaction',
+> 			'prop'     => 'texte_statut_propose_evaluation',
+> 			'publie'   => 'texte_statut_publie',
+> 			'refuse'   => 'texte_statut_refuse',
+> 			'poubelle' => 'texte_statut_poubelle',
+> 		),
+> 		'statut'=> array(
+> 			array(
+> 				'champ'     => 'statut',
+> 				'publie'    => 'publie',
+> 				'previsu'   => 'publie,prop,prepa',
+> 				'post_date' => 'date',
+> 				'exception' => array('statut','tout')
+> 			)
+> 		),
+> 		'texte_changer_statut' => 'image:texte_changer_statut_image',
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_bibliographie.html ../plugins/fabrique_auto/patrimoine/formulaires/editer_bibliographie.html
+114a115,121
+> 			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+> 					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+> 					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+> 					]
+> 					(#VAL|chercher_rubrique{#ENV{id_bibliographie},#ENV{id_parent},'bibliographie',#ENV{id_secteur},'',0,form_simple})
+> 			</div>]
+>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_bibliographie.php ../plugins/fabrique_auto/patrimoine/formulaires/editer_bibliographie.php
+21a22,23
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+38c40
+< function formulaires_editer_bibliographie_identifier_dist($id_bibliographie='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_bibliographie_identifier_dist($id_bibliographie='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+50a53,54
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+67,68c71,72
+< function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$valeurs = formulaires_editer_objet_charger('bibliographie', $id_bibliographie, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_bibliographie_charger_dist($id_bibliographie='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$valeurs = formulaires_editer_objet_charger('bibliographie', $id_bibliographie, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+81a86,87
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+98c104
+< function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_bibliographie_verifier_dist($id_bibliographie='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+114a121,122
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+131,132c139,140
+< function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$retours = formulaires_editer_objet_traiter('bibliographie', $id_bibliographie, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_bibliographie_traiter_dist($id_bibliographie='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$retours = formulaires_editer_objet_traiter('bibliographie', $id_bibliographie, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_college.html ../plugins/fabrique_auto/patrimoine/formulaires/editer_college.html
+12a13,19
+>
+> 			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+> 					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+> 					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+> 					]
+> 					(#VAL|chercher_rubrique{#ENV{id_college},#ENV{id_parent},'college',#ENV{id_secteur},'',0,form_simple})
+> 			</div>]
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_college.php ../plugins/fabrique_auto/patrimoine/formulaires/editer_college.php
+21a22,23
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+38c40
+< function formulaires_editer_college_identifier_dist($id_college='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_college_identifier_dist($id_college='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+50a53,54
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+67,68c71,72
+< function formulaires_editer_college_charger_dist($id_college='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$valeurs = formulaires_editer_objet_charger('college', $id_college, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_college_charger_dist($id_college='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$valeurs = formulaires_editer_objet_charger('college', $id_college, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+81a86,87
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+98c104
+< function formulaires_editer_college_verifier_dist($id_college='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_college_verifier_dist($id_college='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+114a121,122
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+131,132c139,140
+< function formulaires_editer_college_traiter_dist($id_college='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$retours = formulaires_editer_objet_traiter('college', $id_college, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_college_traiter_dist($id_college='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$retours = formulaires_editer_objet_traiter('college', $id_college, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_commune.html ../plugins/fabrique_auto/patrimoine/formulaires/editer_commune.html
+12a13,19
+>
+> 			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+> 					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+> 					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+> 					]
+> 					(#VAL|chercher_rubrique{#ENV{id_commune},#ENV{id_parent},'commune',#ENV{id_secteur},'',0,form_simple})
+> 			</div>]
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_commune.php ../plugins/fabrique_auto/patrimoine/formulaires/editer_commune.php
+21a22,23
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+38c40
+< function formulaires_editer_commune_identifier_dist($id_commune='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_commune_identifier_dist($id_commune='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+50a53,54
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+67,68c71,72
+< function formulaires_editer_commune_charger_dist($id_commune='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$valeurs = formulaires_editer_objet_charger('commune', $id_commune, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_commune_charger_dist($id_commune='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$valeurs = formulaires_editer_objet_charger('commune', $id_commune, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+81a86,87
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+98c104
+< function formulaires_editer_commune_verifier_dist($id_commune='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_commune_verifier_dist($id_commune='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+114a121,122
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+131,132c139,140
+< function formulaires_editer_commune_traiter_dist($id_commune='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$retours = formulaires_editer_objet_traiter('commune', $id_commune, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_commune_traiter_dist($id_commune='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$retours = formulaires_editer_objet_traiter('commune', $id_commune, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_protection.html ../plugins/fabrique_auto/patrimoine/formulaires/editer_protection.html
+13a14,20
+>
+> 			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+> 					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+> 					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+> 					]
+> 					(#VAL|chercher_rubrique{#ENV{id_protection},#ENV{id_parent},'protection',#ENV{id_secteur},'',0,form_simple})
+> 			</div>]
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/formulaires/editer_protection.php ../plugins/fabrique_auto/patrimoine/formulaires/editer_protection.php
+21a22,23
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+38c40
+< function formulaires_editer_protection_identifier_dist($id_protection='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_protection_identifier_dist($id_protection='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+50a53,54
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+67,68c71,72
+< function formulaires_editer_protection_charger_dist($id_protection='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$valeurs = formulaires_editer_objet_charger('protection', $id_protection, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_protection_charger_dist($id_protection='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$valeurs = formulaires_editer_objet_charger('protection', $id_protection, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+81a86,87
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+98c104
+< function formulaires_editer_protection_verifier_dist($id_protection='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+---
+> function formulaires_editer_protection_verifier_dist($id_protection='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+114a121,122
+>  * @param int $id_rubrique
+>  *     Identifiant de la rubrique parente (si connue)
+131,132c139,140
+< function formulaires_editer_protection_traiter_dist($id_protection='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+< 	$retours = formulaires_editer_objet_traiter('protection', $id_protection, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+---
+> function formulaires_editer_protection_traiter_dist($id_protection='new', $id_rubrique=0, $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+> 	$retours = formulaires_editer_objet_traiter('protection', $id_protection, $id_rubrique, $lier_trad, $retour, $config_fonc, $row, $hidden);
+Only in ../plugins/fabrique_auto/patrimoine/: inc
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/paquet.xml ../plugins/fabrique_auto/patrimoine/paquet.xml
+4c4
+< 	version="1.0.15"
+---
+> 	version="1.0.16"
+9c9
+< 	schema="1.0.6"
+---
+> 	schema="1.0.7"
+12c12
+< 		Paquet généré le 2016-07-25 12:02:06
+---
+> 		Paquet généré le 2016-07-26 11:34:59
+35a36
+> 	<pipeline nom="trig_propager_les_secteurs" inclure="patrimoine_pipelines.php" />
+40a42,43
+> 	<menu nom="colleges" titre="college:titre_colleges" parent="menu_edition" icone="images/college-16.png" action="colleges" />
+> 	<menu nom="college_creer" titre="college:icone_creer_college" parent="outils_rapides" icone="images/college-new-16.png" action="college_edit" parametres="new=oui" />
+42a46,47
+> 	<menu nom="communes" titre="commune:titre_communes" parent="menu_edition" icone="images/commune-16.png" action="communes" />
+> 	<menu nom="commune_creer" titre="commune:icone_creer_commune" parent="outils_rapides" icone="images/commune-new-16.png" action="commune_edit" parametres="new=oui" />
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/patrimoine_autorisations.php ../plugins/fabrique_auto/patrimoine/patrimoine_autorisations.php
+181c181
+< 	return in_array($qui['statut'], array('0minirezo', '1comite'));
+---
+> 	return (in_array($qui['statut'], array('0minirezo', '1comite')) AND sql_countsel('spip_rubriques')>0);
+225a226,238
+> /**
+>  * Autorisation de créer l'élément (patbibliographie) dans une rubrique
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_rubrique_creerpatbibliographiedans_dist($faire, $type, $id, $qui, $opt) {
+> 	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','bibliographie', $id));
+> }
+243a257,270
+> /**
+>  * Autorisation de voir un élément de menu (patcolleges)
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_patcolleges_menu_dist($faire, $type, $id, $qui, $opt){
+> 	return true;
+> }
+>
+244a272,284
+> /**
+>  * Autorisation de voir le bouton d'accès rapide de création (patcollege)
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_patcollegecreer_menu_dist($faire, $type, $id, $qui, $opt){
+> 	return autoriser('creer', 'college', '', $qui, $opt);
+> }
+257c297
+< 	return in_array($qui['statut'], array('0minirezo', '1comite'));
+---
+> 	return (in_array($qui['statut'], array('0minirezo', '1comite')) AND sql_countsel('spip_rubriques')>0);
+301a342,354
+> /**
+>  * Autorisation de créer l'élément (patcollege) dans une rubrique
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_rubrique_creerpatcollegedans_dist($faire, $type, $id, $qui, $opt) {
+> 	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','college', $id));
+> }
+360c413
+< 	return in_array($qui['statut'], array('0minirezo', '1comite'));
+---
+> 	return (in_array($qui['statut'], array('0minirezo', '1comite')) AND sql_countsel('spip_rubriques')>0);
+404a458,470
+> /**
+>  * Autorisation de créer l'élément (patprotection) dans une rubrique
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_rubrique_creerpatprotectiondans_dist($faire, $type, $id, $qui, $opt) {
+> 	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','protection', $id));
+> }
+422a489,502
+> /**
+>  * Autorisation de voir un élément de menu (patcommunes)
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_patcommunes_menu_dist($faire, $type, $id, $qui, $opt){
+> 	return true;
+> }
+>
+423a504,516
+> /**
+>  * Autorisation de voir le bouton d'accès rapide de création (patcommune)
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_patcommunecreer_menu_dist($faire, $type, $id, $qui, $opt){
+> 	return autoriser('creer', 'commune', '', $qui, $opt);
+> }
+436c529
+< 	return in_array($qui['statut'], array('0minirezo', '1comite'));
+---
+> 	return (in_array($qui['statut'], array('0minirezo', '1comite')) AND sql_countsel('spip_rubriques')>0);
+480a574,586
+> /**
+>  * Autorisation de créer l'élément (patcommune) dans une rubrique
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_rubrique_creerpatcommunedans_dist($faire, $type, $id, $qui, $opt) {
+> 	return ($id AND autoriser('voir','rubrique', $id) AND autoriser('creer','commune', $id));
+> }
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/patrimoine_pipelines.php ../plugins/fabrique_auto/patrimoine/patrimoine_pipelines.php
+38a39,74
+> 		$bouton = '';
+> 		if (autoriser('creerbibliographiedans', 'rubrique', $id_rubrique)) {
+> 			$bouton .= icone_verticale(_T("bibliographie:icone_creer_bibliographie"), generer_url_ecrire("bibliographie_edit", "id_rubrique=$id_rubrique"), "bibliographie-24.png", "new", "right")
+> 					. "<br class='nettoyeur' />";
+> 		}
+>
+> 		$flux['data'] .= $lister_objets('bibliographies', array('titre'=>_T('bibliographie:titre_bibliographies_rubrique') , 'id_rubrique'=>$id_rubrique));
+> 		$flux['data'] .= $bouton;
+>
+> 		$bouton = '';
+> 		if (autoriser('creercollegedans', 'rubrique', $id_rubrique)) {
+> 			$bouton .= icone_verticale(_T("college:icone_creer_college"), generer_url_ecrire("college_edit", "id_rubrique=$id_rubrique"), "college-24.png", "new", "right")
+> 					. "<br class='nettoyeur' />";
+> 		}
+>
+> 		$flux['data'] .= $lister_objets('colleges', array('titre'=>_T('college:titre_colleges_rubrique') , 'id_rubrique'=>$id_rubrique));
+> 		$flux['data'] .= $bouton;
+>
+> 		$bouton = '';
+> 		if (autoriser('creerprotectiondans', 'rubrique', $id_rubrique)) {
+> 			$bouton .= icone_verticale(_T("protection:icone_creer_protection"), generer_url_ecrire("protection_edit", "id_rubrique=$id_rubrique"), "protection-24.png", "new", "right")
+> 					. "<br class='nettoyeur' />";
+> 		}
+>
+> 		$flux['data'] .= $lister_objets('protections', array('titre'=>_T('protection:titre_protections_rubrique') , 'id_rubrique'=>$id_rubrique));
+> 		$flux['data'] .= $bouton;
+>
+> 		$bouton = '';
+> 		if (autoriser('creercommunedans', 'rubrique', $id_rubrique)) {
+> 			$bouton .= icone_verticale(_T("commune:icone_creer_commune"), generer_url_ecrire("commune_edit", "id_rubrique=$id_rubrique"), "commune-24.png", "new", "right")
+> 					. "<br class='nettoyeur' />";
+> 		}
+>
+> 		$flux['data'] .= $lister_objets('communes', array('titre'=>_T('commune:titre_communes_rubrique') , 'id_rubrique'=>$id_rubrique));
+> 		$flux['data'] .= $bouton;
+>
+56,57c92,93
+< 	// auteurs sur les patrimoines
+< 	if (!$e['edition'] AND in_array($e['type'], array('patrimoine'))) {
+---
+> 	// auteurs sur les patrimoines, bibliographies, colleges, protections, communes, images
+> 	if (!$e['edition'] AND in_array($e['type'], array('patrimoine', 'bibliographie', 'college', 'protection', 'commune', 'image'))) {
+98,99c134,135
+< 	// images sur les documents, patrimoines
+< 	if (!$e['edition'] AND in_array($e['type'], array('document', 'patrimoine'))) {
+---
+> 	// images sur les documents
+> 	if (!$e['edition'] AND in_array($e['type'], array('document'))) {
+132a169,193
+> 		$flux['data'] .= recuperer_fond('prive/objets/liste/bibliographies', array(
+> 			'id_auteur' => $id_auteur,
+> 			'titre' => _T('bibliographie:info_bibliographies_auteur')
+> 		), array('ajax' => true));
+>
+> 		$flux['data'] .= recuperer_fond('prive/objets/liste/colleges', array(
+> 			'id_auteur' => $id_auteur,
+> 			'titre' => _T('college:info_colleges_auteur')
+> 		), array('ajax' => true));
+>
+> 		$flux['data'] .= recuperer_fond('prive/objets/liste/protections', array(
+> 			'id_auteur' => $id_auteur,
+> 			'titre' => _T('protection:info_protections_auteur')
+> 		), array('ajax' => true));
+>
+> 		$flux['data'] .= recuperer_fond('prive/objets/liste/communes', array(
+> 			'id_auteur' => $id_auteur,
+> 			'titre' => _T('commune:info_communes_auteur')
+> 		), array('ajax' => true));
+>
+> 		$flux['data'] .= recuperer_fond('prive/objets/liste/images', array(
+> 			'id_auteur' => $id_auteur,
+> 			'titre' => _T('image:info_images_auteur')
+> 		), array('ajax' => true));
+>
+151a213,232
+> 		} 		// juste les publiés ?
+> 		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+> 			$flux['data']['bibliographies'] = sql_countsel('spip_bibliographies', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+> 		} else {
+> 			$flux['data']['bibliographies'] = sql_countsel('spip_bibliographies', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+> 		} 		// juste les publiés ?
+> 		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+> 			$flux['data']['colleges'] = sql_countsel('spip_colleges', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+> 		} else {
+> 			$flux['data']['colleges'] = sql_countsel('spip_colleges', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+> 		} 		// juste les publiés ?
+> 		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+> 			$flux['data']['protections'] = sql_countsel('spip_protections', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+> 		} else {
+> 			$flux['data']['protections'] = sql_countsel('spip_protections', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+> 		} 		// juste les publiés ?
+> 		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
+> 			$flux['data']['communes'] = sql_countsel('spip_communes', "id_rubrique = ".intval($id_rubrique)." AND (statut = 'publie')");
+> 		} else {
+> 			$flux['data']['communes'] = sql_countsel('spip_communes', "id_rubrique = ".intval($id_rubrique)." AND (statut <> 'poubelle')");
+167a249,253
+>  * Supprime les objets à la poubelle.
+>  * Supprime les objets à la poubelle.
+>  * Supprime les objets à la poubelle.
+>  * Supprime les objets à la poubelle.
+>  * Supprime les objets à la poubelle.
+179a266,322
+> 	sql_delete("spip_bibliographies", "statut='poubelle' AND maj < " . $flux['args']['date']);
+>
+> 	sql_delete("spip_colleges", "statut='poubelle' AND maj < " . $flux['args']['date']);
+>
+> 	sql_delete("spip_protections", "statut='poubelle' AND maj < " . $flux['args']['date']);
+>
+> 	sql_delete("spip_communes", "statut='poubelle' AND maj < " . $flux['args']['date']);
+>
+> 	sql_delete("spip_images", "statut='poubelle' AND maj < " . $flux['args']['date']);
+>
+> 	return $flux;
+> }
+>
+> /**
+>  * Synchroniser la valeur de id secteur
+>  *
+>  * @pipeline trig_propager_les_secteurs
+>  * @param  string $flux Données du pipeline
+>  * @return string       Données du pipeline
+> **/
+> function patrimoine_trig_propager_les_secteurs($flux) {
+>
+> 	// synchroniser spip_patrimoines
+> 	$r = sql_select("A.id_patrimoine AS id, R.id_secteur AS secteur", "spip_patrimoines AS A, spip_rubriques AS R",
+> 		"A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+> 	while ($row = sql_fetch($r)) {
+> 		sql_update("spip_patrimoines", array("id_secteur" => $row['secteur']), "id_patrimoine=" . $row['id']);
+> 	}
+>
+> 	// synchroniser spip_bibliographies
+> 	$r = sql_select("A.id_bibliographie AS id, R.id_secteur AS secteur", "spip_bibliographies AS A, spip_rubriques AS R",
+> 		"A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+> 	while ($row = sql_fetch($r)) {
+> 		sql_update("spip_bibliographies", array("id_secteur" => $row['secteur']), "id_bibliographie=" . $row['id']);
+> 	}
+>
+> 	// synchroniser spip_colleges
+> 	$r = sql_select("A.id_college AS id, R.id_secteur AS secteur", "spip_colleges AS A, spip_rubriques AS R",
+> 		"A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+> 	while ($row = sql_fetch($r)) {
+> 		sql_update("spip_colleges", array("id_secteur" => $row['secteur']), "id_college=" . $row['id']);
+> 	}
+>
+> 	// synchroniser spip_protections
+> 	$r = sql_select("A.id_protection AS id, R.id_secteur AS secteur", "spip_protections AS A, spip_rubriques AS R",
+> 		"A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+> 	while ($row = sql_fetch($r)) {
+> 		sql_update("spip_protections", array("id_secteur" => $row['secteur']), "id_protection=" . $row['id']);
+> 	}
+>
+> 	// synchroniser spip_communes
+> 	$r = sql_select("A.id_commune AS id, R.id_secteur AS secteur", "spip_communes AS A, spip_rubriques AS R",
+> 		"A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
+> 	while ($row = sql_fetch($r)) {
+> 		sql_update("spip_communes", array("id_secteur" => $row['secteur']), "id_commune=" . $row['id']);
+> 	}
+>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/contenu/bibliographie.html ../plugins/fabrique_auto/patrimoine/prive/objets/contenu/bibliographie.html
+1c1
+< <BOUCLE_bibliographie(BIBLIOGRAPHIES){id_bibliographie}>
+---
+> <BOUCLE_bibliographie(BIBLIOGRAPHIES){id_bibliographie}{statut?}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/contenu/college.html ../plugins/fabrique_auto/patrimoine/prive/objets/contenu/college.html
+1c1
+< <BOUCLE_college(COLLEGES){id_college}>
+---
+> <BOUCLE_college(COLLEGES){id_college}{statut?}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/contenu/commune.html ../plugins/fabrique_auto/patrimoine/prive/objets/contenu/commune.html
+1c1
+< <BOUCLE_commune(COMMUNES){id_commune}>
+---
+> <BOUCLE_commune(COMMUNES){id_commune}{statut?}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/contenu/image.html ../plugins/fabrique_auto/patrimoine/prive/objets/contenu/image.html
+1c1
+< <BOUCLE_image(IMAGES){id_image}>
+---
+> <BOUCLE_image(IMAGES){id_image}{statut?}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/contenu/protection.html ../plugins/fabrique_auto/patrimoine/prive/objets/contenu/protection.html
+1c1
+< <BOUCLE_protection(PROTECTIONS){id_protection}>
+---
+> <BOUCLE_protection(PROTECTIONS){id_protection}{statut?}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/infos/bibliographie.html ../plugins/fabrique_auto/patrimoine/prive/objets/infos/bibliographie.html
+1c1
+< <BOUCLE_bibliographie(BIBLIOGRAPHIES){id_bibliographie=#ENV{id}}>
+---
+> <BOUCLE_bibliographie(BIBLIOGRAPHIES){id_bibliographie=#ENV{id}}{statut?}>
+6,10c6,23
+< 	[(#AUTORISER{supprimer, bibliographie, #ID_BIBLIOGRAPHIE}|oui)
+< 		[(#BOUTON_ACTION{
+< 			[(#CHEMIN_IMAGE{bibliographie-del-24.png}|balise_img{<:bibliographie:supprimer_bibliographie:>}|concat{' ',#VAL{<:bibliographie:supprimer_bibliographie:>}|wrap{<b>}}|trim)],
+< 			#URL_ACTION_AUTEUR{supprimer_bibliographie, #ID_BIBLIOGRAPHIE, #URL_ECRIRE{bibliographies}},
+< 			icone s24 horizontale danger bibliographie-del-24, <:bibliographie:confirmer_supprimer_bibliographie:>})]
+---
+> [(#FORMULAIRE_INSTITUER_OBJET{bibliographies,#ID_BIBLIOGRAPHIE})]
+>
+> [(#REM)
+>
+> 	Bouton voir en ligne
+>
+> ]
+> <BOUCLE_publie(BIBLIOGRAPHIES){id_bibliographie}>
+> 	[(#VAL{redirect}
+> 		|generer_url_action{type=bibliographies&id=#ID_BIBLIOGRAPHIE}
+> 		|parametre_url{var_mode,calcul}
+> 		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+> </BOUCLE_publie>
+> 	[(#AUTORISER{previsualiser,bibliographies,#ID_BIBLIOGRAPHIE,'',#ARRAY{statut,#STATUT}})
+> 		[(#VAL{redirect}
+> 			|generer_url_action{type=bibliographies&id=#ID_BIBLIOGRAPHIE}
+> 			|parametre_url{var_mode,preview}
+> 			|icone_horizontale{<:previsualiser:>,preview})]
+11a25
+> <//B_publie>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/infos/college.html ../plugins/fabrique_auto/patrimoine/prive/objets/infos/college.html
+1c1
+< <BOUCLE_college(COLLEGES){id_college=#ENV{id}}>
+---
+> <BOUCLE_college(COLLEGES){id_college=#ENV{id}}{statut?}>
+6,10c6,23
+< 	[(#AUTORISER{supprimer, college, #ID_COLLEGE}|oui)
+< 		[(#BOUTON_ACTION{
+< 			[(#CHEMIN_IMAGE{college-del-24.png}|balise_img{<:college:supprimer_college:>}|concat{' ',#VAL{<:college:supprimer_college:>}|wrap{<b>}}|trim)],
+< 			#URL_ACTION_AUTEUR{supprimer_college, #ID_COLLEGE, #URL_ECRIRE{colleges}},
+< 			icone s24 horizontale danger college-del-24, <:college:confirmer_supprimer_college:>})]
+---
+> [(#FORMULAIRE_INSTITUER_OBJET{colleges,#ID_COLLEGE})]
+>
+> [(#REM)
+>
+> 	Bouton voir en ligne
+>
+> ]
+> <BOUCLE_publie(COLLEGES){id_college}>
+> 	[(#VAL{redirect}
+> 		|generer_url_action{type=colleges&id=#ID_COLLEGE}
+> 		|parametre_url{var_mode,calcul}
+> 		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+> </BOUCLE_publie>
+> 	[(#AUTORISER{previsualiser,colleges,#ID_COLLEGE,'',#ARRAY{statut,#STATUT}})
+> 		[(#VAL{redirect}
+> 			|generer_url_action{type=colleges&id=#ID_COLLEGE}
+> 			|parametre_url{var_mode,preview}
+> 			|icone_horizontale{<:previsualiser:>,preview})]
+11a25
+> <//B_publie>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/infos/commune.html ../plugins/fabrique_auto/patrimoine/prive/objets/infos/commune.html
+1c1
+< <BOUCLE_commune(COMMUNES){id_commune=#ENV{id}}>
+---
+> <BOUCLE_commune(COMMUNES){id_commune=#ENV{id}}{statut?}>
+6,10c6,23
+< 	[(#AUTORISER{supprimer, commune, #ID_COMMUNE}|oui)
+< 		[(#BOUTON_ACTION{
+< 			[(#CHEMIN_IMAGE{commune-del-24.png}|balise_img{<:commune:supprimer_commune:>}|concat{' ',#VAL{<:commune:supprimer_commune:>}|wrap{<b>}}|trim)],
+< 			#URL_ACTION_AUTEUR{supprimer_commune, #ID_COMMUNE, #URL_ECRIRE{communes}},
+< 			icone s24 horizontale danger commune-del-24, <:commune:confirmer_supprimer_commune:>})]
+---
+> [(#FORMULAIRE_INSTITUER_OBJET{communes,#ID_COMMUNE})]
+>
+> [(#REM)
+>
+> 	Bouton voir en ligne
+>
+> ]
+> <BOUCLE_publie(COMMUNES){id_commune}>
+> 	[(#VAL{redirect}
+> 		|generer_url_action{type=communes&id=#ID_COMMUNE}
+> 		|parametre_url{var_mode,calcul}
+> 		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+> </BOUCLE_publie>
+> 	[(#AUTORISER{previsualiser,communes,#ID_COMMUNE,'',#ARRAY{statut,#STATUT}})
+> 		[(#VAL{redirect}
+> 			|generer_url_action{type=communes&id=#ID_COMMUNE}
+> 			|parametre_url{var_mode,preview}
+> 			|icone_horizontale{<:previsualiser:>,preview})]
+11a25
+> <//B_publie>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/infos/image.html ../plugins/fabrique_auto/patrimoine/prive/objets/infos/image.html
+1c1
+< <BOUCLE_image(IMAGES){id_image=#ENV{id}}>
+---
+> <BOUCLE_image(IMAGES){id_image=#ENV{id}}{statut?}>
+6,10c6,23
+< 	[(#AUTORISER{supprimer, image, #ID_IMAGE}|oui)
+< 		[(#BOUTON_ACTION{
+< 			[(#CHEMIN_IMAGE{image-del-24.png}|balise_img{<:image:supprimer_image:>}|concat{' ',#VAL{<:image:supprimer_image:>}|wrap{<b>}}|trim)],
+< 			#URL_ACTION_AUTEUR{supprimer_image, #ID_IMAGE, #URL_ECRIRE{images}},
+< 			icone s24 horizontale danger image-del-24, <:image:confirmer_supprimer_image:>})]
+---
+> [(#FORMULAIRE_INSTITUER_OBJET{images,#ID_IMAGE})]
+>
+> [(#REM)
+>
+> 	Bouton voir en ligne
+>
+> ]
+> <BOUCLE_publie(IMAGES){id_image}>
+> 	[(#VAL{redirect}
+> 		|generer_url_action{type=images&id=#ID_IMAGE}
+> 		|parametre_url{var_mode,calcul}
+> 		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+> </BOUCLE_publie>
+> 	[(#AUTORISER{previsualiser,images,#ID_IMAGE,'',#ARRAY{statut,#STATUT}})
+> 		[(#VAL{redirect}
+> 			|generer_url_action{type=images&id=#ID_IMAGE}
+> 			|parametre_url{var_mode,preview}
+> 			|icone_horizontale{<:previsualiser:>,preview})]
+11a25
+> <//B_publie>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/infos/protection.html ../plugins/fabrique_auto/patrimoine/prive/objets/infos/protection.html
+1c1
+< <BOUCLE_protection(PROTECTIONS){id_protection=#ENV{id}}>
+---
+> <BOUCLE_protection(PROTECTIONS){id_protection=#ENV{id}}{statut?}>
+6,10c6,23
+< 	[(#AUTORISER{supprimer, protection, #ID_PROTECTION}|oui)
+< 		[(#BOUTON_ACTION{
+< 			[(#CHEMIN_IMAGE{protection-del-24.png}|balise_img{<:protection:supprimer_protection:>}|concat{' ',#VAL{<:protection:supprimer_protection:>}|wrap{<b>}}|trim)],
+< 			#URL_ACTION_AUTEUR{supprimer_protection, #ID_PROTECTION, #URL_ECRIRE{protections}},
+< 			icone s24 horizontale danger protection-del-24, <:protection:confirmer_supprimer_protection:>})]
+---
+> [(#FORMULAIRE_INSTITUER_OBJET{protections,#ID_PROTECTION})]
+>
+> [(#REM)
+>
+> 	Bouton voir en ligne
+>
+> ]
+> <BOUCLE_publie(PROTECTIONS){id_protection}>
+> 	[(#VAL{redirect}
+> 		|generer_url_action{type=protections&id=#ID_PROTECTION}
+> 		|parametre_url{var_mode,calcul}
+> 		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+> </BOUCLE_publie>
+> 	[(#AUTORISER{previsualiser,protections,#ID_PROTECTION,'',#ARRAY{statut,#STATUT}})
+> 		[(#VAL{redirect}
+> 			|generer_url_action{type=protections&id=#ID_PROTECTION}
+> 			|parametre_url{var_mode,preview}
+> 			|icone_horizontale{<:previsualiser:>,preview})]
+11a25
+> <//B_publie>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/bibliographies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/bibliographies.html
+13a14
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+20c21
+< 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num vedette},#GET{defaut_tri}}{par vedette}{pagination #ENV{nb,10}}>
+---
+> 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_rubrique?}{id_secteur?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num vedette},#GET{defaut_tri}}{par vedette}{pagination #ENV{nb,10}}>
+22a24
+> 			<td class="statut">[(#STATUT|puce_statut{bibliographie,#ID_BIBLIOGRAPHIE,#ID_RUBRIQUE})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/bibliographies_associer.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/bibliographies_associer.html
+27c27
+< 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{!id_bibliographie IN #GET{exclus}}{where?}{recherche?}
+---
+> 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{!id_bibliographie IN #GET{exclus}}{where?}{recherche?}{statut?}
+41a42
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+47c48
+< 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){!id_bibliographie IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){!id_bibliographie IN #GET{exclus}}{where?}{recherche?}{statut?}
+49a51
+> 			<td class="statut">[(#STATUT|puce_statut{bibliographie})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/bibliographies_lies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/bibliographies_lies.html
+20c20
+< 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{id_bibliographie IN #GET{selection}}{where?}
+---
+> 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{id_bibliographie IN #GET{selection}}{where?}{statut?}
+34a35
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+40c41
+< 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_bibliographie IN #GET{selection}}
+---
+> 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_bibliographie IN #GET{selection}}{statut?}
+42a44
+> 			<td class="statut">[(#STATUT|puce_statut{bibliographie})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/bibliographies_roles_associer.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/bibliographies_roles_associer.html
+27c27
+< 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{!id_bibliographie IN #GET{exclus}}{where?}{recherche?}
+---
+> 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{!id_bibliographie IN #GET{exclus}}{where?}{recherche?}{statut?}
+41a42
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+48c49
+< 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){!id_bibliographie IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){!id_bibliographie IN #GET{exclus}}{where?}{recherche?}{statut?}
+50a52
+> 			<td class="statut">[(#STATUT|puce_statut{bibliographie})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/bibliographies_roles_lies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/bibliographies_roles_lies.html
+20c20
+< 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{id_bibliographie IN #GET{selection}}{where?}
+---
+> 		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{id_bibliographie IN #GET{selection}}{where?}{statut?}
+34a35
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+41c42
+< 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_bibliographie IN #GET{selection}}
+---
+> 	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_bibliographie IN #GET{selection}}{statut?}
+43a45
+> 			<td class="statut">[(#STATUT|puce_statut{bibliographie})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/colleges.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/colleges.html
+13a14
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+20c21
+< 	<BOUCLE_liste_colleges(COLLEGES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+---
+> 	<BOUCLE_liste_colleges(COLLEGES){id_rubrique?}{id_secteur?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+22a24
+> 			<td class="statut">[(#STATUT|puce_statut{college,#ID_COLLEGE,#ID_RUBRIQUE})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/colleges_associer.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/colleges_associer.html
+27c27
+< 		<BOUCLE_lettre(COLLEGES){tout}{!id_college IN #GET{exclus}}{where?}{recherche?}
+---
+> 		<BOUCLE_lettre(COLLEGES){tout}{!id_college IN #GET{exclus}}{where?}{recherche?}{statut?}
+41a42
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+47c48
+< 	<BOUCLE_liste_colleges(COLLEGES){!id_college IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_colleges(COLLEGES){!id_college IN #GET{exclus}}{where?}{recherche?}{statut?}
+49a51
+> 			<td class="statut">[(#STATUT|puce_statut{college})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/colleges_lies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/colleges_lies.html
+20c20
+< 		<BOUCLE_lettre(COLLEGES){tout}{id_college IN #GET{selection}}{where?}
+---
+> 		<BOUCLE_lettre(COLLEGES){tout}{id_college IN #GET{selection}}{where?}{statut?}
+34a35
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+40c41
+< 	<BOUCLE_liste_colleges(COLLEGES){id_college IN #GET{selection}}
+---
+> 	<BOUCLE_liste_colleges(COLLEGES){id_college IN #GET{selection}}{statut?}
+42a44
+> 			<td class="statut">[(#STATUT|puce_statut{college})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/communes.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/communes.html
+2a3
+> 	date_publication,-1,
+12a14
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+13a16
+> 			<th class="date" scope="col">[(#TRI{date_publication,<:date:>,ajax})]</th>
+18c21
+< 	<BOUCLE_liste_communes(COMMUNES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nomcommune},#GET{defaut_tri}}{par nomcommune}{pagination #ENV{nb,10}}>
+---
+> 	<BOUCLE_liste_communes(COMMUNES){id_rubrique?}{id_secteur?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nomcommune},#GET{defaut_tri}}{par nomcommune}{pagination #ENV{nb,10}}>
+20a24
+> 			<td class="statut">[(#STATUT|puce_statut{commune,#ID_COMMUNE,#ID_RUBRIQUE})]</td>
+21a26
+> 			<td class="date secondaire">[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/communes_associer.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/communes_associer.html
+2a3
+> 	date_publication,-1,
+26c27
+< 		<BOUCLE_lettre(COMMUNES){tout}{!id_commune IN #GET{exclus}}{where?}{recherche?}
+---
+> 		<BOUCLE_lettre(COMMUNES){tout}{!id_commune IN #GET{exclus}}{where?}{recherche?}{statut?}
+40a42
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+46c48
+< 	<BOUCLE_liste_communes(COMMUNES){!id_commune IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_communes(COMMUNES){!id_commune IN #GET{exclus}}{where?}{recherche?}{statut?}
+48a51
+> 			<td class="statut">[(#STATUT|puce_statut{commune})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/communes_lies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/communes_lies.html
+2a3
+> 	date_publication,-1,
+19c20
+< 		<BOUCLE_lettre(COMMUNES){tout}{id_commune IN #GET{selection}}{where?}
+---
+> 		<BOUCLE_lettre(COMMUNES){tout}{id_commune IN #GET{selection}}{where?}{statut?}
+33a35
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+39c41
+< 	<BOUCLE_liste_communes(COMMUNES){id_commune IN #GET{selection}}
+---
+> 	<BOUCLE_liste_communes(COMMUNES){id_commune IN #GET{selection}}{statut?}
+41a44
+> 			<td class="statut">[(#STATUT|puce_statut{commune})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/images.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/images.html
+13a14
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+20c21
+< 	<BOUCLE_liste_images(IMAGES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+---
+> 	<BOUCLE_liste_images(IMAGES){id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+22a24
+> 			<td class="statut">[(#STATUT|puce_statut{image,#ID_IMAGE})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/images_associer.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/images_associer.html
+27c27
+< 		<BOUCLE_lettre(IMAGES){tout}{!id_image IN #GET{exclus}}{where?}{recherche?}
+---
+> 		<BOUCLE_lettre(IMAGES){tout}{!id_image IN #GET{exclus}}{where?}{recherche?}{statut?}
+41a42
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+47c48
+< 	<BOUCLE_liste_images(IMAGES){!id_image IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_images(IMAGES){!id_image IN #GET{exclus}}{where?}{recherche?}{statut?}
+49a51
+> 			<td class="statut">[(#STATUT|puce_statut{image})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/images_lies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/images_lies.html
+20c20
+< 		<BOUCLE_lettre(IMAGES){tout}{id_image IN #GET{selection}}{where?}
+---
+> 		<BOUCLE_lettre(IMAGES){tout}{id_image IN #GET{selection}}{where?}{statut?}
+34a35
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+40c41
+< 	<BOUCLE_liste_images(IMAGES){id_image IN #GET{selection}}
+---
+> 	<BOUCLE_liste_images(IMAGES){id_image IN #GET{selection}}{statut?}
+42a44
+> 			<td class="statut">[(#STATUT|puce_statut{image})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/protections.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/protections.html
+13a14
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+20c21
+< 	<BOUCLE_liste_protections(PROTECTIONS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num nomusage},#GET{defaut_tri}}{par nomusage}{pagination #ENV{nb,10}}>
+---
+> 	<BOUCLE_liste_protections(PROTECTIONS){id_rubrique?}{id_secteur?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nomusage},#GET{defaut_tri}}{par nomusage}{pagination #ENV{nb,10}}>
+22a24
+> 			<td class="statut">[(#STATUT|puce_statut{protection,#ID_PROTECTION,#ID_RUBRIQUE})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/protections_associer.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/protections_associer.html
+27c27
+< 		<BOUCLE_lettre(PROTECTIONS){tout}{!id_protection IN #GET{exclus}}{where?}{recherche?}
+---
+> 		<BOUCLE_lettre(PROTECTIONS){tout}{!id_protection IN #GET{exclus}}{where?}{recherche?}{statut?}
+41a42
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+47c48
+< 	<BOUCLE_liste_protections(PROTECTIONS){!id_protection IN #GET{exclus}}{where?}{recherche?}
+---
+> 	<BOUCLE_liste_protections(PROTECTIONS){!id_protection IN #GET{exclus}}{where?}{recherche?}{statut?}
+49a51
+> 			<td class="statut">[(#STATUT|puce_statut{protection})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/protections_lies.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/protections_lies.html
+20c20
+< 		<BOUCLE_lettre(PROTECTIONS){tout}{id_protection IN #GET{selection}}{where?}
+---
+> 		<BOUCLE_lettre(PROTECTIONS){tout}{id_protection IN #GET{selection}}{where?}{statut?}
+34a35
+> 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+40c41
+< 	<BOUCLE_liste_protections(PROTECTIONS){id_protection IN #GET{selection}}
+---
+> 	<BOUCLE_liste_protections(PROTECTIONS){id_protection IN #GET{selection}}{statut?}
+42a44
+> 			<td class="statut">[(#STATUT|puce_statut{protection})]</td>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/objets/liste/patrimoines.html ../plugins/fabrique_auto/patrimoine/prive/objets/liste/patrimoines.html
+21c21
+< 	<BOUCLE_liste_patrimoines(PATRIMOINES){id_rubrique?}{id_parent?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+---
+> 	<BOUCLE_liste_patrimoines(PATRIMOINES){id_rubrique?}{id_secteur?}{id_parent?}{id_mot?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: bibliographie.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/squelettes/contenu/bibliographie_edit.html ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu/bibliographie_edit.html
+4c4,5
+< 	[(#AUTORISER{creer,bibliographie}|sinon_interdire_acces)]
+---
+> 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{bibliographies}}
+> 	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creerbibliographiedans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+7c8
+< #SET{redirect,#ENV{redirect}|sinon{#ID_BIBLIOGRAPHIE|?{#ID_BIBLIOGRAPHIE|generer_url_entite{bibliographie},#URL_ECRIRE{bibliographies}}}}
+---
+> #SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{bibliographie},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+25c26
+< 		[(#FORMULAIRE_EDITER_BIBLIOGRAPHIE{#ENV{id_bibliographie,oui}, #GET{redirect}, #ENV{associer_objet}})]
+---
+> 		[(#FORMULAIRE_EDITER_BIBLIOGRAPHIE{#ENV{id_bibliographie,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: bibliographies.html
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: college.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/squelettes/contenu/college_edit.html ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu/college_edit.html
+4c4,5
+< 	[(#AUTORISER{creer,college}|sinon_interdire_acces)]
+---
+> 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{colleges}}
+> 	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creercollegedans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+7c8
+< #SET{redirect,#ENV{redirect}|sinon{#ID_COLLEGE|?{#ID_COLLEGE|generer_url_entite{college},#URL_ECRIRE{colleges}}}}
+---
+> #SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{college},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+25c26
+< 		[(#FORMULAIRE_EDITER_COLLEGE{#ENV{id_college,oui}, #GET{redirect}, #ENV{associer_objet}})]
+---
+> 		[(#FORMULAIRE_EDITER_COLLEGE{#ENV{id_college,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: colleges.html
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: commune.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/squelettes/contenu/commune_edit.html ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu/commune_edit.html
+4c4,5
+< 	[(#AUTORISER{creer,commune}|sinon_interdire_acces)]
+---
+> 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{communes}}
+> 	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creercommunedans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+7c8
+< #SET{redirect,#ENV{redirect}|sinon{#ID_COMMUNE|?{#ID_COMMUNE|generer_url_entite{commune},#URL_ECRIRE{communes}}}}
+---
+> #SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{commune},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+25c26
+< 		[(#FORMULAIRE_EDITER_COMMUNE{#ENV{id_commune,oui}, #GET{redirect}, #ENV{associer_objet}})]
+---
+> 		[(#FORMULAIRE_EDITER_COMMUNE{#ENV{id_commune,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: communes.html
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: image.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/squelettes/contenu/image_edit.html ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu/image_edit.html
+7c7
+< #SET{redirect,#ENV{redirect}|sinon{#ID_IMAGE|?{#ID_IMAGE|generer_url_entite{image},#URL_ECRIRE{images}}}}
+---
+> #SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_IMAGE}|?{#ENV{lier_trad,#ID_IMAGE}|generer_url_entite{image},#URL_ECRIRE{images}}}}
+25c25
+< 		[(#FORMULAIRE_EDITER_IMAGE{#ENV{id_image,oui}, #GET{redirect}, #ENV{associer_objet}})]
+---
+> 		[(#FORMULAIRE_EDITER_IMAGE{#ENV{id_image,oui}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: images.html
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: protection.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/prive/squelettes/contenu/protection_edit.html ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu/protection_edit.html
+4c4,5
+< 	[(#AUTORISER{creer,protection}|sinon_interdire_acces)]
+---
+> 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{protections}}
+> 	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creerprotectiondans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+7c8
+< #SET{redirect,#ENV{redirect}|sinon{#ID_PROTECTION|?{#ID_PROTECTION|generer_url_entite{protection},#URL_ECRIRE{protections}}}}
+---
+> #SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{protection},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+25c26
+< 		[(#FORMULAIRE_EDITER_PROTECTION{#ENV{id_protection,oui}, #GET{redirect}, #ENV{associer_objet}})]
+---
+> 		[(#FORMULAIRE_EDITER_PROTECTION{#ENV{id_protection,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes/contenu: protections.html
+Only in ../plugins/fabrique_auto/patrimoine/prive/squelettes: inclure
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies/bibliographies.html ../plugins/fabrique_auto/patrimoine/saisies/bibliographies.html
+7c7
+< 	<BOUCLE_bibliographies(BIBLIOGRAPHIES){par num vedette, vedette}{recherche?}{tout}>
+---
+> 	<BOUCLE_bibliographies(BIBLIOGRAPHIES){par num vedette, vedette}{id_rubrique?}{id_secteur?}{statut?}{recherche?}{tout}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies/colleges.html ../plugins/fabrique_auto/patrimoine/saisies/colleges.html
+7c7
+< 	<BOUCLE_colleges(COLLEGES){par num titre, titre}{recherche?}{tout}>
+---
+> 	<BOUCLE_colleges(COLLEGES){par num titre, titre}{id_rubrique?}{id_secteur?}{statut?}{recherche?}{tout}>
+Only in ../plugins/fabrique_auto/patrimoine/saisies: communes.html
+Only in ../plugins/fabrique_auto/patrimoine/saisies: images.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies/protections.html ../plugins/fabrique_auto/patrimoine/saisies/protections.html
+7c7
+< 	<BOUCLE_protections(PROTECTIONS){par num nomusage, nomusage}{recherche?}{tout}>
+---
+> 	<BOUCLE_protections(PROTECTIONS){par num nomusage, nomusage}{id_rubrique?}{id_secteur?}{statut?}{recherche?}{tout}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies/patrimoines.html ../plugins/fabrique_auto/patrimoine/saisies/patrimoines.html
+7c7
+< 	<BOUCLE_patrimoines(PATRIMOINES){par num titre, titre}{id_rubrique?}{statut?}{racine}{id_parent?}{recherche?}{tout}>
+---
+> 	<BOUCLE_patrimoines(PATRIMOINES){par num titre, titre}{id_rubrique?}{id_secteur?}{statut?}{racine}{id_parent?}{recherche?}{tout}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies-vues/bibliographies.html ../plugins/fabrique_auto/patrimoine/saisies-vues/bibliographies.html
+6c6
+< 		{par num vedette, vedette}{tout}>
+---
+> 		{par num vedette, vedette}{statut?}{tout}>
+15c15
+< 		{par num vedette, vedette}{tout}>
+---
+> 		{par num vedette, vedette}{statut?}{tout}>
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies-vues/colleges.html ../plugins/fabrique_auto/patrimoine/saisies-vues/colleges.html
+6c6
+< 		{par num titre, titre}{tout}>
+---
+> 		{par num titre, titre}{statut?}{tout}>
+15c15
+< 		{par num titre, titre}{tout}>
+---
+> 		{par num titre, titre}{statut?}{tout}>
+Only in ../plugins/fabrique_auto/patrimoine/saisies-vues: communes.html
+Only in ../plugins/fabrique_auto/patrimoine/saisies-vues: images.html
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_patrimoine.php ../plugins/fabrique_auto/.backup/patrimoine/saisies-vues/protections.html ../plugins/fabrique_auto/patrimoine/saisies-vues/protections.html
+6c6
+< 		{par num nomusage, nomusage}{tout}>
+---
+> 		{par num nomusage, nomusage}{statut?}{tout}>
+15c15
+< 		{par num nomusage, nomusage}{tout}>
+---
+> 		{par num nomusage, nomusage}{statut?}{tout}>

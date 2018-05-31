@@ -1,0 +1,128 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_bibliographie,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_bibliographie" value="#ENV{id_bibliographie}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{selection, type,
+				label=<:bibliographie:champ_type_label:>,
+				datas=[(#ARRAY{monographie,monographie,article,article,rapport,rapport,travail_universitaire,travail universitaire,periodique,périodique,catalogue_d_exposition,catalogue d'exposition,brochure,brochure,actes_de_colloque,actes de colloque,document_numerique,document numérique,document_figure,document figuré,source_ecrite,source écrite})]})]
+
+			[(#SAISIE{input, auteurs,
+				label=<:bibliographie:champ_auteurs_label:>})]
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:bibliographie:champ_titre_label:>})]
+
+			[(#SAISIE{input, titredocumenthote,
+				label=<:bibliographie:champ_titredocumenthote_label:>})]
+
+			[(#SAISIE{input, lieudedition,
+				label=<:bibliographie:champ_lieudedition_label:>})]
+
+			[(#SAISIE{input, nomdelediteur,
+				label=<:bibliographie:champ_nomdelediteur_label:>})]
+
+			[(#SAISIE{input, datededition,
+				label=<:bibliographie:champ_datededition_label:>})]
+
+			[(#SAISIE{input, serviceproducteur,
+				label=<:bibliographie:champ_serviceproducteur_label:>})]
+
+			[(#SAISIE{textarea, texte,
+				label=<:bibliographie:champ_texte_label:>,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+
+			[(#SAISIE{input, auteursdocumenthote,
+				label=<:bibliographie:champ_auteursdocumenthote_label:>})]
+
+			[(#SAISIE{input, mentiondedition,
+				label=<:bibliographie:champ_mentiondedition_label:>})]
+
+			[(#SAISIE{input, collation,
+				label=<:bibliographie:champ_collation_label:>})]
+
+			[(#SAISIE{input, collationdudocumenthote,
+				label=<:bibliographie:champ_collationdudocumenthote_label:>})]
+
+			[(#SAISIE{input, collection,
+				label=<:bibliographie:champ_collection_label:>})]
+
+			[(#SAISIE{input, travauxuniversitaires,
+				label=<:bibliographie:champ_travauxuniversitaires_label:>})]
+
+			[(#SAISIE{input, localisation,
+				label=<:bibliographie:champ_localisation_label:>})]
+
+			[(#SAISIE{input, cote,
+				label=<:bibliographie:champ_cote_label:>})]
+
+			[(#SAISIE{input, topocommune,
+				label=<:bibliographie:champ_topocommune_label:>})]
+
+			[(#SAISIE{input, motscles,
+				label=<:bibliographie:champ_motscles_label:>})]
+
+			[(#SAISIE{input, chronologie,
+				label=<:bibliographie:champ_chronologie_label:>})]
+
+			[(#SAISIE{input, signet,
+				label=<:bibliographie:champ_signet_label:>})]
+
+			[(#SAISIE{input, illustrations,
+				label=<:bibliographie:champ_illustrations_label:>})]
+
+			[(#SAISIE{input, issn,
+				label=<:bibliographie:champ_issn_label:>})]
+
+			[(#SAISIE{input, notes,
+				label=<:bibliographie:champ_notes_label:>})]
+
+			[(#SAISIE{input, isbn,
+				label=<:bibliographie:champ_isbn_label:>})]
+
+			[(#SAISIE{input, auteurnotice,
+				label=<:bibliographie:champ_auteurnotice_label:>})]
+
+			[(#SAISIE{input, lien,
+				label=<:bibliographie:champ_lien_label:>})]
+
+			[(#SAISIE{input, telechargement,
+				label=<:bibliographie:champ_telechargement_label:>})]
+
+			[(#SAISIE{input, document,
+				label=<:bibliographie:champ_document_label:>})]
+
+			[(#SAISIE{input, timecreate,
+				label=<:bibliographie:champ_timecreate_label:>})]
+
+			[(#SAISIE{input, codecreateur,
+				label=<:bibliographie:champ_codecreateur_label:>})]
+
+			[(#SAISIE{input, codederniermodif,
+				label=<:bibliographie:champ_codederniermodif_label:>})]
+
+			[(#SAISIE{input, timemodif,
+				label=<:bibliographie:champ_timemodif_label:>})]
+
+			[(#SAISIE{input, vedette,
+				label=<:bibliographie:champ_vedette_label:>})]
+
+			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+					<span class="erreur_message">(#ENV**{erreurs/id_parent})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_bibliographie},#ENV{id_parent},'bibliographie',#ENV{id_secteur},'',0,form_simple})
+			</div>]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

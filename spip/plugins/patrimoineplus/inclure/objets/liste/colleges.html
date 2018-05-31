@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	num titre,1,
+	id_patrimoine,1,
+	codeia,1,
+}})]
+
+<B_liste_patrimoines>
+#ANCRE_PAGINATION
+<div class="liste-objets patrimoines">
+<table class="spip liste">
+	[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="titre principale" scope="col">[(#TRI{titre,<:patrimoine:champ_titre_label:>,ajax})]</th>
+			<th class="commune" scope="col"><:commune:champ_nomcommune_label:></th>
+			<th class="codesite" scope="col">[(#TRI{codesite,<:patrimoine:champ_codesite_label:>,ajax})]</th>
+			<th class="codeia" scope="col"><:college:champ_codeia_label:></th>
+			<th class="logo" scope="col"><:patrimoine:vignette:></th>
+			<th class="nbdoc" scope="col"><:patrimoine:nb_doc:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_patrimoines(PATRIMOINES)
+		{id_patrimoine?}{documents_liens.id_document?}{mots_liens.id_mot=3370}{protections_liens.id_protection?}{communes_liens.id_commune?}{bibliographies_liens.id_bibliographie?}{auteurs_liens.id_auteur?}{contacts_liens.id_contact?}{organisations_liens.id_organisation?}{definitions_liens.id_definition?}
+		{tri #ENV{par,#GET{defaut_tri_par,num titre}},#GET{defaut_tri}}
+		{pagination #ENV{pagination,30}}{recherche?}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="titre principale"><a href="[(#ID_PATRIMOINE|generer_url_entite{patrimoine})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PATRIMOINE">[(#RANG). ]#TITRE</a></td>
+			<td class="commune"><BOUCLE_liste_communes(COMMUNES spip_communes_lien){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}{", "}><a href="#URL_COMMUNE">#NOMCOMMUNE</a></BOUCLE_liste_communes></td>
+			<td class="codesite">#CODESITE</td>
+			<td class="codesite"><BOUCLE_colleges(COLLEGES){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}>#CODEIA</BOUCLE_colleges></td>
+			<td class="logo">[(#LOGO_PATRIMOINE|image_proportions{4,3,"focus"}|image_responsive{0/75/150})]</td>
+			<td class="nbdoc"><B_nb_documents><a href="[(#URL_PATRIMOINE|ancre_url{portfolios})]">#GRAND_TOTAL</a><BOUCLE_nb_documents(DOCUMENTS spip_documents_liens){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}> </BOUCLE_nb_documents></B_nb_documents>-<//B_nb_documents></td>
+		</tr>
+	</BOUCLE_liste_patrimoines>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_patrimoines>[
+<div class="liste-objets patrimoines caption-wrap"><strong class="caption">(#ENV*{sinon,<:college:info_aucun_college:>})</strong></div>
+]<//B_liste_patrimoines>

@@ -1,0 +1,12 @@
+	<B_patcomm>
+	<div class="bloc college">
+		<div class="titrebloc"><:college:autres_colleges:> (#INFO_NOMCOMMUNE{commune,#ID_OBJET})</div>
+		#ANCRE_PAGINATION
+		<ul class="spip">
+			<BOUCLE_patcomm(colleges_liens patrimoines communes_liens){colleges_liens.objet=patrimoine}{communes_liens.id_commune=#ID_OBJET}{pagination 5}{si #OBJET|=={patrimoine}}>
+				<li class="valeurchamp"><a href="#URL_PATRIMOINE">#TITRE</a></li>
+			</BOUCLE_patcomm>
+		</ul>
+		<p class="pagination">#PAGINATION{prive}</p>
+	</div>
+	</B_patcomm>

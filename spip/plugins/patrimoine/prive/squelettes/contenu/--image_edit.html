@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,image,#ID_IMAGE}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,image}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_IMAGE}|?{#ENV{lier_trad,#ID_IMAGE}|generer_url_entite{image},#URL_ECRIRE{images}}}}
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_IMAGE|oui)
+	[(#GET{redirect}|icone_verticale{Retour,image,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_IMAGE|?{<:image:icone_modifier_image:>,<:image:icone_creer_image:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{image,#ID_IMAGE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_IMAGE|generer_url_entite{image}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_IMAGE{#ENV{id_image,oui}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

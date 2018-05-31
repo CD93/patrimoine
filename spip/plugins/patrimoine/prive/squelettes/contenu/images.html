@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/images, env, ajax, sinon=<:image:info_aucun_image:>}>
+
+[(#AUTORISER{creer,image})
+	[(#URL_ECRIRE{image_edit,new=oui}|icone_verticale{<:image:icone_creer_image:>,image,new,right})]
+]

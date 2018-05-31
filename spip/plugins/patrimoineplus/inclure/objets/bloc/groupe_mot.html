@@ -1,0 +1,109 @@
+<BOUCLE_mot(MOTS)
+{auteurs_liens.id_auteur?}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{mots_liens.id_mot?}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}
+{si #ENV{objet}|=={mot}}>
+<div class="bloc groupemot">
+  <B_motsautres>
+  <div class="soustitre motsautres">
+    <div class="patchamps inline">
+      <div class="titrebloc"><a href="#URL_GROUPE_MOTS">#TYPE</a></div>
+      <div class="valeurchamp">
+        <ul>
+        <BOUCLE_motsautres(MOTS){racine}{id_groupe=#ID_GROUPE}{id_groupe IN 1,3,6,12}{id_mot!=#ID_MOT}{par num titre, titre}>
+        <li><a href="#URL_MOT" class="valeurchamp">#TITRE</a>
+          [(#ID_GROUPE|=={12}|oui)<span class="badge">[(#COMPTER_OBJET{#ID_MOT,contact,#TEXTE*}|singulier_ou_pluriel{contacts:contact_un,contacts:contacts_nb}|sinon{<:contacts:contact_aucun:>})]</span>
+          <span class="badge">[(#COMPTER_OBJET{#ID_MOT,organisation,#TEXTE*}|singulier_ou_pluriel{contacts:organisation_un,contacts:organisations_nb}|sinon{<:contacts:organisation_aucun:>})]</span>
+          ]
+          [(#ID_GROUPE|=={12}|non)<span class="badge">[(#COMPTER_OBJET{#ID_MOT,patrimoine,#TEXTE*}|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}|sinon{<:patrimoine:info_aucun_patrimoine:>})]</span>
+          <span class="badge">[(#COMPTER_OBJET{#ID_MOT,bibliographie,#TEXTE*}|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}|sinon{<:bibliographie:info_aucun_bibliographie:>})]</span>
+          <span class="badge">[(#COMPTER_OBJET{#ID_MOT,protection,#TEXTE*}|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protection}|sinon{<:protection:info_aucun_protection:>})]</span>
+          ]
+        </li>
+        </BOUCLE_motsautres>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </B_motsautres>
+
+  #SET{motsparents,#ARRAY}
+  #SET{motsparents, #GET{motsparents}|push{#ID_MOT}}
+  <BOUCLE_enfants(MOTS){id_mot=#ID_PARENT}>
+  #SET{motsparents, #GET{motsparents}|push{#ID_MOT}}
+  #SET{id_parent,#ID_PARENT}
+    <BOUCLE_recursif(BOUCLE_enfants) />
+  </BOUCLE_enfants>
+  <B_motsparents>
+  <div class="soustitre motsparents">
+    <div class="patchamps">
+      <div class="titrebloc"><a href="#URL_GROUPE_MOTS" class="">#TYPE</a></div>
+      <div class="valeurchamp">
+        <ul><li>
+        <BOUCLE_motsparents(MOTS){id_mot IN #GET{motsparents}}{!par #CLE}{id_groupe IN 8,9}{"<ul><li>"}>
+          <a href="#URL_MOT" class="valeurchamp[(#ID_MOT|=={#_mot:ID_MOT}|oui) bold]">#TITRE</a>
+            <span class="badge">[(#COMPTER_OBJET{#ID_MOT,patrimoine,#TEXTE*}|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}|sinon{<:patrimoine:info_aucun_patrimoine:>})]</span>
+            <span class="badge">[(#COMPTER_OBJET{#ID_MOT,bibliographie,#TEXTE*}|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}|sinon{<:bibliographie:info_aucun_bibliographie:>})]</span>
+            <span class="badge">[(#COMPTER_OBJET{#ID_MOT,protection,#TEXTE*}|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}|sinon{<:protection:info_aucun_protection:>})]</span>
+        </BOUCLE_motsparents>
+          <B_motenfants>
+          <ul>
+          <BOUCLE_motenfants(MOTS){id_parent}{par titre}>
+            <li><a href="#URL_MOT" class="valeurchamp[(#ID_MOT|=={#_mot:ID_MOT}|oui) bold]">#TITRE</a>
+              <span class="badge">[(#COMPTER_OBJET{#ID_MOT,patrimoine,#TEXTE*}|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}|sinon{<:patrimoine:info_aucun_patrimoine:>})]</span>
+              <span class="badge">[(#COMPTER_OBJET{#ID_MOT,bibliographie,#TEXTE*}|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}|sinon{<:bibliographie:info_aucun_bibliographie:>})]</span>
+              <span class="badge">[(#COMPTER_OBJET{#ID_MOT,protection,#TEXTE*}|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}|sinon{<:protection:info_aucun_protection:>})]</span>
+            </li>
+            <BOUCLE_recursifmot(BOUCLE_motenfants) />
+          </BOUCLE_motenfants>
+          </ul>
+          </B_motenfants>
+          <BOUCLE_i(DATA){liste #GET{motsparents}}{"</li></ul>"}>
+          </BOUCLE_i>
+      </div>
+    </div>
+  </div>
+  </B_motsparents>
+</div>
+</BOUCLE_mot>
+</B_mot>
+<div class="bloc groupemot2">
+#SET{motsparents0,#ARRAY}
+#SET{motsparents0, #GET{motsparents0}|push{#ID_MOT}}
+<BOUCLE_mot0(MOTS){id_mot}>
+<BOUCLE_enfants0(MOTS){id_mot=#ID_PARENT}>
+#SET{motsparents0, #GET{motsparents0}|push{#ID_MOT}}
+  #SET{id_parent,#ID_PARENT}
+  <BOUCLE_recursif0(BOUCLE_enfants0) />
+</BOUCLE_enfants0>
+</BOUCLE_mot0>
+<B_motsparents0>
+<div class="soustitre motsparents0">
+  <div class="patchamps">
+    <div class="titrebloc"><a href="#URL_GROUPE_MOTS" class="">#TYPE</a></div>
+    <div class="valeurchamp">
+      <ul><li>
+      <BOUCLE_motsparents0(MOTS){id_mot IN #GET{motsparents0}}{!par #CLE}{id_groupe IN 8,9}{"<ul><li>"}>
+        <a href="#URL_MOT" class="valeurchamp[(#ID_MOT|=={#_mot:ID_MOT}|oui) bold]">#TITRE</a>
+          <span class="badge">[(#COMPTER_OBJET{#ID_MOT,patrimoine,#TEXTE*}|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}|sinon{<:patrimoine:info_aucun_patrimoine:>})]</span>
+          <span class="badge">[(#COMPTER_OBJET{#ID_MOT,bibliographie,#TEXTE*}|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}|sinon{<:bibliographie:info_aucun_bibliographie:>})]</span>
+          <span class="badge">[(#COMPTER_OBJET{#ID_MOT,protection,#TEXTE*}|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}|sinon{<:protection:info_aucun_protection:>})]</span>
+      </BOUCLE_motsparents0>
+        <B_motenfants0>
+        <ul>
+        <BOUCLE_motenfants0(MOTS){id_parent}{par titre}>
+          <li><a href="#URL_MOT" class="valeurchamp[(#ID_MOT|=={#_mot:ID_MOT}|oui) bold]">#TITRE</a>
+            <span class="badge">[(#COMPTER_OBJET{#ID_MOT,patrimoine,#TEXTE*}|singulier_ou_pluriel{patrimoine:info_1_patrimoine,patrimoine:info_nb_patrimoines}|sinon{<:patrimoine:info_aucun_patrimoine:>})]</span>
+            <span class="badge">[(#COMPTER_OBJET{#ID_MOT,bibliographie,#TEXTE*}|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}|sinon{<:bibliographie:info_aucun_bibliographie:>})]</span>
+            <span class="badge">[(#COMPTER_OBJET{#ID_MOT,protection,#TEXTE*}|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}|sinon{<:protection:info_aucun_protection:>})]</span>
+          </li>
+          <BOUCLE_recursifmot0(BOUCLE_motenfants0) />
+        </BOUCLE_motenfants0>
+        </ul>
+      </B_motenfants0>
+        <BOUCLE_i0(DATA){liste #GET{motsparents0}}{"</li></ul>"}>
+      </BOUCLE_i0>
+    </div>
+  </div>
+</div>
+</B_motsparents0>
+</div>
+<//B_mot>

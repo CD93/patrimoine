@@ -1,0 +1,11 @@
+		<BOUCLE_gis(GIS){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{id_patrimoine ?}{recherche ?}{0, #ENV{limit,5000}}{","}>
+		{"type": "Feature",
+		["geometry": (#GEOMETRY|appliquer_filtre{wkt_to_json}|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+		"id":"#ID_GIS",
+		"properties": {
+			"title":[(#VAL{<a href='[(#URL_PATRIMOINE|url_absolue)]'>[(#TITRE*|extraire_multi|supprimer_numero|sinon{----})]</a>}|json_encode)],
+			"description":[(#DESCRIPTIF*|json_encode)][(#SET{logo_doc,''})][
+			(#LOGO_GIS|gis_icon_properties)][,
+			"styles": (#GEOMETRY_STYLES|appliquer_filtre{geometry_styles_to_json})][,
+			"image":(#LOGO_PATRIMOINE|oui)[(#CHEMIN{IMG/#LOGO_PATRIMOINE**}|url_absolue|json_encode)]]
+		}}</BOUCLE_gis>

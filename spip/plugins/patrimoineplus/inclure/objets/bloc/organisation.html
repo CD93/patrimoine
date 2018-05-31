@@ -1,0 +1,47 @@
+<B_organisations>
+<div class="bloc organisation">
+	<div class="titrebloc"><:paquet_patrimoine:organisations:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_organisations(ORGANISATIONS)
+		{auteurs_liens.id_auteur?}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{mots_liens.id_mot?}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}{objet?}{id_objet?}
+		{pagination #ENV{nb,5}}
+		>
+		<li class="valeurchamp"><a href="#URL_ORGANISATION">#NOM</a></li>
+		</BOUCLE_organisations>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_organisations>
+<B_organisationsdoc>
+<div class="bloc organisation">
+	<div class="titrebloc"><:paquet_patrimoine:organisations:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_organisationsdoc(ORGANISATIONS)
+		{documents_liens.id_document=#ID_OBJET}
+		{pagination #ENV{nb,5}}
+		{SI #ENV{objet}|=={document}}
+		>
+		<li class="valeurchamp"><a href="#URL_ORGANISATION">#NOM</a></li>
+	</BOUCLE_organisationsdoc>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_organisationsdoc>
+<B_organisationsmot>
+<div class="bloc organisation">
+	<div class="titrebloc"><:paquet_patrimoine:organisations:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_organisationsmot(ORGANISATIONS)
+		{mots_liens.id_mot=#ID_OBJET}
+		{SI #ENV{objet}|=={mot}}
+		{pagination #ENV{nb,5}}
+		>
+		<li class="valeurchamp"><a href="#URL_ORGANISATION">#NOM</a></li>
+	</BOUCLE_organisationsmot>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_organisationsmot>

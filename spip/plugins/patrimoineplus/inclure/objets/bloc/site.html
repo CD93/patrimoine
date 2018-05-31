@@ -1,0 +1,31 @@
+<B_patdoc>
+<div class="bloc site">
+	<div class="titrebloc">[(#GRAND_TOTAL|singulier_ou_pluriel{patrimoine:info_1_patrimoine_documente, patrimoine:info_nb_patrimoines_documentes})]</div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_patdoc(PATRIMOINES)
+	{auteurs_liens.id_auteur?}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{mots_liens.id_mot?}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}{si #ENV{objet}|!=={patrimoine}}{si #ENV{objet}|!=={bibliographie}}
+	{pagination #ENV{nb,5}}>
+		<li class="valeurchamp"><a href="#URL_PATRIMOINE">#TITRE</a>
+		[(#ENV{objet}|=={document}|oui) #INCLURE{fond=modeles/carte_gis_pat,autocenterandzoom=oui,objet=patrimoine,id_objet=#ID_PATRIMOINE,height=300px,id_carte_gis=#ID_PATRIMOINE}]
+		</li>
+	</BOUCLE_patdoc>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_patdoc>
+<B_pataut>
+	<div class="bloc site2">
+		<div class="titrebloc">[(#GRAND_TOTAL|singulier_ou_pluriel{patrimoine:info_1_patrimoine_documente, patrimoine:info_nb_patrimoines_documentes})]</div>
+		#ANCRE_PAGINATION
+		<ul class="spip">
+			<BOUCLE_pataut(PATRIMOINES auteurs_liens)
+			{auteurs_liens.id_auteur=#ID_OBJET}
+			{si #OBJET|=={auteur}}
+			{pagination #ENV{nb,5}}>
+			<li class="valeurchamp"><a href="#URL_PATRIMOINE">#TITRE</a></li>
+		</BOUCLE_pataut>
+		</ul>
+		<p class="pagination">#PAGINATION{prive}</p>
+	</div>
+</B_pataut>

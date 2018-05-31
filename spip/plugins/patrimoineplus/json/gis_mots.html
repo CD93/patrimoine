@@ -1,0 +1,13 @@
+#CACHE{24*3600}
+<BOUCLE_art(PATRIMOINES){gis}{spip_mots_liens.id_mot=#ENV{id_mot}}{0, #ENV{limit}}{","}>
+#SET{description,""}
+[(#LOGO_PATRIMOINE|oui)#SET{description,#GET{description}|concat{#LOGO_PATRIMOINE{#URL_PATRIMOINE}|image_reduire{300,300}}}]
+[(#LOGO_PATRIMOINE|non)#SET{description,#GET{description}|concat{'<br/><a href="'}|concat{#URL_PATRIMOINE}|concat{'">'}|concat{voir la fiche}|concat{'</a>'}}]
+{"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+"id":"#ID_GIS",
+"properties": {
+        "title":[(#TITRE*|sinon{#TITRE_GIS*}|supprimer_numero|json_encode)],
+        "description":[(#GET{description}|json_encode)]<BOUCLE_logomot(MOTS){id_patrimoine}{type=marker_icon}>
+        [(#LOGO_MOT_NORMAL|gis_icon_properties)]</BOUCLE_logomot>
+}}</BOUCLE_art>

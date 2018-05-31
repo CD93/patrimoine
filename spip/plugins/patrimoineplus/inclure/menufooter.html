@@ -1,0 +1,60 @@
+<BOUCLE_menu(MENUS){id_menu?}{identifiant?}>
+<footer id="footer">
+  <div class="row">
+	<B_entrees>
+    <div class="col-lg-4">	
+		<ul class="menu-liste menu-items[ (#ENV{class})][(#VAL{_MENUS_EXTRA_CLASS}|defined|oui)[(#VAL{_MENUS_EXTRA_CLASS}|constant)]][ (#CHAMP_SQL{css})]">
+			<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}{1/3}>#SET{entree,''}
+			[(#MENUS_AFFICHER_ENTREE)#SET{entree,' '}
+				]<BOUCLE_sous_menu(MENUS){id_menus_entree}>
+					#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
+				</BOUCLE_sous_menu>
+			[(#REM)
+				On ferme le li si le type d'entrée accepte des sous-menus
+				et si on a bien quelque chose dans le li (cas des menus sur Balise SESSION)
+			][(#GET{entree}|et{#TYPE_ENTREE|menus_type_refuser_sous_menu|non})
+				</li>
+			]
+			</BOUCLE_entrees>
+		</ul>
+	</div>
+	</B_entrees>
+	<B_entrees1>
+	<div class="col-lg-4">	
+		<ul class="menu-liste menu-items[ (#ENV{class})][(#VAL{_MENUS_EXTRA_CLASS}|defined|oui)[(#VAL{_MENUS_EXTRA_CLASS}|constant)]][ (#CHAMP_SQL{css})]">
+			<BOUCLE_entrees1(MENUS_ENTREES){id_menu}{par rang}{2/3}>#SET{entree,''}
+			[(#MENUS_AFFICHER_ENTREE)#SET{entree,' '}
+				]<BOUCLE_sous_menu1(MENUS){id_menus_entree}>
+					#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
+				</BOUCLE_sous_menu1>
+			[(#REM)
+				On ferme le li si le type d'entrée accepte des sous-menus
+				et si on a bien quelque chose dans le li (cas des menus sur Balise SESSION)
+			][(#GET{entree}|et{#TYPE_ENTREE|menus_type_refuser_sous_menu|non})
+				</li>
+			]
+			</BOUCLE_entrees1>
+		</ul>
+	</div>
+	</B_entrees1>
+	<B_entrees2>
+	<div class="col-lg-4">	
+		<ul class="menu-liste menu-items[ (#ENV{class})][(#VAL{_MENUS_EXTRA_CLASS}|defined|oui)[(#VAL{_MENUS_EXTRA_CLASS}|constant)]][ (#CHAMP_SQL{css})]">
+			<BOUCLE_entrees2(MENUS_ENTREES){id_menu}{par rang}{3/3}>#SET{entree,''}
+			[(#MENUS_AFFICHER_ENTREE)#SET{entree,' '}
+				]<BOUCLE_sous_menu2(MENUS){id_menus_entree}>
+					#INCLURE{fond=inclure/menu, env, id_menu, identifiant}
+				</BOUCLE_sous_menu2>
+			[(#REM)
+				On ferme le li si le type d'entrée accepte des sous-menus
+				et si on a bien quelque chose dans le li (cas des menus sur Balise SESSION)
+			][(#GET{entree}|et{#TYPE_ENTREE|menus_type_refuser_sous_menu|non})
+				</li>
+			]
+			</BOUCLE_entrees2>
+		</ul>
+	</div>
+	</B_entrees2>
+  </div>
+</footer>	
+</BOUCLE_menu>

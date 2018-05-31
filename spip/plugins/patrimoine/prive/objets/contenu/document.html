@@ -1,0 +1,17 @@
+<BOUCLE_document(DOCUMENTS){id_document}{statut?}>
+début
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:document:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:document:champ_descriptif_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+[<div class="champ contenu_fichier[ (#FICHIER*|strlen|?{'',vide})]">
+	<label><:document:champ_fichier_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{fichier} fichier">(#FICHIER)</span>
+</div>]
+fin
+
+</BOUCLE_document>

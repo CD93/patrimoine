@@ -1,0 +1,21 @@
+<div class="ariane">
+  [(#OBJET|!={mot}|oui|et{#OBJET|!={groupe_mot}}|oui)[<a href="[(#URL_PAGE{recherche}|parametre_url{restype,#ENV{objet}})]">(#OBJET|ucfirst)</a>]]
+  [(#OBJET|!={groupe_mot}|non)<a href="[(#URL_PAGE{recherche}|parametre_url{restype,mot})]"><:paquet_patrimoine:titre_groupe_mot:></a>]
+  <B_mot_gde_periode> | <BOUCLE_mot_gde_periode(MOTS){id_groupe=3}{id_objet}{objet}{" - "}><a href="#URL_MOT">#TITRE</a></BOUCLE_mot_gde_periode>
+  <B_mot_gd_theme> | <BOUCLE_mot_gd_theme(MOTS){id_groupe=1}{id_objet}{objet}{" - "}><a href="#URL_MOT">#TITRE</a></BOUCLE_mot_gd_theme>
+  <B_mot_label> | <BOUCLE_mot_label(MOTS){id_groupe=6}{id_objet}{objet}{" - "}><a href="#URL_MOT">#TITRE</a></BOUCLE_mot_label>
+  <B_commune> | <BOUCLE_commune(COMMUNES){id_objet}{objet}{si #ENV{objet}|!={commune}}{" - "}><a href="#URL_COMMUNE">#NOMCOMMUNE</a></BOUCLE_commune>
+  <BOUCLE_hierarchie(MOTS){id_mot=#ENV{id_objet}}{si #ENV{objet}|=={mot}}>
+     <a href="[(#ID_GROUPE|generer_url_entite{groupe_mots})]">#INFO_TITRE{groupe_mots,#ID_GROUPE}</a>
+  	<BOUCLE_hierarchie_mot(HIERARCHIE_MOTS){id_mot}>
+  	&gt; <a href="[(#ID_MOT|generer_url_entite{mot})]">#TITRE</a>
+  	</BOUCLE_hierarchie_mot>
+  	&gt; <strong class="on">#TITRE</strong>
+  </BOUCLE_hierarchie>
+  	[(#ENV{id_groupe}|oui)
+      <a href="[(#ID_GROUPE|generer_url_entite{groupe_mots})]">#INFO_TITRE{groupe_mots,#ID_GROUPE}</a>
+  	]
+  	<BOUCLE_hierarchie_mot_new(HIERARCHIE_MOTS){id_parent}{tout}{si #ENV{id_parent}}>
+  	&gt; <a href="[(#ID_MOT|generer_url_entite{mot})]">#TITRE</a>
+  	</BOUCLE_hierarchie_mot_new>
+</div>

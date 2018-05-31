@@ -1,0 +1,68 @@
+    <BOUCLE_image(IMAGES){id_objet=#ID_DOCUMENT}{objet=document}>
+    <h3>Image :</h3>
+
+    [(#NATURESOURCE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_naturesource_label:></div>
+    <div class="valeurchamp #EDIT{naturesource}" >#NATURESOURCE</div>
+    </div>
+    ]
+    [(#TYPOLOGIEPHOTOTYPE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_typologiephototype_label:></div>
+    <div class="valeurchamp #EDIT{typologiephototype}" >#TYPOLOGIEPHOTOTYPE</div>
+    </div>
+    ]
+    [(#DATECREATION|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_datecreation_label:></div>
+    <div class="valeurchamp #EDIT{datecreation}" >#DATECREATION</div>
+    </div>
+    ]
+
+    [(#SERVICEPRODUCTEUR|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_serviceproducteur_label:></div>
+    <div class="valeurchamp #EDIT{serviceproducteur}" >#SERVICEPRODUCTEUR</div>
+    </div>
+    ]
+
+    [(#COTE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_cote_label:></div>
+    <div class="valeurchamp #EDIT{cote}" >#COTE</div>
+    </div>
+    ]
+    [(#DROITSDIFFUSION|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_droitsdiffusion_label:></div>
+    <div class="valeurchamp #EDIT{droitsdiffusion}" >#DROITSDIFFUSION</div>
+    </div>
+    ]
+  
+    [(#CATALOGUE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_catalogue_label:></div>
+    <div class="valeurchamp #EDIT{catalogue}" >#CATALOGUE</div>
+    </div>
+    ]
+    [(#DUREE|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_duree_label:></div>
+    <div class="valeurchamp #EDIT{duree}" >#DUREE</div>
+    </div>
+    ]
+    [(#SON|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_son_label:></div>
+    <div class="valeurchamp #EDIT{son}" >#SON</div>
+    </div>
+    ]
+    [(#LIENINTERNET|oui)
+    <div class="patchamps">
+    <div class="titrechamp"><:docu:champ_lieninternet_label:></div>
+    <div class="valeurchamp #EDIT{lieninternet}" >#LIENINTERNET</div>
+    </div>
+    ]
+
+    </BOUCLE_image>

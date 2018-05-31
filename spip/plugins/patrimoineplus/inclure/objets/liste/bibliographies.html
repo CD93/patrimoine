@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	type,1,
+	datededition,-1,
+	id_bibliographie,1,
+	num titre,1,
+	titredocumenthote,1,
+	auteurs,1,
+	cote,-1
+}})]<B_liste_bibliographies>
+#ANCRE_PAGINATION
+<div class="liste-objets bibliographies">
+<table class="spip liste">
+	[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="type" scope="col">[(#TRI{type,<:bibliographie:champ_type_label:>,ajax})]</th>
+			<th class="titre principale" scope="col">[(#TRI{titre,<:bibliographie:champ_titre_label:>,ajax})]</th>
+			<th class="titredocumenthote" scope="col">[(#TRI{titredocumenthote,<:bibliographie:champ_titredocumenthote_label:>,ajax})]</th>
+			<th class="auteurs" scope="col">[(#TRI{auteurs,<:bibliographie:champ_auteurs_label:>,ajax})]</th>
+			<th class="datededition" scope="col">[(#TRI{datededition,<:bibliographie:champ_datededition_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_bibliographie,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class="cote" scope="col">[(#TRI{cote,<:bibliographie:champ_cote_label:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_mot?}{where?}{recherche?}
+		{tri #ENV{par,#GET{defaut_tri_par,num titre}},#GET{defaut_tri}}
+		{pagination #ENV{pagination,30}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="type">#TYPE</td>
+			<td class="titre principale"><a href="[(#ID_BIBLIOGRAPHIE|generer_url_entite{bibliographie})]" title="<:info_numero_abbreviation|attribut_html:> #ID_BIBLIOGRAPHIE">[(#RANG). ][(#TITRE|sinon{<:info_sans_titre:>})]</a></td>
+			<td class="titredocumenthote">#TITREDOCUMENTHOTE</td>
+			<td class="auteurs">#AUTEURS</td>
+			<td class="datededition secondaire">#DATEDEDITION</td>
+			<td class="id">#ID_BIBLIOGRAPHIE</td>
+			<td class="cote">#COTE</td>
+		</tr>
+	</BOUCLE_liste_bibliographies>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_bibliographies>[
+<div class="liste-objets bibliographies caption-wrap"><strong class="caption">(#ENV*{sinon,<:bibliographie:info_aucun_bibliographie:>})</strong></div>
+]<//B_liste_bibliographies>

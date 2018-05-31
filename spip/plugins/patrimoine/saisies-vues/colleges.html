@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_colleges_selectionnes>
+	<ul>
+	<BOUCLE_colleges_selectionnes(COLLEGES){id_college IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_COLLEGE)</li>
+	</BOUCLE_colleges_selectionnes>
+	</ul>
+	</B_colleges_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_colleges_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_college_selectionne(COLLEGES){id_college=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_COLLEGE)</p>
+	</BOUCLE_college_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_college_selectionne>
+<//B_test_multiple>

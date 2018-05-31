@@ -1,0 +1,239 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_patrimoine,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_patrimoine" value="#ENV{id_patrimoine}" />
+		<div class="editer-groupe">
+ 
+ 
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:patrimoine:champ_titre_label:>})]
+
+			[<div class="editer editer_rubrique[ (#ENV**{erreurs/id_parent}|oui)erreur]">
+					<label for="id_rubrique"><:titre_cadre_interieur_rubrique:></label>[
+					<span class="erreur_message">(#ENV**{erreurs/id_rubrique})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_patrimoine},#ENV{id_rubrique},'patrimoine',#ENV{id_secteur},'',0,form_simple})
+			</div>]
+
+			[(#SAISIE{input, appellation,
+				label=<:patrimoine:champ_appellation_label:>})]
+ 
+			[(#SAISIE{textarea, denomination,
+				label=<:patrimoine:champ_denomination_label:>,
+				rows=4})]
+ 
+			[(#SAISIE{textarea, texte,
+				label=<:patrimoine:champ_texte_label:>,
+				rows=16})]
+ 
+			[(#SAISIE{textarea, dateconstruction,
+				label=<:patrimoine:champ_dateconstruction_label:>,
+				rows=4})]
+ 
+			[(#SAISIE{input, datemodif,
+				label=<:patrimoine:champ_datemodif_label:>,
+				rows=4})]
+ 
+			[(#SAISIE{input, redacteurs,
+				label=<:patrimoine:champ_redacteurs_label:>})]
+ 
+			[(#SAISIE{input, organisme,
+				label=<:patrimoine:champ_organisme_label:>})]
+ 
+			[(#SAISIE{input, typeetude,
+				label=<:patrimoine:champ_typeetude_label:>})]
+ 
+			[(#SAISIE{input, dateredaction,
+				label=<:patrimoine:champ_dateredaction_label:>})]
+ 
+			[(#SAISIE{input, codesite,
+				label=<:patrimoine:champ_codesite_label:>})]
+ 
+			[(#SAISIE{input, anneedecouvenq,
+				label=<:patrimoine:champ_anneedecouvenq_label:>})]
+ 
+			[(#SAISIE{input, inventinforenq,
+				label=<:patrimoine:champ_inventinforenq_label:>})]
+ 
+			[(#SAISIE{input, destsuccactu,
+				label=<:patrimoine:champ_destsuccactu_label:>})]
+ 
+			[(#SAISIE{input, doutedatation,
+				label=<:patrimoine:champ_doutedatation_label:>})]
+ 
+			[(#SAISIE{input, oldid,
+				label=<:patrimoine:champ_oldid_label:>})]
+ 
+			[(#SAISIE{input, source,
+				label=<:patrimoine:champ_source_label:>})]
+ 
+			[(#SAISIE{textarea, descriptif,
+				label=<:patrimoine:champ_descriptif_label:>,
+				rows=8})]
+ 
+			[(#SAISIE{input, codepatriarche,
+				label=<:patrimoine:champ_codepatriarche_label:>})]
+ 
+			[(#SAISIE{input, codemerimee,
+				label=<:patrimoine:champ_codemerimee_label:>})]
+ 
+			[(#SAISIE{input, commune,
+				label=<:patrimoine:champ_commune_label:>})]
+ 
+			[(#SAISIE{input, commune2,
+				label=<:patrimoine:champ_commune2_label:>})]
+ 
+			[(#SAISIE{input, adresse,
+				label=<:patrimoine:champ_adresse_label:>})]
+ 
+			[(#SAISIE{input, etatdecouverte,
+				label=<:patrimoine:champ_etatdecouverte_label:>})]
+ 
+			[(#SAISIE{input, niveauinterpretation,
+				label=<:patrimoine:champ_niveauinterpretation_label:>})]
+ 
+			[(#SAISIE{input, precisionemprise,
+				label=<:patrimoine:champ_precisionemprise_label:>})]
+ 
+			[(#SAISIE{input, precisiondeno,
+				label=<:patrimoine:champ_precisiondeno_label:>})]
+ 
+			[(#SAISIE{input, auteur,
+				label=<:patrimoine:champ_auteur_label:>})]
+ 
+			[(#SAISIE{input, qualifdatation,
+				label=<:patrimoine:champ_qualifdatation_label:>})]
+ 
+			[(#SAISIE{input, datation,
+				label=<:patrimoine:champ_datation_label:>})]
+ 
+			[(#SAISIE{input, sousdossierde,
+				label=<:patrimoine:champ_sousdossierde_label:>})]
+ 
+			[(#SAISIE{input, sousdossiersrattaches,
+				label=<:patrimoine:champ_sousdossiersrattaches_label:>})]
+ 
+			[(#SAISIE{input, maitreouvrage,
+				label=<:patrimoine:champ_maitreouvrage_label:>})]
+ 
+			[(#SAISIE{input, protectionmh,
+				label=<:patrimoine:champ_protectionmh_label:>})]
+ 
+			[(#SAISIE{input, lieuditquartier,
+				label=<:patrimoine:champ_lieuditquartier_label:>})]
+ 
+			[(#SAISIE{input, locprecise,
+				label=<:patrimoine:champ_locprecise_label:>})]
+ 
+			[(#SAISIE{input, versementatlas,
+				label=<:patrimoine:champ_versementatlas_label:>})]
+ 
+			[(#SAISIE{input, versementatlas2,
+				label=<:patrimoine:champ_versementatlas2_label:>})]
+ 
+			[(#SAISIE{input, appreciationloc,
+				label=<:patrimoine:champ_appreciationloc_label:>})]
+ 
+			[(#SAISIE{input, typesite,
+				label=<:patrimoine:champ_typesite_label:>})]
+ 
+			[(#SAISIE{input, naturesite,
+				label=<:patrimoine:champ_naturesite_label:>})]
+ 
+			[(#SAISIE{input, etatactuel,
+				label=<:patrimoine:champ_etatactuel_label:>})]
+ 
+			[(#SAISIE{input, structures,
+				label=<:patrimoine:champ_structures_label:>})]
+ 
+			[(#SAISIE{input, presencemobilier,
+				label=<:patrimoine:champ_presencemobilier_label:>})]
+ 
+			[(#SAISIE{input, contextemobilier,
+				label=<:patrimoine:champ_contextemobilier_label:>})]
+ 
+			[(#SAISIE{input, inventairemobilier,
+				label=<:patrimoine:champ_inventairemobilier_label:>})]
+ 
+			[(#SAISIE{input, chronodebut,
+				label=<:patrimoine:champ_chronodebut_label:>})]
+ 
+			[(#SAISIE{input, chronofin,
+				label=<:patrimoine:champ_chronofin_label:>})]
+ 
+			[(#SAISIE{input, datationinitiale,
+				label=<:patrimoine:champ_datationinitiale_label:>})]
+ 
+			[(#SAISIE{input, datationfinale,
+				label=<:patrimoine:champ_datationfinale_label:>})]
+ 
+			[(#SAISIE{input, qualifdatationin,
+				label=<:patrimoine:champ_qualifdatationin_label:>})]
+ 
+			[(#SAISIE{input, qualifdatationfinale,
+				label=<:patrimoine:champ_qualifdatationfinale_label:>})]
+ 
+			[(#SAISIE{input, attributionculturelle,
+				label=<:patrimoine:champ_attributionculturelle_label:>})]
+ 
+			[(#SAISIE{input, commentairedatation,
+				label=<:patrimoine:champ_commentairedatation_label:>})]
+ 
+			[(#SAISIE{input, partiesconstituantes,
+				label=<:patrimoine:champ_partiesconstituantes_label:>})]
+ 
+			[(#SAISIE{input, dateinit,
+				label=<:patrimoine:champ_dateinit_label:>})]
+ 
+			[(#SAISIE{input, datefin,
+				label=<:patrimoine:champ_datefin_label:>})]
+ 
+			[(#SAISIE{input, interet,
+				label=<:patrimoine:champ_interet_label:>})]
+ 
+			[(#SAISIE{input, zonagesposplu,
+				label=<:patrimoine:champ_zonagesposplu_label:>})]
+ 
+			[(#SAISIE{input, servitudeprotection,
+				label=<:patrimoine:champ_servitudeprotection_label:>})]
+ 
+			[(#SAISIE{input, gestionadm,
+				label=<:patrimoine:champ_gestionadm_label:>})]
+ 
+			[(#SAISIE{input, diagnostic,
+				label=<:patrimoine:champ_diagnostic_label:>})]
+ 
+			[(#SAISIE{input, timecreate,
+				label=<:patrimoine:champ_timecreate_label:>})]
+ 
+			[(#SAISIE{input, codecreateur,
+				label=<:patrimoine:champ_codecreateur_label:>})]
+ 
+			[(#SAISIE{input, codederniermodif,
+				label=<:patrimoine:champ_codederniermodif_label:>})]
+ 
+			[(#SAISIE{input, timemodif,
+				label=<:patrimoine:champ_timemodif_label:>})]
+ 
+			[(#SAISIE{input, infospratiques,
+				label=<:patrimoine:champ_infospratiques_label:>})]
+ 
+			[(#SAISIE{textarea, description,
+				label=<:patrimoine:champ_description_label:>,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+
+			[(#SAISIE{textarea, reference,
+				label=<:patrimoine:champ_reference_label:>,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+				
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

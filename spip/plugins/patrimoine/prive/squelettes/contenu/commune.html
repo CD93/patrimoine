@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,commune,#ID_COMMUNE}|sinon_interdire_acces)]
+<BOUCLE_commune(COMMUNES){id_commune}{statut==.*}{si #ENV{exec}|=={commune}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,commune,#ID_COMMUNE})
+		[(#ID_COMMUNE|afficher_qui_edite{commune}|non)
+			[(#URL_ECRIRE{commune_edit,id_commune=#ID_COMMUNE}|icone_verticale{<:commune:icone_modifier_commune:>,commune,edit,right ajax preload})]
+		]
+		[(#ID_COMMUNE|afficher_qui_edite{commune}|oui)
+			[(#URL_ECRIRE{commune_edit,id_commune=#ID_COMMUNE}|icone_verticale{#ID_COMMUNE|afficher_qui_edite{commune},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOMCOMMUNE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{commune-24.png}|balise_img{commune,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{commune,#ID_COMMUNE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/commune,id=#ID_COMMUNE,id_commune=#ID_COMMUNE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,commune,#ID_COMMUNE})
+	[(#ID_COMMUNE|afficher_qui_edite{commune}|non)
+		[(#URL_ECRIRE{commune_edit,id_commune=#ID_COMMUNE}|icone_verticale{<:commune:icone_modifier_commune:>,commune,edit,right ajax preload})]
+	]
+	[(#ID_COMMUNE|afficher_qui_edite{commune}|oui)
+		[(#URL_ECRIRE{commune_edit,id_commune=#ID_COMMUNE}|icone_verticale{#ID_COMMUNE|afficher_qui_edite{commune},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+
+<div class="liste">
+<BOUCLE_objetslies(spip_communes_liens){id_commune}{0,1}><h3><:commune:titre_objets_lies_commune:></h3></BOUCLE_objetslies>
+
+<BOUCLE_autresobjets(spip_communes_liens){id_commune}{objet !IN article,rubrique}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_commune]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_commune}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_commune,ajax,env} />
+</BOUCLE_autresobjets>
+</div>
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commune,id,#ID_COMMUNE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/commune-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/commune-enfants,id_commune,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,commune,id_commune,#ID_COMMUNE,objet,commune,id_objet,#ID_COMMUNE},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_commune>
+[(#ENV**{exec}|=={commune_edit}|?{#INCLURE{fond=prive/squelettes/contenu/commune_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_commune>

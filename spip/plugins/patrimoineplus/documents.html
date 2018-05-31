@@ -1,0 +1,126 @@
+<BOUCLE_patrimoine(PATRIMOINES){id_patrimoine=#ID_OBJET}{si #ENV{objet}|=={patrimoine}}>
+<!DOCTYPE html>
+<html lang="#LANG">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#TITRE|textebrut)][ - Liste de Documents - (#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="[(#INTRODUCTION|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/patrimoine}{env}|couper{300}|textebrut})]">
+		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+<INCLURE{fond=inc/entete}{env} />
+	<body class="objet">
+		<div class="container">
+			<INCLURE{fond=inc/menuhaut}{env} />
+			<main id="main">
+				<section class="parun">
+					<div class="diaporama">
+						[(#LOGO_PATRIMOINE|image_proportions{17,6,"focus"}|image_responsive|inserer_attribut{alt,#TITRE})]
+					</div>
+					<INCLURE{fond=inclure/ariane}{env}{objet=patrimoine}{id_objet=#ID_DOCUMENT}/>
+				</section>
+				<article>
+					<header>
+						<h1><a href="#URL_PATRIMOINE" title="retourner au patrimoine">#TITRE</a></h1>
+						<p class="info-publi"><abbr class="published" title="#DATE">[(#DATE|affdate)]</abbr>
+							[<span class="sep">, </span><span class="auteurs">par (#LESAUTEURS)</span>]
+						</p>
+					</header>
+					<section class="contenu">
+						<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=patrimoine}{id_objet=#ID_PATRIMOINE}{id_unique=''}{ajax} />
+					</section>
+					<section class="bloc">
+						<INCLURE{fond=inclure/blocs}{objet=patrimoine}{id_objet=#ID_PATRIMOINE}{env}{ajax} />
+					</section>
+				</article>
+			</main>
+			<INCLURE{fond=inc/footer}{env} />
+		</div>
+	</body>
+</html>
+</BOUCLE_patrimoine>
+<BOUCLE_commune(COMMUNES){id_commune=#ID_OBJET}{si #ENV{objet}|=={commune}}>
+<!DOCTYPE html>
+<html lang="#LANG">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#NOMCOMMUNE|textebrut)][ - Liste de Documents - (#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="[(#INTRODUCTION|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/commune}{env}|couper{300}|textebrut})]">
+		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+<INCLURE{fond=inc/entete}{env} />
+	<body class="objet">
+		<div class="container">
+			<INCLURE{fond=inc/menuhaut}{env} />
+			<main id="main">
+				<section class="parun">
+					<div class="diaporama">
+						[(#LOGO_COMMUNE|image_proportions{17,6,"focus"}|image_responsive|inserer_attribut{alt,#NOMCOMMUNE})]
+					</div>
+					<INCLURE{fond=inclure/ariane}{env}{objet=commune} />
+				</section>
+				<article>
+					<header>
+						<h1>#NOMCOMMUNE</h1>
+						<p class="info-publi"><abbr class="published" title="#DATE">[(#DATE|affdate)]</abbr>
+							[<span class="sep">, </span><span class="auteurs">par (#LESAUTEURS)</span>]
+						</p>
+					</header>
+					<section class="contenu">
+						<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=commune}{id_objet=#ID_COMMUNE}{id_unique=''}{ajax=documents} />
+					</section>
+					<section class="bloc">
+						<INCLURE{fond=inclure/blocs}{objet=commune}{id_objet=#ID_COMMUNE}{env}{ajax} />
+					</section>
+				</article>
+			</main>
+			<INCLURE{fond=inc/footer}{env} />
+		</div>
+	</body>
+</html>
+</BOUCLE_commune>
+<BOUCLE_bibliographie(BIBLIOGRAPHIES){id_bibliographie=#ID_OBJET}{si #ENV{objet}|=={bibliographie}}>
+<!DOCTYPE html>
+<html lang="#LANG">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#TITRE|textebrut)][ - Liste de Documents - (#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="[(#INTRODUCTION|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/patrimoine}{env}|couper{300}|textebrut})]">
+		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+<INCLURE{fond=inc/entete}{env} />
+	<body class="objet">
+		<div class="container">
+			<INCLURE{fond=inc/menuhaut}{env} />
+			<main id="main">
+				<section class="parun">
+					<div class="diaporama">
+						[(#LOGO_BIBLIOGRAPHIE|image_proportions{17,6,"focus"}|image_responsive|inserer_attribut{alt,#TITRE})]
+					</div>
+					<INCLURE{fond=inclure/ariane}{env}{objet=bibliographie}{id_objet=#ID_DOCUMENT}/>
+				</section>
+				<article>
+					<header>
+						<h1><a href="#URL_BIBLIOGRAPHIE" title="retourner à la bibliographie">#TITRE</a></h1>
+						<p class="info-publi"><abbr class="published" title="#DATE">[(#DATE|affdate)]</abbr>
+							[<span class="sep">, </span><span class="auteurs">par (#LESAUTEURS)</span>]
+						</p>
+					</header>
+					<section class="contenu">
+						<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=bibliographie}{id_objet=#ID_BIBLIOGRAPHIE}{id_unique=''}{ajax} />
+					</section>
+					<section class="bloc">
+						<INCLURE{fond=inclure/blocs}{objet=bibliographie}{id_objet=#ID_BIBLIOGRAPHIE}{env}{ajax} />
+					</section>
+				</article>
+			</main>
+			<INCLURE{fond=inc/footer}{env} />
+		</div>
+	</body>
+</html>
+</BOUCLE_bibliographie>

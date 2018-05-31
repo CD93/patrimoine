@@ -1,0 +1,54 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+[(#REM) pour permettre d'inclure ce squelette plusieurs fois dans une page, fournir un parametre id_unique dans l'appel]
+
+#SET{nbdocs,0}
+<div id="portfolios#ENV{id_unique}" class="portfolios">
+[(#REM) D'abord les images illustration]
+<B_illustrations>
+<h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
+<div class="liste_items documents ordonner_rang_lien" id="illustrations#ENV{id_unique}"  data-cookie-affichage="illustrations" data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
+[<p class="pagination">(#PAGINATION{prive})</p>]
+<div class="sortable">
+<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){media=image}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_public_desc,id_document,id_objet,objet}
+</BOUCLE_illustrations>
+</div>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+</B_illustrations>
+
+[(#REM) puis les documents]
+<B_documents>
+<h3><:medias:info_documents:></h3>
+<div class="liste_items documents ordonner_rang_lien" id="documents#ENV{id_unique}" data-cookie-affichage="documents" data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
+[<p class="pagination">(#PAGINATION{prive})</p>]
+<div class="sortable">
+<BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=image}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_public_desc,id_document,id_objet,objet}
+</BOUCLE_documents>
+</div>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+</B_documents>
+
+<script type="text/javascript">/*<![CDATA[*/
+/* Plugin multifile et gestion de la modale */
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+
+/* Sur la page d'une rubrique, recharger la boîte d'info en cas de rechargement ajax */
+[(#OBJET|=={patrimoine}|et{#CONST{_AJAX}}|et{#GET{nbdocs}|=={1}}|oui)
+if (window.jQuery) jQuery('#navigation .box.info').ajaxReload();]
+
+/* Gestion des différents modes d'affichages, du tri des documents, et des rechargements ajax */
+[(#INCLURE{fond=javascript/gestion_listes_documents.js}|compacte{js})]
+/*]]>*/</script>
+</div>

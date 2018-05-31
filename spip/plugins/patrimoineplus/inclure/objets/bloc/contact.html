@@ -1,0 +1,54 @@
+<B_acteurs>
+<div class="bloc contact">
+	<div class="titrebloc"><:paquet_patrimoine:auteurs:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_acteurs(CONTACTS)
+		{objet?}{id_objet?}
+		{pagination #ENV{nb,5}}
+		{SI #ENV{objet}|!=={contact}}{SI #ENV{objet}|!=={auteur}}>
+		<li class="valeurchamp">
+			<a href="#URL_CONTACT">#PRENOM #NOM</a>
+			[<span class="valeurchamp">(#ROLE)</span>]
+		</li>
+		</BOUCLE_acteurs>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_acteurs>
+<B_acteursmot>
+<div class="bloc contact">
+	<div class="titrebloc"><:paquet_patrimoine:contacts:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_acteursmot(CONTACTS)
+		{mots_liens.id_mot=#ID_OBJET}
+		{pagination #ENV{nb,5}}
+		{SI #ENV{objet}|=={mot}}>
+		<li class="valeurchamp">
+			<a href="#URL_CONTACT">#PRENOM #NOM</a>
+			[<span class="valeurchamp">(#ROLE)</span>]
+		</li>
+	</BOUCLE_acteursmot>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_acteursmot>
+<B_acteursdoc>
+<div class="bloc contact">
+	<div class="titrebloc"><:paquet_patrimoine:contacts:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_acteursdoc(CONTACTS)
+		{documents_liens.id_document=#ID_OBJET}
+		{pagination #ENV{nb,5}}
+		{SI #ENV{objet}|=={document}}>
+		<li class="valeurchamp">
+			<a href="#URL_CONTACT">#PRENOM #NOM</a>
+			[<span class="valeurchamp">(#ROLE)</span>]
+		</li>
+	</BOUCLE_acteursdoc>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_acteursdoc>

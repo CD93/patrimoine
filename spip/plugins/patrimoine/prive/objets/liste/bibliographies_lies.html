@@ -1,0 +1,65 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+	auteurs,1,
+	date_publication,-1,
+	id_bibliographie,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+<B_liste_bibliographies>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutpatl,#EVAL{_request("debutpatl");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies bibliographies">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{bibliographie:info_1_bibliographie,bibliographie:info_nb_bibliographies}})</strong></caption>]
+	<thead>
+		#SET{p,''}
+		<BOUCLE_lettre(BIBLIOGRAPHIES){tout}{id_bibliographie IN #GET{selection}}{where?}{statut?}{id_mot?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_bibliographie==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
+		[(#SET{p,#GET{p}|concat{
+		#SELF|parametre_url{debutpatl,@#ID_BIBLIOGRAPHIE}|ancre_url{paginationpatl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#SET{p,
+			#GET{p}|concat{
+				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
+			}
+		})]</B_lettre>
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
+
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{multi titre,<:bibliographie:champ_titre_label:>,ajax})]</th>
+			<th class="auteurs" scope="col">[(#TRI{auteurs,<:bibliographie:champ_auteurs_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_bibliographies(BIBLIOGRAPHIES){id_bibliographie IN #GET{selection}}{statut?}{id_mot?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} patl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_BIBLIOGRAPHIE|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{bibliographie})]</td>
+			<td class="titre">[(#LOGO_BIBLIOGRAPHIE|image_reduire{20,20})]<a href="[(#ID_BIBLIOGRAPHIE|generer_url_entite{bibliographie})]">#TITRE</a></td>
+			<td class="auteurs">#AUTEURS</td>
+			<td class="action">
+				[(#ENV{editable}|oui)
+					<button type="submit" class="button link delete" name="supprimer_lien\[bibliographie-#ID_BIBLIOGRAPHIE-#OBJET-#ID_OBJET\]" value="X"><:bibliographie:retirer_lien_bibliographie:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_bibliographies>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[bibliographie-*-#OBJET-#ID_OBJET\]" value="X"><:bibliographie:retirer_tous_liens_bibliographies:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_bibliographies>
+<div class="liste-objets liste-objets-lies BIBLIOGRAPHIES caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:bibliographie:info_aucun_bibliographie:>})]</strong>
+</div>
+<//B_liste_bibliographies>

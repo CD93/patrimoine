@@ -1,0 +1,126 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_image,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_image" value="#ENV{id_image}" />
+		<div class="editer-groupe">
+ 
+			[(#SAISIE{input, titre,
+				label=<:image:champ_titre_label:>})]
+ 
+			[(#SAISIE{input, idimage,
+				label=<:image:champ_idimage_label:>})]
+ 
+			[(#SAISIE{input, idorigine,
+				label=<:image:champ_idorigine_label:>})]
+ 
+			[(#SAISIE{input, datesaisie,
+				label=<:image:champ_datesaisie_label:>})]
+ 
+			[(#SAISIE{input, naturesource,
+				label=<:image:champ_naturesource_label:>})]
+ 
+			[(#SAISIE{input, format,
+				label=<:image:champ_format_label:>})]
+ 
+			[(#SAISIE{input, typologiephototype,
+				label=<:image:champ_typologiephototype_label:>})]
+ 
+			[(#SAISIE{input, datecreation,
+				label=<:image:champ_datecreation_label:>})]
+ 
+			[(#SAISIE{input, auteurimg,
+				label=<:image:champ_auteurimg_label:>})]
+ 
+			[(#SAISIE{input, copyright,
+				label=<:image:champ_copyright_label:>})]
+ 
+			[(#SAISIE{textarea, legende,
+				label=<:image:champ_legende_label:>,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+ 
+			[(#SAISIE{input, adressageecran,
+				label=<:image:champ_adressageecran_label:>})]
+ 
+			[(#SAISIE{input, numcd,
+				label=<:image:champ_numcd_label:>})]
+ 
+			[(#SAISIE{input, numrangcd,
+				label=<:image:champ_numrangcd_label:>})]
+ 
+			[(#SAISIE{input, serviceproducteur,
+				label=<:image:champ_serviceproducteur_label:>})]
+ 
+			[(#SAISIE{input, idsite,
+				label=<:image:champ_idsite_label:>})]
+ 
+			[(#SAISIE{input, auteurdocreproduit,
+				label=<:image:champ_auteurdocreproduit_label:>})]
+ 
+			[(#SAISIE{input, precisionsdocreproduit,
+				label=<:image:champ_precisionsdocreproduit_label:>})]
+ 
+			[(#SAISIE{input, localisation,
+				label=<:image:champ_localisation_label:>})]
+ 
+			[(#SAISIE{input, cote,
+				label=<:image:champ_cote_label:>})]
+ 
+			[(#SAISIE{input, droitsdiffusion,
+				label=<:image:champ_droitsdiffusion_label:>})]
+ 
+			[(#SAISIE{input, codesite,
+				label=<:image:champ_codesite_label:>})]
+ 
+			[(#SAISIE{input, refbiblio,
+				label=<:image:champ_refbiblio_label:>})]
+ 
+			[(#SAISIE{input, catalogue,
+				label=<:image:champ_catalogue_label:>})]
+ 
+			[(#SAISIE{input, adressagelocal,
+				label=<:image:champ_adressagelocal_label:>})]
+ 
+			[(#SAISIE{input, fichesite,
+				label=<:image:champ_fichesite_label:>})]
+ 
+			[(#SAISIE{input, imgcomp,
+				label=<:image:champ_imgcomp_label:>})]
+ 
+			[(#SAISIE{input, numordre,
+				label=<:image:champ_numordre_label:>})]
+ 
+			[(#SAISIE{input, versementatlas,
+				label=<:image:champ_versementatlas_label:>})]
+ 
+			[(#SAISIE{input, duree,
+				label=<:image:champ_duree_label:>})]
+ 
+			[(#SAISIE{input, son,
+				label=<:image:champ_son_label:>})]
+ 
+			[(#SAISIE{input, lieninternet,
+				label=<:image:champ_lieninternet_label:>})]
+ 
+			[(#SAISIE{input, timecreate,
+				label=<:image:champ_timecreate_label:>})]
+ 
+			[(#SAISIE{input, codecreateur,
+				label=<:image:champ_codecreateur_label:>})]
+ 
+			[(#SAISIE{input, codederniermodif,
+				label=<:image:champ_codederniermodif_label:>})]
+ 
+			[(#SAISIE{input, timemodif,
+				label=<:image:champ_timemodif_label:>})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

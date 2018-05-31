@@ -1,0 +1,24 @@
+<B_patbib>
+<div class="bloc patrimoine">
+	<div class="titrebloc"><:patrimoine:texte_notices_liees:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_patbib(PATRIMOINES patrimoines_liens){patrimoines_liens.id_patrimoine=#ID_OBJET}{objet=patrimoine}{pagination 5}>
+		<li class="valeurchamp"><a href="#URL_PATRIMOINE{#ID_OBJET}">#INFO_TITRE{patrimoine,#ID_OBJET}</a></li>
+	</BOUCLE_patbib>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_patbib>
+<B_patsouslie>
+<div class="bloc patrimoine">
+	<div class="titrebloc"><:patrimoine:texte_notices_liees:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_patsouslie(PATRIMOINES patrimoines_liens){id_objet=#ID_OBJET}{objet=patrimoine}{pagination 5}>
+		<li class="valeurchamp"><a href="#URL_PATRIMOINE{#ID_PATRIMOINE}">#INFO_TITRE{patrimoine,#ID_PATRIMOINE}</a></li>
+	</BOUCLE_patsouslie>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_patsouslie>

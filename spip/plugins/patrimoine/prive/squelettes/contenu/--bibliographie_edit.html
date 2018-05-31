@@ -1,0 +1,31 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,bibliographie,#ID_BIBLIOGRAPHIE}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{bibliographies}}
+	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creerbibliographiedans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+]
+
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{bibliographie},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+	[(#ID_BIBLIOGRAPHIE|oui)
+	[(#GET{redirect}|icone_verticale{Retour,bibliographie,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_BIBLIOGRAPHIE|?{<:bibliographie:icone_modifier_bibliographie:>,<:bibliographie:icone_creer_bibliographie:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{bibliographie,#ID_BIBLIOGRAPHIE}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_BIBLIOGRAPHIE|generer_url_entite{bibliographie}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_BIBLIOGRAPHIE{#ENV{id_bibliographie,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

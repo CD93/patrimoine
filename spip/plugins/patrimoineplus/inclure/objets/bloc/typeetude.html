@@ -1,0 +1,17 @@
+<B_typetude>
+<div class="bloc typeetude">
+	<div class="titrebloc">#INFO_TITRE{groupes_mots,11}</div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<span class="titrechamp"></span>
+		<BOUCLE_typetude(MOTS){id_groupe=11}
+		{objet?}{id_objet?}
+		{pagination #ENV{nb,5}}>
+		<li class="valeurchamp">
+			<a href="#URL_MOT">#TITRE</a>
+		</li>
+		</BOUCLE_typetude>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_typetude>

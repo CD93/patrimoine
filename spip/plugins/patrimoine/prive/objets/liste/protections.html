@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	nomusage,1,
+	datemiseenplace,-1,
+	id_protection,1,
+	points,-1
+}})]<B_liste_protections>
+#ANCRE_PAGINATION
+<div class="liste-objets protections">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class="nomusage" scope="col">[(#TRI{nomusage,<:protection:champ_nomusage_label:>,ajax})]</th>
+			<th class="datemiseenplace" scope="col">[(#TRI{datemiseenplace,<:protection:champ_datemiseenplace_label:>,ajax})]</th>
+			<th class="id" scope="col">[(#TRI{id_protection,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_protections(PROTECTIONS){id_rubrique?}{id_secteur?}{mots_liens.id_mot?}{communes_liens.id_commune?}{auteurs_liens.id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nomusage},#GET{defaut_tri}}{par nomusage}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{protection-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{protection,#ID_PROTECTION,#ID_RUBRIQUE})]</td>
+			<td class="nomusage principale">[(#LOGO_PROTECTION|image_reduire{20,26})]<a href="[(#ID_PROTECTION|generer_url_entite{protection})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROTECTION">[(#RANG). ]#NOMUSAGE</a></td>
+			<td class="datemiseenplace secondaire">[(#DATEMISEENPLACE)]</td>
+			<td class="id">[(#AUTORISER{modifier,protection,#ID_PROTECTION}|?{
+				<a href="[(#URL_ECRIRE{protection_edit,id_protection=#ID_PROTECTION})]">#ID_PROTECTION</a>,
+				#ID_PROTECTION
+			})]</td>
+		</tr>
+	</BOUCLE_liste_protections>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_protections>[
+<div class="liste-objets protections caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_protections>

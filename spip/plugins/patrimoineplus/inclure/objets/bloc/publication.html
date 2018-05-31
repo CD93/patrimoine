@@ -1,0 +1,49 @@
+<B_publi>
+	<div class="bloc publication">
+	<div class="titrebloc">#GRAND_TOTAL <:bibliographie:titre_publication_bibliographies:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_publi(BIBLIOGRAPHIES)
+	{auteurs_liens.id_auteur?}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{mots_liens.id_mot?}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}{objet?}{id_objet?}
+	{mots_liens.id_mot=5173}
+	{pagination #ENV{nb,5}}>
+		<li class="valeurchamp">
+			<a href="#URL_BIBLIOGRAPHIE">#TITRE, #AUTEURS (#DATEDEDITION)
+			<BOUCLE_bibliorole(bibliographies_liens){id_bibliographie}>
+			[<span class="minus">((#ROLE))</span>]
+			</BOUCLE_bibliorole>
+			</a>
+		</li>
+	</BOUCLE_publi>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_publi>
+
+#SET{listebiblio,#ARRAY}
+<BOUCLE_publimot2(BIBLIOGRAPHIES)
+{auteurs_liens.id_auteur?}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{mots_liens.id_mot=#ID_OBJET}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}{mots_liens.objet=bibliographie}{SI #OBJET|=={mot}}>
+#SET{listebiblio,#GET{listebiblio}|push{#ID_BIBLIOGRAPHIE}}
+</BOUCLE_publimot2>
+<BOUCLE_publimot3(BIBLIOGRAPHIES)
+{auteurs_liens.id_auteur=#ID_OBJET}{bibliographies_liens.id_bibliographie?}{communes_liens.id_commune?}{contacts_liens.id_contact?}{definitions_liens.id_definition?}{documents_liens.id_document?}{organisations_liens.id_organisation?}{patrimoines_liens.id_patrimoine?}{protections_liens.id_protection?}{mots_liens.objet=bibliographie}{SI #OBJET|=={auteur}}>
+#SET{listebiblio,#GET{listebiblio}|push{#ID_BIBLIOGRAPHIE}}
+</BOUCLE_publimot3>
+<B_publimot>
+	<div class="bloc publicationmot">
+	<div class="titrebloc">#GRAND_TOTAL <:bibliographie:titre_publication_bibliographies:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_publimot(BIBLIOGRAPHIES){mots_liens.objet=bibliographie}{mots_liens.id_objet IN #GET{listebiblio}}{mots_liens.id_mot=5173}{pagination #ENV{nb,5}}>
+		<li class="valeurchamp">
+			<a href="#URL_BIBLIOGRAPHIE">#TITRE, #AUTEURS (#DATEDEDITION)
+			<BOUCLE_bibliorolemot(bibliographies_liens){id_bibliographie}>
+			[<span class="minus">((#_publimot:ROLE))</span>]
+		</BOUCLE_bibliorolemot>
+			</a>
+		</li>
+	</BOUCLE_publimot>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_publimot>

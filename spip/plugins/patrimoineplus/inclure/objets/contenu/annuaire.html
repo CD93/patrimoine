@@ -1,0 +1,27 @@
+<BOUCLE_annuaire(ANNUAIRES){id_annuaire}>
+<div class="row">
+  <div class="col-md-12">
+    <div class="logo">#LOGO_ANNUAIRE</div>
+    <div class="break"></div>
+    <B_annuaire>
+    <div class="bloc-annuaire">
+    	<h4 class="spip">Informations</h4>
+    	[(#IDENTIFIANT|oui)
+    	<div class="patchamps">
+    		<div class="titrechamp"><:contacts:annuaire_champ_identifiant_label:></div>
+    		<div class="valeurchamp #EDIT{identifiant}">#IDENTIFIANT</div>
+    	</div>
+    	]
+    	[(#DESCRIPTIF|oui)
+    	<div class="patchamps">
+    		<div class="titrechamp"><:contacts:annuaire_champ_descriptif_label:></div>
+    		<div class="valeurchamp #EDIT{descriptif}">#DESCRIPTIF</div>
+    	</div>
+    	]
+    </div>
+    </B_annuaire>
+    <div class="break"></div>
+    <INCLURE{fond=inclure/bouton-partage}{env} />
+  </div>
+</div>
+</BOUCLE_annuaire>

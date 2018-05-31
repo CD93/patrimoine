@@ -1,0 +1,87 @@
+#SET{objet,#ENV{objet}}
+<B_protection>
+<div class="bloc protection">
+	<div class="titrebloc"><:protection:info_protections_objet:></div>
+	<BOUCLE_protection(PROTECTIONS){si (#GET{objet}|!={commune})}{id_objet?}{objet?}>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_nomusage_label:> :</span>
+		<span class="valeurchamp">#NOMUSAGE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_mode_label:> :</span>
+		<span class="valeurchamp">#MODE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_datemiseenplace_label:> :</span>
+		<span class="valeurchamp">#DATEMISEENPLACE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_objet_label:> :</span>
+		<span class="valeurchamp">#PROTOBJET</span>
+	</div>
+	[(#INCLURE{fond=modeles/carte_gis_pat,id_carte_gis=#ID_PROTECTION,autocenterandzoom=oui,objet=protection,id_objet=#ID_PROTECTION,height=300px})]
+
+	<div class="patchamps">
+		<a href="#URL_PROTECTION"><:protection:texte_lien_notice:></a>
+	</div>
+	</BOUCLE_protection>
+</div>
+</B_protection>
+
+<B_protectionmot>
+<div class="bloc protectionmot">
+	<div class="titrebloc"><:protection:info_protections_objet:></div>
+	<BOUCLE_protectionmot(PROTECTIONS mots_liens){si (#GET{objet}|!={commune})}{mots_liens.id_mot=#ENV{id_objet}}{mots_liens.objet=protection}>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_nomusage_label:> :</span>
+		<span class="valeurchamp">#NOMUSAGE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_mode_label:> :</span>
+		<span class="valeurchamp">#MODE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_datemiseenplace_label:> :</span>
+		<span class="valeurchamp">#DATEMISEENPLACE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_objet_label:> :</span>
+		<span class="valeurchamp">#PROTOBJET</span>
+	</div>
+	[(#INCLURE{fond=modeles/carte_gis_pat,id_carte_gis=#ID_PROTECTION,autocenterandzoom=oui,objet=protection,id_objet=#ID_PROTECTION,height=300px})]
+
+	<div class="patchamps">
+		<a href="#URL_PROTECTION"><:protection:texte_lien_notice:></a>
+	</div>
+</BOUCLE_protectionmot>
+</div>
+</B_protectionmot>
+
+<B_protectiondoc>
+<div class="bloc protectionmot">
+	<div class="titrebloc"><:protection:info_protections_objet:></div>
+	<BOUCLE_protectiondoc(PROTECTIONS documents_liens){si (#ENV{objet}|=={document})}{documents_liens.id_document=#ENV{id_objet}}>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_nomusage_label:> :</span>
+		<span class="valeurchamp">#NOMUSAGE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_mode_label:> :</span>
+		<span class="valeurchamp">#MODE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_datemiseenplace_label:> :</span>
+		<span class="valeurchamp">#DATEMISEENPLACE</span>
+	</div>
+	<div class="patchamps">
+		<span class="titrechamp"><:protection:champ_objet_label:> :</span>
+		<span class="valeurchamp">#PROTOBJET</span>
+	</div>
+	[(#INCLURE{fond=modeles/carte_gis_pat,id_carte_gis=#ID_PROTECTION,autocenterandzoom=oui,objet=protection,id_objet=#ID_PROTECTION,height=300px})]
+
+	<div class="patchamps">
+		<a href="#URL_PROTECTION"><:protection:texte_lien_notice:></a>
+	</div>
+</BOUCLE_protectiondoc>
+</div>
+</B_protectiondoc>

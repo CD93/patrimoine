@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="#LANG">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#RECHERCHE|?{#RECHERCHE - Recherche,Liste des objets patrimoniaux})][ - (#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="<:rechercher:recherche_description:>">
+		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+		<INCLURE{fond=inc/entete}{env} />
+	<body class="recherche">
+		<div class="container">
+			<INCLURE{fond=inc/menuhaut, env} />
+			<main id="main">
+				<article>
+					<INCLURE{fond=inclure/inc-recherche, env, ajax} />
+				</article>
+			</main>
+      <INCLURE{fond=inc/footer}{env} />
+    </div>
+  </body>
+</html>

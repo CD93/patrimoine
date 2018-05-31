@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	num nomusage,1,
+	codeprotection,1,
+	mode,1,
+	etat,1,
+	datemiseenplace,1,
+}})]
+<B_liste_protections>
+#ANCRE_PAGINATION
+<div class="liste-objets protections">
+<table class="spip liste">
+	[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{nomusage,#GRAND_TOTAL|singulier_ou_pluriel{protection:info_1_protection,protection:info_nb_protections}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="nomusage principale" scope="col">[(#TRI{nomusage,<:protection:champ_nomusage_label:>,ajax})]</th>
+			<th class="codeprotection" scope="col">[(#TRI{codeprotection,<:protection:champ_codeprotection_label:>,ajax})]</th>
+			<th class="mode" scope="col">[(#TRI{mode,<:protection:champ_mode_label:>,ajax})]</th>
+			<th class="etat" scope="col">[(#TRI{etat,<:protection:champ_etat_label:>,ajax})]</th>
+			<th class="datemiseenplace" scope="col">[(#TRI{datemiseenplace,<:protection:champ_datemiseenplace_label:>,ajax})]</th>
+			<th class="titre" scope="col"><:protection:champ_titre_patrimoine_label:></th>
+			<th class="nomcommune" scope="col"><:commune:champ_nomcommune_label:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_liste_protections(PROTECTIONS){recherche?}
+		    {tri #ENV{par,#GET{defaut_tri_par,num nomusage}},#GET{defaut_tri}}
+				{pagination #ENV{pagination,30}}>
+			<tr>
+				<td><a href="#URL_PROTECTION">[(#RANG). ]#NOMUSAGE</a></td>
+				<td>#CODEPROTECTION</td>
+				<td>#MODE</td>
+				<td>#ETAT</td>
+				<td class="date">[(#DATEMISEENPLACE)]</td>
+				<td><BOUCLE_pat1(PATRIMOINES){protections_liens.id_protection}{" / "}><a href="#URL_PATRIMOINE" title="voir la fiche patrimoine">#TITRE</a></BOUCLE_pat1></td>
+				<td><BOUCLE_comm1(COMMUNES){id_protection}{" / "}><a href="#URL_COMMUNE">#NOMCOMMUNE</a></BOUCLE_comm1></td>
+			</tr>
+		</BOUCLE_liste_protections>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_protections>[
+<div class="liste-objets protections caption-wrap"><strong class="caption">(#ENV*{sinon,<:protection:info_aucun_protection:>})</strong></div>
+]<//B_liste_protections>

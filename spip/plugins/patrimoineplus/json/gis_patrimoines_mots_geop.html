@@ -1,0 +1,25 @@
+#CACHE{86400}
+<BOUCLE_gis(PATRIMOINES){gis}{id_gis ?}{spip_mots_liens.id_mot=#ENV{id_mot} ?}{0, #ENV{limit,5000}}{","}>#SET{idpat,#ID_PATRIMOINE}#SET{gdethema,""}<BOUCLE_theme(MOTS){id_groupe=1}{id_patrimoine=#GET{idpat}}{0,1}>#SET{gdethema,#TITRE**}</BOUCLE_theme>#SET{gdeperio,""}<BOUCLE_periode(MOTS){id_groupe=3}{id_patrimoine=#GET{idpat}}{0,1}>#SET{gdeperio,#TITRE**}</BOUCLE_periode>#SET{label20,""}<BOUCLE_label20(MOTS){id_mot=22}{id_patrimoine=#GET{idpat}}>#SET{label20,"true"}</BOUCLE_label20>#SET{cartearcheo,""}<BOUCLE_cartearcheo(MOTS){id_mot=5150}{id_patrimoine=#GET{idpat}}>#SET{cartearcheo,"true"}</BOUCLE_cartearcheo>#SET{etudeplu,""}<BOUCLE_etudeplu(MOTS){id_mot=5151}{id_patrimoine=#GET{idpat}}>#SET{etudeplu,"true"}</BOUCLE_etudeplu>#SET{etudethema,""}<BOUCLE_etudethema(MOTS){id_mot=5152}{id_patrimoine=#GET{idpat}}>#SET{etudethema,"true"}</BOUCLE_etudethema>#SET{etudemono,""}<BOUCLE_etudemono(MOTS){id_mot=5154}{id_patrimoine=#GET{idpat}}>#SET{etudemono,"true"}</BOUCLE_etudemono>#SET{commune,""}<BOUCLE_commune(COMMUNES){id_patrimoine=#GET{idpat}}{0,1}>#SET{commune,#NOMCOMMUNE**}</BOUCLE_commune>#SET{adresse,""}<BOUCLE_adresse(GIS){id_patrimoine=#GET{idpat}}{0,1}>#SET{adresse,#ADRESSE**}</BOUCLE_adresse>
+{"type": "Feature",
+["geometry": (#GEOMETRY|wkt_to_json|sinon{{"type": "Point", "coordinates": \[#LON, #LAT\]}}),]
+"id":"#ID_GIS",
+"properties": {["styles": (#GEOMETRY_STYLES|geometry_styles_to_json),]
+	"title":[(#VAL{<a href='[(#URL_PATRIMOINE|url_absolue)]'>[(#TITRE*|extraire_multi|supprimer_numero|sinon{----})]</a><br/>}|json_encode)],
+	"description":[(#CODESITE*|json_encode)][(#SET{logo_doc,''})][(#LOGO_GIS|gis_icon_properties)][,	
+	"id_patrimoine":(#ID_PATRIMOINE|json_encode)][,
+	"titre":(#TITRE|json_encode)][,
+	"url":(#URL_PATRIMOINE|url_absolue|json_encode)][,
+	"image":(#LOGO_PATRIMOINE|oui)[(#CHEMIN{IMG/#LOGO_PATRIMOINE**}|url_absolue|json_encode)]][,
+	"codesite":(#CODESITE|json_encode)][,
+	"adresse":(#_adresse:ADRESSE|json_encode)][,
+	"commune":(#GET{commune}|json_encode)][,
+	"appellation":(#APPELLATION|json_encode)][,
+	"gdethema":(#GET{gdethema}|json_encode)][,
+	"gdeperio":(#GET{gdeperio}|json_encode)][,
+	"label20":(#GET{label20}|json_encode)][,
+	"cartearcheo":(#GET{cartearcheo}|json_encode)][,
+	"etudeplu":(#GET{etudeplu}|json_encode)][,
+	"etudethema":(#GET{etudethema}|json_encode)][,
+	"etudemono":(#GET{etudemono}|json_encode)][,
+	"descriptif":(#DESCRIPTIF*|json_encode)]
+}}</BOUCLE_gis>

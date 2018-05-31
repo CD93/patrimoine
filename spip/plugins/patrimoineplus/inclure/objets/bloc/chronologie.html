@@ -1,0 +1,16 @@
+<B_chronologie>
+<div class="bloc chronologie">
+	<div class="titrebloc">#INFO_TITRE{groupes_mots,8}</div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+		<BOUCLE_chronologie(MOTS){id_groupe=8}
+		{objet?}{id_objet?}
+		{pagination #ENV{nb,5}}{si #ENV{objet}|!={mot}}>
+		<li class="valeurchamp">
+			<a href="#URL_MOT">[(#TITRE)]</a>
+		</li>
+		</BOUCLE_chronologie>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_chronologie>

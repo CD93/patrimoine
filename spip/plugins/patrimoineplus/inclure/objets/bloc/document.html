@@ -1,0 +1,11 @@
+<B_doctout>
+<div class="bloc document">
+	<div class="titrebloc"><a href="[(#SELF|ancre_url{portfolios})]"><:document:voirdocs:> (#TOTAL_BOUCLE)</a></div>
+	<BOUCLE_doctout(DOCUMENTS){id_objet?}{objet?}> </BOUCLE_doctout>
+		#SET{docs,""}
+	<BOUCLE_doc(DOCUMENTS){mode=document}{media=image}{id_objet?}{objet?}{par rang_lien}{0,8}>
+		#SET{docs,#GET{docs}|concat{#MODELE{slide}{id=#ID_DOCUMENT}}}
+	</BOUCLE_doc>
+	#PIPELINE{post_echappe_html_propre,#GET{docs}}
+</div>
+</B_doctout>

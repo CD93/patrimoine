@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_bibliographies_selectionnes>
+	<ul>
+	<BOUCLE_bibliographies_selectionnes(BIBLIOGRAPHIES){id_bibliographie IN #GET*{valeur}}
+		{par num vedette, vedette}{statut?}{tout}>
+		<li class="choix">#VEDETTE (#ID_BIBLIOGRAPHIE)</li>
+	</BOUCLE_bibliographies_selectionnes>
+	</ul>
+	</B_bibliographies_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_bibliographies_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_bibliographie_selectionne(BIBLIOGRAPHIES){id_bibliographie=#ENV{valeur}}
+		{par num vedette, vedette}{statut?}{tout}>
+	  	<p>#VEDETTE (#ID_BIBLIOGRAPHIE)</p>
+	</BOUCLE_bibliographie_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_bibliographie_selectionne>
+<//B_test_multiple>

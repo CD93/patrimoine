@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/bibliographies, env, ajax, sinon=<:bibliographie:info_aucun_bibliographie:>}>
+
+[(#AUTORISER{creer,bibliographie})
+	[(#URL_ECRIRE{bibliographie_edit,new=oui}|icone_verticale{<:bibliographie:icone_creer_bibliographie:>,bibliographie,new,right})]
+]

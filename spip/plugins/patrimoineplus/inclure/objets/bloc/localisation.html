@@ -1,0 +1,56 @@
+[(#OBJET|=={patrimoine}|ou{#OBJET|=={protection}}|oui)
+<div class="bloc localisation">
+	<div class="titrebloc"><:paquet_patrimoine:localisation:></div>
+]
+<B_gis>
+	<ul class="spip">
+		<BOUCLE_gis(GIS){id_objet}{objet}{adresse!=''}{si #OBJET IN patrimoine,protection}>
+		<li class="valeurchamp">#ADRESSE</li>
+		</BOUCLE_gis>
+	</ul>
+</B_gis>
+<B_commune>
+	<ul class="spip">
+		<BOUCLE_commune(COMMUNES){id_objet}{objet}{si #OBJET IN patrimoine,protection}>
+		<li class="valeurchamp"><a href="#URL_COMMUNE">#NOMCOMMUNE</a></li>
+		</BOUCLE_commune>
+	</ul>
+</B_commune>
+[(#OBJET|=={patrimoine}|ou{#OBJET|=={protection}}|oui) #INCLURE{fond=modeles/carte_gis_pat,autocenterandzoom=oui,objet=#OBJET,id_objet=#ID_OBJET,height=300px,id_carte_gis=#ID_OBJET}
+</div>
+]
+
+[(#OBJET|=={contact}|oui)
+ <div class="bloc localisation">
+	<div class="titrebloc">Où ?</div>
+]
+	<BOUCLE_contact(CONTACTS){id_contact=#ID_OBJET}{si #OBJET|=={contact}}>
+	#INCLURE{fond=modeles/carte_gis_pat,autocenterandzoom=oui,objets=contacts,id_objet=#ID_CONTACT,height=300px,id_carte_gis=#ID_OBJET}
+	</BOUCLE_contact>
+[(#OBJET|=={contact}|oui)
+</div>
+]
+
+[(#OBJET|=={auteur}|oui)
+ <div class="bloc localisation">
+	<div class="titrebloc">Où ?</div>
+]
+	<BOUCLE_auteur(AUTEURS){id_auteur}{mots_liens.id_mot=5156}{si #OBJET|=={auteur}}>
+	#INCLURE{fond=modeles/carte_gis_pat,autocenterandzoom=oui,objets=auteurs,id_objet=#ID_AUTEUR,height=300px,id_carte_gis=#ID_OBJET}
+</BOUCLE_auteur>
+[(#OBJET|=={auteur}|oui)
+</div>
+]
+
+[(#OBJET|=={organisation}|oui)
+ <div class="bloc localisation">
+	<div class="titrebloc">Où ?</div>
+]
+	<BOUCLE_organisation(ORGANISATIONS){id_organisation=#ID_OBJET}{si #OBJET|=={organisation}}>
+	#INCLURE{fond=modeles/carte_gis_pat,autocenterandzoom=oui,objets=organisations,id_objet=#ID_ORGANISATION,height=300px,id_carte_gis=#ID_OBJET}
+	</BOUCLE_organisation>
+[(#OBJET|=={organisation}|oui)
+</div>
+]
+
+[(#OBJET|=={commune}|oui) [<div class="bloc localisation"><div class="titrebloc">Où ?</div>(#INCLURE{fond=modeles/carte_gis_pat,autocenterandzoom=oui,objets=geop_#OBJET,id_objet=#ID_OBJET,height=300px,id_carte_gis=#ID_OBJET})</div>]]

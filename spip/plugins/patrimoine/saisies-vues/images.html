@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_images_selectionnes>
+	<ul>
+	<BOUCLE_images_selectionnes(IMAGES){id_image IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_IMAGE)</li>
+	</BOUCLE_images_selectionnes>
+	</ul>
+	</B_images_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_images_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_image_selectionne(IMAGES){id_image=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_IMAGE)</p>
+	</BOUCLE_image_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_image_selectionne>
+<//B_test_multiple>
