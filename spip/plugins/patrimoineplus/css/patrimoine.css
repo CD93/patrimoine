@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'Barlow_Condensed';
   font-style: normal;
-  src: local('Barlow_Condensed'), url("Barlow_Condensed/BarlowCondensed-Regular.ttf") format('truetype');
+  src: local('Barlow_Condensed'), url("/Barlow_Condensed/BarlowCondensed-Regular.ttf") format('truetype');
 }
 @font-face {
   font-family: 'Barlow_Condensed';
   font-style: normal;
-  src: local('Barlow_Condensed'), url("Barlow_Condensed/BarlowCondensed-Bold.ttf") format('truetype');
+  src: local('Barlow_Condensed'), url("/Barlow_Condensed/BarlowCondensed-Bold.ttf") format('truetype');
   font-weight: bold;
 }
 
