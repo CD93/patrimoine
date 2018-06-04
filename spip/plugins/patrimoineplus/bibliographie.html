@@ -4,7 +4,7 @@
 	<head>
 		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
 		<meta charset="#CHARSET">
-		<title>[(#TITRE|textebrut)][ - (#TITREDOCUMENTHOTE)][ - (#AUTEURS)][ - (#DATEDEDITION)][ - Bibliographie - (#NOM_SITE_SPIP|textebrut)]</title>
+		<title>[(#AUTEURS|textebrut) - ][(#TITRE|textebrut)][ - (#TITREDOCUMENTHOTE|textebrut)][ - (#DATEDEDITION)][ - Bibliographie - (#NOM_SITE_SPIP|textebrut)]</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="[(#TEXTE|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/bibliographie}{env}|couper{300}|textebrut})]">
@@ -22,7 +22,7 @@
 				</section>
 				<article>
 					<header>
-						<h1>#TITRE[ - (#TITREDOCUMENTHOTE)][ - (#AUTEURS)][ - (#DATEDEDITION)]</h1>
+						<h1>[(#AUTEURS) - ]#TITRE[ - (#TITREDOCUMENTHOTE)][ - (#DATEDEDITION)]</h1>
 						<p class="info-publi"><abbr class="published" title="#DATE">[(#DATE|affdate)]</abbr>
 							[<span class="sep">, </span><span class="auteurs">par (#LESAUTEURS)</span>]
 						</p>
