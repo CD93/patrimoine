@@ -1,0 +1,12 @@
+<B_artaut>
+<div class="bloc patrimoine">
+	<div class="titrebloc"><:info_article:></div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_artaut(ARTICLES auteurs_liens){auteurs_liens.id_auteur=#ID_OBJET}{objet=article}{pagination 5}{si #ENV{objet}|=={auteur}}>
+		<li class="valeurchamp"><a href="#URL_ARTICLE">#TITRE</a></li>
+	</BOUCLE_artaut>
+	</ul>
+	<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_artaut>
