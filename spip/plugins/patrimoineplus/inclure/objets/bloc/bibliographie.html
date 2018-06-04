@@ -47,9 +47,9 @@
 	<div class="titrebloc">#GRAND_TOTAL <:bibliographie:titre_bibliographies:></div>
 	#ANCRE_PAGINATION
 	<ul class="spip">
-	<BOUCLE_biblioauteur(BIBLIOGRAPHIES auteurs_liens){auteurs_liens.id_auteur=#ENV{id_objet}}{auteurs_liens.objet=bibliographie}	{pagination #ENV{nb,5}}>
+	<BOUCLE_biblioauteur(BIBLIOGRAPHIES auteurs_liens){auteurs_liens.id_auteur=#ENV{id_objet}}{auteurs_liens.objet=bibliographie}{si #OBJET|=={auteur}}{pagination #ENV{nb,5}}>
 		<BOUCLE_autpubbib(auteurs_liens){objet='bibliographie'}{id_mot='5173'}{id_objet=#ID_BIBLIOGRAPHIE}></BOUCLE_autpubbib>
-	</B_motautbib>
+	</B_autpubbib>
 		<li class="valeurchamp">
 			<a href="#URL_BIBLIOGRAPHIE">#TITRE, #AUTEURS (#DATEDEDITION)
 			<BOUCLE_biblioautrole(bibliographies_liens){id_bibliographie}>
