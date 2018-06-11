@@ -1,4 +1,5 @@
     <BOUCLE_image(IMAGES){id_objet=#ID_DOCUMENT}{objet=document}>
+    <div class="contenu imageaccess">
     <h3>Image :</h3>
 
     [(#NATURESOURCE|oui)
@@ -39,7 +40,7 @@
     <div class="valeurchamp #EDIT{droitsdiffusion}" >#DROITSDIFFUSION</div>
     </div>
     ]
-  
+
     [(#CATALOGUE|oui)
     <div class="patchamps">
     <div class="titrechamp"><:docu:champ_catalogue_label:></div>
@@ -64,5 +65,5 @@
     <div class="valeurchamp #EDIT{lieninternet}" >#LIENINTERNET</div>
     </div>
     ]
-
+</div>
     </BOUCLE_image>
