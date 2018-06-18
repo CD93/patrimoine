@@ -1,0 +1,9 @@
+[(#ENV{commune}|oui) #SET{commune,#ENV{commune}}]
+<B_dep>
+<ul>
+<BOUCLE_dep(COMMUNES){SI (#ENV{commune}|non)}>
+<li><a href="[(#SELF|parametre_url{commune,#CODECOMMUNAL})]" title="#NOMCOMMUNE" >#NOMCOMMUNE</a></li>
+</BOUCLE_dep>
+</ul>
+</B_dep>
+[(#ENV{commune}|oui) <INCLURE{fond=inclure/cadastrenapo/menu#ENV{commune}} />]
