@@ -287,3 +287,7 @@ function patrimoine_trig_propager_les_secteurs($flux) {
 
 	return $flux;
 }
+function imagedoc_declarer_url_objets($array){
+    $array[] = 'imagedoc';
+    return $array;
+}
