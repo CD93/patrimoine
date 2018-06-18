@@ -3,15 +3,15 @@ session_start();
 $ariane="02.02";
 $lien='../';
 $titre= 'g-titre_cadastres.gif';
-$nompagephp='cadastre napoléonien / accueil';
-$titrepage="Cadastre napoléonien";
+$nompagephp='cadastre napolÃ¨onien / accueil';
+$titrepage="Cadastre napolÃ¨onien";
 $liencourt="cadastrenapo";
 include($lien."page-haut.php");
 $reqcomsql = "SELECT nomcommune,codecommunal FROM communes ORDER BY codecommunal ASC";
-$reqcom = mysql_query($reqcomsql) or Die("raté !");
+$reqcom = mysql_query($reqcomsql) or Die("ratÃ¨ !");
 include($lien."page-milieu.php");
 ?>
-<h4>cadastre napoléonien</h4>
+<h4>cadastre napolÃ¨onien</h4>
 <div class="spacer">&nbsp;</div>
 <p>
 <?
@@ -28,7 +28,7 @@ while ($repcom=mysql_fetch_object($reqcom)) {
 <div class="spacer">&nbsp;</div>
 <div class="encadre">
   <p id="centree">
-    <img src="<?=$lien;?>img_pages/communes93.gif" usemap="#departementMap" alt="carte du département"/>
+    <img src="<?=$lien;?>img_pages/communes93.gif" usemap="#departementMap" alt="carte du dÃ¨partement"/>
   </p>
     <map name="departementMap" id="departement">
 <area shape="poly" alt="" coords="386,284, 389,283, 392,283, 395,282, 398,282, 402,281, 406,280, 410,280, 414,279, 411,282, 417,286, 416,291, 417,294, 417,296, 418,298, 419,301, 419,302, 421,302, 424,301, 426,301, 429,300, 431,300, 433,299, 434,299, 437,298, 439,298, 439,297, 440,297, 434,306, 433,307, 433,309, 431,313,
