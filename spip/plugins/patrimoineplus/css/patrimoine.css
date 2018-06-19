@@ -61,7 +61,7 @@ a {
 }
 a:hover, a:active, a:focus {
   text-decoration: underline;
-  background: none;
+  /*background: none;*/
 }
 ul {
   list-style: none;
