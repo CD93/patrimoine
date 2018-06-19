@@ -1,4 +1,6 @@
 [(#ENV{commune}|oui) #SET{commune,#ENV{commune}}]
-<a href="[(#SELF|parametre_url{commune})]">Seine-Saint-Denis</a>
+[(#ENV{commune}|non) #SET{commune,000}]
+<a href="[(#SELF|parametre_url{commune,''}|parametre_url{fichier,''})]">Seine-Saint-Denis</a>
 <INCLURE{fond=inclure/cadastrenapo/menu/menu#GET{commune,000}} />
-<INCLURE{fond=inclure/cadastrenapo/carte/carte#GET{commune,000}} />
+[(#ENV{fichier}|non) <INCLURE{fond=inclure/cadastrenapo/carte/carte#GET{commune,000}} />]
+[(#ENV{fichier}|oui) <INCLURE{fond=inclure/cadastrenapo/detail}{fichier=#ENV{fichier}}{env} />]

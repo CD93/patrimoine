@@ -25,15 +25,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * https://code.spip.net/@generer_url_ecrire_document
  */
-function urls_generer_url_document($id, $args = '', $ancre = '', $public = null, $connect = '') {
+function urls_generer_url_imagedoc($id, $args = '', $ancre = '', $public = null, $connect = '') {
 	include_spip('inc/documents');
-	return generer_url_document($id_document, $args, $ancre);
+	return generer_url_imagedoc($id_document, $args, $ancre);
 	//return generer_url_public("document","id_document=$id");
 }
 
 
 // https://code.spip.net/@generer_url_document_dist
-function generer_url_document($id_document, $args = '', $ancre = '') {
+function generer_url_imagedoc($id_document, $args = '', $ancre = '') {
 	include_spip('inc/autoriser');
 	if (!autoriser('voir', 'document', $id_document)) {
 		return '';
