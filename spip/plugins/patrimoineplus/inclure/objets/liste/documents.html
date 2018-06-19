@@ -22,18 +22,10 @@
 	   {tri #ENV{par,#GET{defaut_tri_par,num titre}},#GET{defaut_tri}}
 		 {pagination #ENV{pagination,30}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo">
-				<a href="#URL_DOCUMENT" onclick="return false;">
-					[(#FICHIER|image_proportions{4,3,"focus"}
-						|image_responsive{0/75/150}
-						|inserer_attribut{data-photo,#URL_DOCUMENT}
-						|inserer_attribut{data-photo-h,#HAUTEUR}
-						|inserer_attribut{data-photo-w,#LARGEUR}
-						|inserer_attribut{alt,#TITRE}
-						|inserer_attribut{title,#TITRE}
-					)]
-			</a></td>
-			<td class="titre principale"><a href="#" title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">[(#RANG). ]#TITRE</a></td>
+			<td class="logo" width="160px">
+				<INCLURE{fond=modeles/img}{id_document=#ID_DOCUMENT} />
+			</td>
+			<td class="titre principale"><a href="[(#URL_PAGE{document}|parametre_url{id_document,#ID_DOCUMENT})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">[(#RANG). ]#TITRE</a></td>
 			<td class="credits">#MEDIA</td>
 			<td class="credits">#CREDITS</td>
 			<td class="codesite"><BOUCLE_liste_pat(PATRIMOINES spip_documents_liens){id_document=#ID_DOCUMENT}{", "}><a href="#URL_PATRIMOINE">#CODESITE</a></BOUCLE_liste_pat></td>

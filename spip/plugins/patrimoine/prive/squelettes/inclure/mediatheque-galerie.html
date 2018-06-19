@@ -52,10 +52,10 @@
 		<td class="logo">
 		#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
 		[(#MEDIA|=={image}|oui)[
-			[(#REM)<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>](#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})[(#REM)</a>]
+			[(#REM)<a href="[(#URL_PAGE{document}|parametre_url{id_document,#ID_DOCUMENT})]" type="#MIME_TYPE"[ title="(#GET{fichier})"]>](#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})[(#REM)</a>]
 		]]
 		[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
-			[(#REM)<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>](#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})[(#REM)</a>]
+			[(#REM)<a href="[(#URL_PAGE{document}|parametre_url{id_document,#ID_DOCUMENT})]" type="#MIME_TYPE"[ title="(#GET{fichier})"]>](#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})[(#REM)</a>]
 		</div>]]
 		<div class="fichier">#GET{fichier}</div>
 		</td>

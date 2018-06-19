@@ -25,6 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * https://code.spip.net/@generer_url_ecrire_document
  */
+ /*
 function urls_generer_url_imagedoc($id, $args = '', $ancre = '', $public = null, $connect = '') {
 	include_spip('inc/documents');
 	return generer_url_imagedoc($id_document, $args, $ancre);
@@ -72,7 +73,7 @@ function generer_url_imagedoc($id_document, $args = '', $ancre = '') {
 		true
 	);
 }
-
+*/
 function balise_COMPTER_OBJET($p){
 	$var1 = interprete_argument_balise(1,$p);
 	$var2 = interprete_argument_balise(2,$p);
