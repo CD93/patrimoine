@@ -548,6 +548,12 @@ table.liste td {
   vertical-align: top;
   padding: 0.5em 1em 0.5em 0;
 }
+table.liste td.logo {
+  width:160px;
+}
+table.liste td.logo figure {
+  margin: 0;
+}
 /* fin article */
 /* portfolios */
 #portfolios h3 {
