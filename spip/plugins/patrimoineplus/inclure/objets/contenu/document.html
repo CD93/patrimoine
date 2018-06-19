@@ -1,7 +1,9 @@
 <BOUCLE_document(DOCUMENTS){id_document}{tout}>
 <div class="contenu document">
     <h3>Document :</h3>
-    <a href="#FICHIER">[(#LOGO_DOCUMENT|image_responsive{0/300/600,1})]</a>
+    <div class="docsansleg">
+    <INCLURE{fond=modeles/img}{id_document=#ID_DOCUMENT} />
+    </div>
     [(#DESCRIPTIF|oui)
     <div class="patchamps">
     <div class="titrechamp"><:document:champ_descriptif_label:></div>

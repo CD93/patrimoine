@@ -29,7 +29,7 @@
 			<td class="commune"><BOUCLE_liste_communes(COMMUNES spip_communes_lien){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}{", "}><a href="#URL_COMMUNE">#NOMCOMMUNE</a></BOUCLE_liste_communes></td>
 			<td class="codesite">#CODESITE</td>
 			<td class="codesite"><BOUCLE_colleges(COLLEGES){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}>#CODEIA</BOUCLE_colleges></td>
-			<td class="logo">[(#LOGO_PATRIMOINE|image_proportions{4,3,"focus"}|image_responsive{0/75/150})]</td>
+			<td class="logo">[(#LOGO_PATRIMOINE|image_proportions{4,3,"focus"}|image_responsive{0/150/300})]</td>
 			<td class="nbdoc"><B_nb_documents><a href="[(#URL_PATRIMOINE|ancre_url{portfolios})]">#GRAND_TOTAL</a><BOUCLE_nb_documents(DOCUMENTS spip_documents_liens){objet='patrimoine'}{id_objet=#ID_PATRIMOINE}> </BOUCLE_nb_documents></B_nb_documents>-<//B_nb_documents></td>
 		</tr>
 	</BOUCLE_liste_patrimoines>

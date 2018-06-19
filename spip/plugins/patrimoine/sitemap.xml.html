@@ -16,7 +16,7 @@
 	sitemap.xml?annee=1981
 
 	un critère limite est ajouté
-	
+
 	(On pose un cache a zero pour echapper au test _IS_BOT)
 
 ]#HTTP_HEADER{Content-Type: text/xml; charset=utf-8}
@@ -80,5 +80,5 @@
 <url><loc>(#URL_PATRIMOINE|url_absolue)</loc></url>]</BOUCLE_pa>
 [(#REM) Documents]
 <BOUCLE_do(DOCUMENTS){annee?}{!par date}{#GET{limite,0},1000}>[
-<url><loc>(#URL_DOCUMENT|url_absolue)</loc></url>]</BOUCLE_do>
+<url><loc>(#URL_PAGE{document}|parametre_url{id_document,#ID_DOCUMENT}|url_absolue)</loc></url>]</BOUCLE_do>
 </urlset>

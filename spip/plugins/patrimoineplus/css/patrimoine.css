@@ -61,7 +61,7 @@ a {
 }
 a:hover, a:active, a:focus {
   text-decoration: underline;
-  background: none;
+  /*background: none;*/
 }
 ul {
   list-style: none;
@@ -333,6 +333,10 @@ section.ariane {
   grid-template-rows: auto 1fr ;
 }
 
+.objet .contenu.document .docsansleg figcaption {
+  display:none;
+}
+
 .recherche article section.nav-recherche {
   display: flex;
   flex-wrap: wrap;
@@ -521,6 +525,9 @@ section .bloc.groupemot {
 table.liste {
   border-spacing: 0;
 }
+table.liste figcaption {
+  display:none;
+}
 table.liste caption {
   text-align: left;
 }
@@ -540,6 +547,12 @@ table.liste tr.row_odd {
 table.liste td {
   vertical-align: top;
   padding: 0.5em 1em 0.5em 0;
+}
+table.liste td.logo {
+  width:160px;
+}
+table.liste td.logo figure {
+  margin: 0;
 }
 /* fin article */
 /* portfolios */

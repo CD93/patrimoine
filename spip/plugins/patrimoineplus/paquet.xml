@@ -32,4 +32,5 @@
 
 	<utilise nom="medias" />
 	<utilise nom="mots" />
+	<utilise nom="medias_responsive_mod" />
 </paquet>
