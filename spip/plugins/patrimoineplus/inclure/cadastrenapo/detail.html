@@ -5,19 +5,6 @@
 	    <link rel="stylesheet" href="#CHEMIN{inclure/cadastrenapo/leaflet//leaflet-0.6.4/leaflet.ie.css}" />
 	<![endif]-->
 	<style type="text/css">
-	/*
-	#photo {
-		margin:  auto;
-		max-width:  900px;
-		width: 100%;
-	}
-	#photoV, #photoR {
-	        max-width: 600px;
-	        max-height: 512px;
-	        padding: 0;
-	        margin: 0;
-	    }
-*/
 	    .leaflet-control-attribution {
 	    	display: none;
 	    }
@@ -26,17 +13,17 @@
 	<script src="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/L.TileLayer.Zoomify.js}"></script>
 	<BOUCLE_resultat(DOCUMENTS){fichier LIKE %#ENV{fichier}%}{0,1}>
 	#SET{reg,(WIDTH=.(\d+).[[:space:]]HEIGHT=.(\d+).[[:space:]]NUMTILES)}
-	#SET{fichierxml,#CHEMIN{IMG/numerisation/cartes/cadastre_napo/#ENV{fichier}/ImageProperties.xml}}
+	#SET{fichierxml,#CHEMIN{IMG/images/cartes/cadastre_napo/#ENV{fichier}/ImageProperties.xml}}
 	#SET{texte,#GET{fichierxml}|fopen{"r"}|fread{#GET{fichierxml}|filesize}}
 	#SET{imgdos,#URL_SITE_SPIP}
-	#SET{imgdos,#GET{imgdos}|concat{/IMG/numerisation/cartes/cadastre_napo/#ENV{fichier}/}}
+	#SET{imgdos,#GET{imgdos}|concat{/IMG/images/cartes/cadastre_napo/#ENV{fichier}/}}
 	#SET{width,#GET{texte}|match{#GET{reg},Uims,2}|div{2}|plus{1}}
 	#SET{height,#GET{texte}|match{#GET{reg},Uims,3}|div{2}|plus{1}}
 	<div id="photo">
-		<div id="photoR" style="width: 100%;height: 400px;"></div>
+		<div id="photoR" style="width: 100%; min-height: 200px; height: 100%;"></div>
 	</div>
 	<script type="text/javascript">
-    var map = L.map('photoR').setView(new L.LatLng(0,0), 0);
+    var map = L.map('photoR').setView(new L.LatLng(0,0), 2);
     L.tileLayer.zoomify('[(#GET{imgdos})]', {
         width: [(#GET{width})],
         height: [(#GET{height})],
@@ -45,6 +32,8 @@
         continuousWorld: false,
         noWrap: true
     }).addTo(map);
+			$("#photoR").height($("#photo").width()*3/4);
+			map.setView(new L.LatLng(0,0), 2);
 	</script>
 </BOUCLE_resultat>
 <div>
