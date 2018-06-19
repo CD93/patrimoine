@@ -1,7 +1,7 @@
 <B_dep>
-<ul>
-<BOUCLE_dep(COMMUNES)>
-<li><a href="[(#SELF|parametre_url{commune,#CODECOMMUNAL}|parametre_url{fichier,''})]" title="#NOMCOMMUNE" >#NOMCOMMUNE</a></li>
+<p>
+<BOUCLE_dep(COMMUNES){" | "}>
+<a href="[(#SELF|parametre_url{commune,#CODECOMMUNAL}|parametre_url{fichier,''})]" title="#NOMCOMMUNE" >#NOMCOMMUNE</a>
 </BOUCLE_dep>
-</ul>
+</p>
 </B_dep>

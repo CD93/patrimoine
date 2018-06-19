@@ -1,126 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
-<head>
-<INCLURE{fond=inc-head}{env}/>
-<INCLURE{fond=inc-leaflet-css}{env}/>
-</head>
-<body>
-<INCLURE{fond=inc-leaflet-js}{env}/>
-#SET{reg,(WIDTH=.(\d+).[[:space:]]HEIGHT=.(\d+).[[:space:]]NUMTILES)}
-<BOUCLE_resultat (base_images){id=#ENV{iddoc}}>
-	[(#ENV{dos}|?{' ',''})
-	#SET{fichierxml,#CHEMIN{stock/#DOSSIER/#NOM_FICHIER_VERSO/ImageProperties.xml}}
+<B_resultat>
+	<div>
+	<link rel="stylesheet" href="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/leaflet.css}" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="#CHEMIN{inclure/cadastrenapo/leaflet//leaflet-0.6.4/leaflet.ie.css}" />
+	<![endif]-->
+	<style type="text/css">
+	/*
+	#photo {
+		margin:  auto;
+		max-width:  900px;
+		width: 100%;
+	}
+	#photoV, #photoR {
+	        max-width: 600px;
+	        max-height: 512px;
+	        padding: 0;
+	        margin: 0;
+	    }
+*/
+	    .leaflet-control-attribution {
+	    	display: none;
+	    }
+	</style>
+	<script src="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/leaflet.js}"></script>
+	<script src="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/L.TileLayer.Zoomify.js}"></script>
+	<BOUCLE_resultat(DOCUMENTS){fichier LIKE %#ENV{fichier}%}{0,1}>
+	#SET{reg,(WIDTH=.(\d+).[[:space:]]HEIGHT=.(\d+).[[:space:]]NUMTILES)}
+	#SET{fichierxml,#CHEMIN{IMG/numerisation/cartes/cadastre_napo/#ENV{fichier}/ImageProperties.xml}}
 	#SET{texte,#GET{fichierxml}|fopen{"r"}|fread{#GET{fichierxml}|filesize}}
-	#SET{imgdos,#URL_SITE_SPIP/stock/#DOSSIER/#NOM_FICHIER_VERSO/}
-	]
-	[(#ENV{dos}|?{'',' '})
-	#SET{fichierxml,#CHEMIN{stock/#DOSSIER/#NOM_FICHIER_RECTO/ImageProperties.xml}}
-	#SET{texte,#GET{fichierxml}|fopen{"r"}|fread{#GET{fichierxml}|filesize}}
-	#SET{imgdos,#URL_SITE_SPIP/stock/#DOSSIER/#NOM_FICHIER_RECTO/}
-	]
-
+	#SET{imgdos,#URL_SITE_SPIP}
+	#SET{imgdos,#GET{imgdos}|concat{/IMG/numerisation/cartes/cadastre_napo/#ENV{fichier}/}}
 	#SET{width,#GET{texte}|match{#GET{reg},Uims,2}|div{2}|plus{1}}
 	#SET{height,#GET{texte}|match{#GET{reg},Uims,3}|div{2}|plus{1}}
-	<div id="photo" style="width:[(#GET{width})]px;">
-		<div id="photoR" style="width: [(#GET{width})]px;height: [(#GET{height})]px;"></div>
+	<div id="photo">
+		<div id="photoR" style="width: 100%;height: 400px;"></div>
 	</div>
-			<script type="text/javascript">
-			        var map = L.map('photoR').setView(new L.LatLng(0,0), 0);
-			        L.tileLayer.zoomify('[(#GET{imgdos})]', {
-			            width: [(#GET{texte}|match{#GET{reg},Uims,2})],
-			            height: [(#GET{texte}|match{#GET{reg},Uims,3})],
-			            tolerance: 1,
-			            attribution: '',
-			            continuousWorld: false,
-			            noWrap: true
-			        }).addTo(map);
-			</script>
-
-	<div class="detail">
-
-	[<p><strong>(#DISTINCTION|=={'A'}|?{'Fonds','Collection'}) : </strong>#FONDS<br/>]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-	[<p><strong>Cat&eacute;gorie : </strong>(#CATEGORIE)</p>]
-	]
-
-	[(#ANALYSE|?{'',' '})
-		[<p><strong>Titre : </strong>(#INTITULE)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[(#ANALYSE|?{' ',''})
-			[<p><strong>Titre : </strong>(#INTITULE)</p>]
-		]
-	]
-	[<p>(#ANALYSE)</p>]
-	[<p><strong>Date : </strong>(#DATEDOC**)</p>]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Date de publication : </strong>(#DATE_PUBLICATION)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Th&egrave;me / Deno : </strong>(#THEME)</p>]
-	]
-	[<p><strong>Auteur : </strong>(#AUTEUR)</p>]
-	[<p><strong>Editeur : </strong>(#EDITEUR_IMPRIMEUR)</p>]
-	[<p><strong>Commune : </strong>(#COMMUNE)</p>]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Ancien d&eacute;partement : </strong>(#ANCIEN_DEPARTEMENT)</p>]
-	]
-	[<p><strong>Typologie : </strong>(#TYPE)</p>]
-	[<p><strong>Support original & dimensions : </strong>(#SUPPORT_ORIGINAL) - #TAILLE]
-	[<p><strong>Echelle : </strong>(#ECHELLE)</p>]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Langue : </strong>(#LANGUE)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Technique : </strong>(#TECHNIQUE)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Couleur : </strong>(#COULEUR)</p>]
-	]
-
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Profil : </strong>(#PROFIL)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Nom fichier recto : </strong>(#NOM_FICHIER_RECTO)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Nom fichier verso : </strong>(#NOM_FICHIER_VERSO)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Id support HD : </strong>(#ID_SUPPORT_HD)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Id support BD : </strong>(#ID_SUPPORT_BD)</p>]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>Statut juridique : </strong>(#STATUS)</p>]
-	]
-	[<p><strong>Cote : </strong>(#COTE)</p>]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-	[<p><strong>Cote d'origine : </strong>(#COTE_ORIGINE)</p>]
-	]
-	[(#SESSION{bio}|=={#ID_PROFIL}|?{' ',''})
-	[(#ENV{dos}|?{' ',''})
-	<p><a href="[(#URL_PAGE{acces_doc}|parametre_url{'id_doc',#ID}| parametre_url{'verso',oui})]" target="_blank"><em>t&eacute;l&eacute;charger la version haute-d&eacute;finition</em></a>
-	]
-	[(#ENV{dos}|?{'',' '})
-	<p><a href="#URL_PAGE{acces_doc,id_doc=#ID}" target="_blank"><em>t&eacute;l&eacute;charger la version haute-d&eacute;finition</em></a>
-	]
-	]
-	[(#SESSION{pgp}|>={3}|?{' ',''})
-	[(#ENV{dos}|?{' ',''})
-	<p><a href="[(#URL_PAGE{acces_doc}|parametre_url{'id_doc',#ID}| parametre_url{'verso',oui})]" target="_blank"><em>t&eacute;l&eacute;charger la version haute-d&eacute;finition</em></a>
-	]
-	[(#ENV{dos}|?{'',' '})
-	<p><a href="#URL_PAGE{acces_doc,id_doc=#ID}" target="_blank"><em>t&eacute;l&eacute;charger la version haute-d&eacute;finition</em></a>
-	]
-	]
-	[(#SESSION{pgp}|=={4}|?{' ',''})
-		[<p><strong>note : </strong>(#NOTE)</p>]
-	]
-	</div>
+	<script type="text/javascript">
+    var map = L.map('photoR').setView(new L.LatLng(0,0), 0);
+    L.tileLayer.zoomify('[(#GET{imgdos})]', {
+        width: [(#GET{width})],
+        height: [(#GET{height})],
+        tolerance: 1,
+        attribution: '',
+        continuousWorld: false,
+        noWrap: true
+    }).addTo(map);
+	</script>
 </BOUCLE_resultat>
-<!--stock/sources/#DOSSIER/#NOM_FICHIER_RECTO.jpg-->
-</body>
-</html>
+<div>
+</B_resultat>
