@@ -1,0 +1,8 @@
+<B_doc>
+	#ANCRE_PAGINATION
+	<p class="pagination">#PAGINATION</p>
+<BOUCLE_doc(DOCUMENTS){tout}{pagination 2500}>
+	#SET{largeur,(#FICHIER|largeur)} #SET{hauteur,(#FICHIER|hauteur)} <ul>id : #ID_DOCUMENT<li>largeur : #GET{largeur} - (#LARGEUR)</li><li>hauteur : #GET{hauteur} - (#HAUTEUR)</li></ul> #MAJDOC{#ID_DOCUMENT,#GET{largeur},#GET{hauteur}}
+</BOUCLE_doc>
+<p class="pagination">#PAGINATION</p>
+</B_doc>
