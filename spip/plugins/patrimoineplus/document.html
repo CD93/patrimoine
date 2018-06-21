@@ -9,10 +9,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="[(#DESCRIPTIF|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/document}{env}|couper{300}|textebrut})]">
 		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
-		<BOUCLE_url(URLS){type=document}{id_objet=#ID_DOCUMENT}{perma=1}>
+		<BOUCLE_url(URLS){type='document'}{id_objet=#ID_DOCUMENT}{perma=1}>
 		#SET{urlcanonique,#URL}
 		</BOUCLE_url>
-		<link rel="canonical" href="[(#GET{urlcanonique}|url_absolue)]">		
+		<link rel="canonical" href="[(#GET{urlcanonique}|url_absolue)]">
 		<INCLURE{fond=inc/entete}{env} />
 	<body class="objet">
 		<div class="container">
