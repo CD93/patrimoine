@@ -74,5 +74,5 @@
 <url><loc>(#URL_PATRIMOINE|url_absolue)</loc></url>]</BOUCLE_pa>
 [(#REM) Documents]
 <BOUCLE_do(DOCUMENTS){annee?}{!par date}{#GET{limite,0},1000}>[
-<url><loc>(#URL_PAGE{document}|parametre_url{id_document,#ID_DOCUMENT}|url_absolue)</loc></url>]</BOUCLE_do>
+<url><loc>(#URLDOC{#ID_DOCUMENT}|url_absolue)</loc></url>]</BOUCLE_do>
 </urlset>
