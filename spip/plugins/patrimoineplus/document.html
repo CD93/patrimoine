@@ -9,6 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="[(#DESCRIPTIF|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/document}{env}|couper{300}|textebrut})]">
 		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
+		#SET{urlcanonique,#URL_PAGE{document,id_document=#ID_DOCUMENT}}
 		<BOUCLE_url(URLS){type='document'}{id_objet=#ID_DOCUMENT}{!par perma}{0,1}>
 		#SET{urlcanonique,#URL}
 		</BOUCLE_url>
