@@ -11,7 +11,7 @@ Distribue sous licence GPL
 		[<div class='vignette'><a href="#FICHIER" >(#LOGO_DOCUMENT|image_responsive{160/300/600/900}|inserer_attribut{data-photo-h,#HAUTEUR}|inserer_attribut{data-photo-w,#LARGEUR}|inserer_attribut{data-photo,#URL_DOCUMENT})</a></div>]
 
 		<div class="descriptions">
-			<h4 class="titrem">
+			<h3 class="titrem">
 				[(#VU|=={oui}|oui)<span class="vu"><img src='#CHEMIN_IMAGE{vu-16-10.png}' width='16' height='10' alt='<:medias:document_vu|attribut_html:>' title='<:medias:document_vu:>'/></span> ]
 				<span class="#EDIT{titre} titre" title="[(#FICHIER*|basename|attribut_html)]">
 					[(#TITRE|oui)<a href="[(#URLDOC{#ID_DOCUMENT})]">#TITRE</a>]
@@ -21,7 +21,7 @@ Distribue sous licence GPL
 					]
 					</span>
 				<span class="image_loading"></span>
-			</h4>
+			</h3>
 
 			<div class="descriptif [(#EDIT{descriptif})]">[(#DESCRIPTIF|couper{100})]</div>
 
