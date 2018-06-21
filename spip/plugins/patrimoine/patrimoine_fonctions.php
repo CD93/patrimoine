@@ -95,3 +95,26 @@ function calculer_balise_COMPTER_OBJET($id_mot,$objet,$texte) {
 	$count=sql_count($res);
 	return $count;
 }
+
+function balise_URLDOC($p){
+	$var1 = interprete_argument_balise(1,$p);
+	$p->code = "calculer_balise_URLDOC($var1)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+function calculer_balise_URLDOC($id_document) {
+	$where = array(
+	    'id_objet = '.$id_document,
+	    'type = "document"'
+	);
+	$res = sql_getfetsel(
+		'url',
+		'spip_urls',
+    $where,
+		'',
+		'perma DESC'
+	);
+	if ($res)	return $res;
+	else return generer_url_public("document",'id_document='.$id_document);
+}
