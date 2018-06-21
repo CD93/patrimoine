@@ -27,12 +27,6 @@
 	<loc>#URL_SITE_SPIP/</loc>
 	<changefreq>hourly</changefreq>
 </url>
-[(#REM) Rubriques]
-<BOUCLE_r(RUBRIQUES){!par date}{#GET{limite,0},1000}{si #ENV{annee}|non}>
-<url>
-	[<loc>(#URL_RUBRIQUE|url_absolue)</loc>]
-</url>
-</BOUCLE_r>
 [(#REM) Articles]
 [(#SET{recent,[(#VAL{Y-m-d H:i:s}|date{#VAL{"-1 day"}|strtotime})]})]
 <BOUCLE_a(ARTICLES){annee?}{!par date_modif}{!par date}{#GET{limite,0},1000}>
