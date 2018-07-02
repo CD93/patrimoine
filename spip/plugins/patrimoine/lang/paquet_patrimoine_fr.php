@@ -6,6 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'auteurs' => 'Auteurs / protagonistes',
+	// C
 	'contacts' => 'Acteurs',
 	'champ_titre_label' => 'Terme',
 	'champ_texte_label' => 'Description',
@@ -38,7 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_description' => '',
 	'article_nom' => 'article',
 	'article_slogan' => '',
+	// R
+	'rechercher_atlas' => 'Trouver un élément ou accéder à l\'atlas',
 	// T
 	'titre_groupe_mot' => 'Liste thématique',
-	'mots_tous' => 'Tous les mots-clés',
+	'mots_tous' => 'Tous les mots-clefs',
 );
