@@ -4,17 +4,17 @@
 	<h1>[(#RECHERCHE|?{Votre recherche : #RECHERCHE,Liste des objets patrimoniaux})]</h1>
 </header>
 <section class="nav-recherche btn-group-md" role="group">
-	[(#BOUTON_ACTION{patrimoines,[(#GET{url}|parametre_url{restype,patrimoine})],ajax [(#ENV{restype,patrimoine}|=={patrimoine}|oui) active]})]
-	[(#BOUTON_ACTION{collèges,[(#GET{url}|parametre_url{restype,college})],ajax [(#ENV{restype}|=={college}|oui) active]})]
-	[(#BOUTON_ACTION{protections,[(#GET{url}|parametre_url{restype,protection})],ajax [(#ENV{restype}|=={protection}|oui) active]})]
-	[(#BOUTON_ACTION{documents,[(#GET{url}|parametre_url{restype,document})],ajax [(#ENV{restype}|=={document}|oui) active]})]
-	[(#BOUTON_ACTION{bibliographies,[(#GET{url}|parametre_url{restype,bibliographie})],ajax [(#ENV{restype}|=={bibliographie}|oui) active]})]
-	[(#BOUTON_ACTION{publications,[(#GET{url}|parametre_url{restype,publication})],ajax [(#ENV{restype}|=={publication}|oui) active]})]
-	[(#BOUTON_ACTION{articles,[(#GET{url}|parametre_url{restype,article})],ajax [(#ENV{restype}|=={article}|oui) active]})]
-	[(#BOUTON_ACTION{mots-clefs,[(#GET{url}|parametre_url{restype,mot})],ajax [(#ENV{restype}|=={mot}|oui) active]})]
-	[(#BOUTON_ACTION{contacts,[(#GET{url}|parametre_url{restype,contact})],ajax [(#ENV{restype}|=={contact}|oui) active]})]
-	[(#BOUTON_ACTION{communes,[(#GET{url}|parametre_url{restype,commune})],ajax [(#ENV{restype}|=={commune}|oui) active]})]
-	[(#BOUTON_ACTION{définitions,[(#GET{url}|parametre_url{restype,definition})],ajax [(#ENV{restype}|=={definition}|oui) active]})]
+	[(#BOUTON_ACTION{patrimoines,[(#GET{url}|parametre_url{restype,patrimoine})],[(#ENV{restype,patrimoine}|=={patrimoine}|oui) active]})]
+	[(#BOUTON_ACTION{collèges,[(#GET{url}|parametre_url{restype,college})],[(#ENV{restype}|=={college}|oui) active]})]
+	[(#BOUTON_ACTION{protections,[(#GET{url}|parametre_url{restype,protection})],[(#ENV{restype}|=={protection}|oui) active]})]
+	[(#BOUTON_ACTION{documents,[(#GET{url}|parametre_url{restype,document})],[(#ENV{restype}|=={document}|oui) active]})]
+	[(#BOUTON_ACTION{bibliographies,[(#GET{url}|parametre_url{restype,bibliographie})],[(#ENV{restype}|=={bibliographie}|oui) active]})]
+	[(#BOUTON_ACTION{publications,[(#GET{url}|parametre_url{restype,publication})],[(#ENV{restype}|=={publication}|oui) active]})]
+	[(#BOUTON_ACTION{articles,[(#GET{url}|parametre_url{restype,article})],[(#ENV{restype}|=={article}|oui) active]})]
+	[(#BOUTON_ACTION{mots-clefs,[(#GET{url}|parametre_url{restype,mot})],[(#ENV{restype}|=={mot}|oui) active]})]
+	[(#BOUTON_ACTION{contacts,[(#GET{url}|parametre_url{restype,contact})],[(#ENV{restype}|=={contact}|oui) active]})]
+	[(#BOUTON_ACTION{communes,[(#GET{url}|parametre_url{restype,commune})],[(#ENV{restype}|=={commune}|oui) active]})]
+	[(#BOUTON_ACTION{définitions,[(#GET{url}|parametre_url{restype,definition})],[(#ENV{restype}|=={definition}|oui) active]})]
 </section>
 <section class="resultat">
 		[(#ENV{restype,patrimoine}|=={patrimoine}|oui) <INCLURE{fond=inclure/objets/liste/patrimoines, env} />]
