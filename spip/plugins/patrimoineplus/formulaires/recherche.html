@@ -6,7 +6,7 @@
 			<label class="muted" for="#ENV{_id_champ}">Recherche détaillée :</label>
 			<div class="input-append input-group">
 				<input type="[(#HTML5|?{search,text})]" class="search text form-control" placeholder="<:paquet_patrimoine:rechercher_atlas:>" name="recherche" id="#ENV{_id_champ}"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off" />
-				<input type="hidden" name="restype" id="restype" value="#ENV{restype}" />
+				<input type="hidden" name="restype" id="restype#ENV{_id_champ}" value="#ENV{restype}" />
 				<button type="submit" class="submit" value="rechercher" title="<:info_rechercher:>" >rechercher</button>
 			</div>
 		</div>
