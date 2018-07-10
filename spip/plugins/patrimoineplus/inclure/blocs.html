@@ -12,9 +12,9 @@
 [(#OBJET|=={bibliographie}|non)<INCLURE{fond=inclure/objets/bloc/publication}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
 <INCLURE{fond=inclure/objets/bloc/contact}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
 [(#OBJET|=={organisation}|non)<INCLURE{fond=inclure/objets/bloc/organisation}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
-<INCLURE{fond=inclure/objets/bloc/protection}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
+[(#OBJET|=={protection}|non)<INCLURE{fond=inclure/objets/bloc/protection}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
 <BOUCLE_communeprot(COMMUNES){id_objet}{objet}>
-<INCLURE{fond=inclure/objets/bloc/protections}{objet=commune}{id_objet=#ID_COMMUNE}{ajax} />
+<INCLURE{fond=inclure/objets/bloc/protections}{objet=commune}{id_objet=#ID_COMMUNE}{ajax}{id_protection=#ID_OBJET} />
 </BOUCLE_communeprot>
 [(#OBJET|=={commune}|oui)<INCLURE{fond=inclure/objets/bloc/protections}{objet=commune}{id_objet=#ID_COMMUNE}{ajax} />]
 [(#OBJET|=={bibliographie}|non)<INCLURE{fond=inclure/objets/bloc/bibliographie}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax}{where='id_mot!=5137'} />]

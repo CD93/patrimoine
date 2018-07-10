@@ -3,7 +3,7 @@
 	<div class="titrebloc"><:protection:info_protections_commune:> (#INFO_NOMCOMMUNE{commune,#ID_OBJET})</div>
 	#ANCRE_PAGINATION
 	<ul class="spip">
-	<BOUCLE_prtot(PROTECTIONS communes_liens){id_commune=#ID_OBJET}{si #OBJET|=={commune}|ou{#OBJET|=={protection}}}{pagination 5}>
+	<BOUCLE_prtot(PROTECTIONS communes_liens){id_protection != #ID_PROTECTION}{id_commune=#ID_OBJET}{si #OBJET|=={commune}|ou{#OBJET|=={protection}}}{pagination 5}>
 		<li class="valeurchamp">
 			<a href="#URL_PROTECTION">#NOMUSAGE</a>
 		</li>
