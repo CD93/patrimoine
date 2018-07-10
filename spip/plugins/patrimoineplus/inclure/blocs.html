@@ -2,7 +2,7 @@
 <INCLURE{fond=inclure/objets/bloc/typeetude}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
 [(#OBJET|=={patrimoine}|oui|ou{#OBJET|=={protection}|oui})<INCLURE{fond=inclure/objets/bloc/localisation}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
 <INCLURE{fond=inclure/objets/bloc/site}{env}{ajax}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}} />
-[(#OBJET|=={contact}|non)<INCLURE{fond=inclure/objets/bloc/document}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />]
+<INCLURE{fond=inclure/objets/bloc/document}{objet=#ENV{objet}}{id_objet=#ENV{id_objet}}{ajax} />
 <BOUCLE_commune(COMMUNES){id_objet}{objet}>
 <INCLURE{fond=inclure/objets/bloc/college}{objet=commune}{id_objet=#ID_COMMUNE}{ajax} />
 </BOUCLE_commune>
