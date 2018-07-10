@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="description" content="[(#DESCRIPTIF|couper{300}|textebrut|sinon{#INCLURE{fond=inclure/objets/contenu/contact}{env}|couper{300}|textebrut})]">
 		<meta name="author" content="[(#LESAUTEURS|textebrut|sinon{#INFO_NOM{organisation,2}|textebrut})]">
-		<link rel="canonical" href="[(#URL_CONTACT|url_absolue)]">		
+		<link rel="canonical" href="[(#URL_CONTACT|url_absolue)]">
 		<INCLURE{fond=inc/entete}{env} />
 	<body class="objet">
 		<div class="container">
@@ -29,10 +29,10 @@
 					<section class="contenu">
 						<INCLURE{fond=inclure/objets/contenu/contact}{env} />
 						<INCLURE{fond=inclure/objets/liste/organisations}{env}{objet=contact}{id_objet=#ID_CONTACT} />
+						<INCLURE{fond=inclure/objets/contenu/portfolio-documents}{env}{objet=contact}{id_objet=#ID_CONTACT}{id_unique=''}{ajax} />
 					</section>
 					<section class="bloc">
-						[(#ID_AUTEUR|oui)<INCLURE{fond=inclure/blocs}{objet=auteur}{id_objet=#ID_AUTEUR}{env}{ajax} />]
-						[(#ID_AUTEUR|non)<INCLURE{fond=inclure/blocs}{objet=contact}{id_objet=#ID_CONTACT}{env}{ajax} />]
+						<INCLURE{fond=inclure/blocs}{objet=contact}{id_objet=#ID_CONTACT}{env}{ajax} />
 					</section>
 				</article>
 			</section>
