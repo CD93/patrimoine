@@ -9,3 +9,16 @@
 	#PIPELINE{post_echappe_html_propre,#GET{docs}}
 </div>
 </B_doctout>
+
+<B_doctoutcont>
+<div class="bloc documentcont">
+	<div class="titrebloc">[<caption><strong class="caption">#TOTAL_BOUCLE sur (#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{document:info_1_document,document:info_nb_documents}})</strong></caption>]</div>
+	#ANCRE_PAGINATION
+	<ul class="spip">
+	<BOUCLE_doctoutcont(DOCUMENTS contacts_liens){contacts_liens.id_contact=#ID_OBJET}{contacts_liens.objet='document'}{pagination #ENV{nb,10}}>
+			<li><a href="[(#URLDOC{#ID_DOCUMENT})]">#TITRE</a></li>
+ 	</BOUCLE_doctoutcont>
+</ul>
+<p class="pagination">#PAGINATION{prive}</p>
+</div>
+</B_doctoutcont>

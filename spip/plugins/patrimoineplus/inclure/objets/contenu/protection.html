@@ -1,4 +1,4 @@
-<div class="bloc protection">
+<div class="protection">
 [(#REM) les autres protections de la commune (à mettre à droite ou pas)]
 <BOUCLE_commune(COMMUNES){id_patrimoine}>
 <div class="patchamps">
@@ -41,7 +41,7 @@
                 [(#COMMENTAIRE|oui)
 								<div class="patchamps">
 								<div class="titrechamp"><:protection:champ_commentaire_label:>: </div>
-								<div class="valeurchamp #EDIT{commentaire}" >#COMMENTAIRE</div>
+								<div class="valeurchamp #EDIT{commentaire}" >[(#COMMENTAIRE|propre)]</div>
 								</div>
 								]
                 [(#DATATION|oui)
