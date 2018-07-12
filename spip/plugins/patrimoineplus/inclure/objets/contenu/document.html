@@ -2,8 +2,13 @@
 <div class="contenu document">
     <h3>Document :</h3>
     <div class="docsansleg">
-    <INCLURE{fond=modeles/img}{id_document=#ID_DOCUMENT} />
+    [(#MODE|=={image}|oui)
+      <INCLURE{fond=modeles/img}{id_document=#ID_DOCUMENT} />
+    ]
     </div>
+    [(#MODE|=={document}|oui)
+      <INCLURE{fond=modeles/doc}{id=#ID_DOCUMENT} />
+    ]
     [(#DESCRIPTIF|oui)
     <div class="patchamps">
     <div class="titrechamp"><:document:champ_descriptif_label:></div>
