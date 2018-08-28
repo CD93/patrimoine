@@ -6,8 +6,14 @@
 	<![endif]-->
 	<style type="text/css">
 	    .leaflet-control-attribution {
-	    	display: none;
+	    	//display: none;
 	    }
+		#photo {
+			width: 100%;
+			height: 100%;
+            padding: 0;
+            margin: 0;
+		}
 	</style>
 	<script src="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/leaflet.js}"></script>
 	<script src="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/L.TileLayer.Zoomify.js}"></script>
@@ -17,25 +23,24 @@
 	#SET{texte,#GET{fichierxml}|fopen{"r"}|fread{#GET{fichierxml}|filesize}}
 	#SET{imgdos,#URL_SITE_SPIP}
 	#SET{imgdos,#GET{imgdos}|concat{/IMG/images/cartes/cadastre_napo/#ENV{fichier}/}}
-	#SET{width,#GET{texte}|match{#GET{reg},Uims,2}|div{2}|plus{1}}
-	#SET{height,#GET{texte}|match{#GET{reg},Uims,3}|div{2}|plus{1}}
-	<a><a href="[(#FICHIER|replace{_pleinecran,''})]" download="[(#FICHIER|replace{IMG/images/cartes/cadastre_napo/,''}|replace{_pleinecran,''})]">Téléchargez la feuille</a></div>
-	<div id="photo">
-		<div id="photoR" style="width: 100%; min-height: 200px; height: 100%;"></div>
-	</div>
+	#SET{width,#GET{texte}|match{#GET{reg},Uims,2}}
+	#SET{height,#GET{texte}|match{#GET{reg},Uims,3}}
+	<a href="[(#FICHIER|replace{_pleinecran,''})]" download="[(#FICHIER|replace{IMG/images/cartes/cadastre_napo/,''}|replace{_pleinecran,''})]">Téléchargez la feuille</a></div>
+	<div id="photo"></div>
 	<script type="text/javascript">
-    var map = L.map('photoR').setView(new L.LatLng(0,0), 2);
+	$("#photo").height($("#photo").width()*3/4);
+    var map = L.map('photo', {
+		center: [0,0],
+		zoom: 2
+	});
     L.tileLayer.zoomify('[(#GET{imgdos})]', {
         width: [(#GET{width})],
         height: [(#GET{height})],
-        tolerance: 1,
-        attribution: '',
-        continuousWorld: false,
-        noWrap: true
+        tolerance: 0.8,
+        attribution: ''
     }).addTo(map);
-			$("#photoR").height($("#photo").width()*3/4);
-			map.setView(new L.LatLng(0,0), 2);
 	</script>
 </BOUCLE_resultat>
+
 <div>
 </B_resultat>
