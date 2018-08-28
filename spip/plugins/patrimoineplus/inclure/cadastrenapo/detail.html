@@ -2,7 +2,7 @@
 	<div>
 	<link rel="stylesheet" href="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/leaflet.css}" />
 	<!--[if lte IE 8]>
-	    <link rel="stylesheet" href="#CHEMIN{inclure/cadastrenapo/leaflet//leaflet-0.6.4/leaflet.ie.css}" />
+	    <link rel="stylesheet" href="#CHEMIN{inclure/cadastrenapo/leaflet/leaflet-0.6.4/leaflet.ie.css}" />
 	<![endif]-->
 	<style type="text/css">
 	    .leaflet-control-attribution {
@@ -19,6 +19,7 @@
 	#SET{imgdos,#GET{imgdos}|concat{/IMG/images/cartes/cadastre_napo/#ENV{fichier}/}}
 	#SET{width,#GET{texte}|match{#GET{reg},Uims,2}|div{2}|plus{1}}
 	#SET{height,#GET{texte}|match{#GET{reg},Uims,3}|div{2}|plus{1}}
+	<a><a href="[(#FICHIER|replace{_pleinecran,''})]" download="[(#FICHIER|replace{IMG/images/cartes/cadastre_napo/,''}|replace{_pleinecran,''})]">Téléchargez la feuille</a></div>
 	<div id="photo">
 		<div id="photoR" style="width: 100%; min-height: 200px; height: 100%;"></div>
 	</div>
